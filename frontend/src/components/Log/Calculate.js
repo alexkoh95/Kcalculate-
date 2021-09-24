@@ -30,6 +30,9 @@ const Calculate = (props) => {
       return addedMealType;
     });
   };
+
+  const handleInputChange = (event) => {};
+
   return <div>Hello, this is calculate component</div>;
 };
 
