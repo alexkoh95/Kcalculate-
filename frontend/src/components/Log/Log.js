@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Calculate from "./Calculate";
 import Search from "./Search";
 import Result from "./Result";
+import LogDisplay from './LogDisplay'
 
 const Log = () => {
   // =====================================================
@@ -11,17 +12,27 @@ const Log = () => {
   const [nutritionDataToCalculate, setNutritionDataToCalculate] = useState("");
 
   console.log(nutritionDataToCalculate);
-  return (
-    <div>
-      <h1>this is log page</h1>
-      <Search setSearchTerm={setSearchTerm} />
+    return (
+      
+        <div>
+        <h1>this is log page</h1>
+            <div className='grid grid-cols-2 pt-5'>
+                <div>
+        <Search setSearchTerm={setSearchTerm} />
       <Result
         searchTerm={searchTerm}
         nutritionDataToCalculate={nutritionDataToCalculate}
         setNutritionDataToCalculate={setNutritionDataToCalculate}
       />
       <Calculate nutritionDataToCalculate={nutritionDataToCalculate} />
-    </div>
+      </div>
+            <div>
+                <LogDisplay />
+        </div>
+        
+        </div>
+        </div>
+  
   );
 };
 
