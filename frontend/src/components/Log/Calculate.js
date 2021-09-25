@@ -75,6 +75,11 @@ const Calculate = (props) => {
     axios
       .post("http://localhost:5000/nutrition/", submitToDataBase)
       .then((res) => console.log(res.data));
+
+    const nutritionCalculatedArray = nutritionCalculated.filter(
+      (element, index) => index !== index
+    );
+    setNutritionCalculated(nutritionCalculatedArray);
   };
 
   const handleCalculate = (event) => {
