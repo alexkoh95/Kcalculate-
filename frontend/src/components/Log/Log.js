@@ -5,7 +5,7 @@ const Log = () => {
     return (
         <div>
             <h1>this is log page</h1>
-            <div className='grid grid-cols-2'>
+            <div className='grid grid-cols-2 pt-5'>
             <div>search component here 1</div>
             
                 <div>
