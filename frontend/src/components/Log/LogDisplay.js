@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import FoodCard from './FoodCard';
 import { Tab } from '@headlessui/react'
 
-const dayjs = require('dayjs')
+const dayjs = require("dayjs");
 
 const LogDisplay = () => {
 
