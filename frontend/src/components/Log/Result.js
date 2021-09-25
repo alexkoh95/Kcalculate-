@@ -34,7 +34,6 @@ const Result = (props) => {
 
   for (const key in nutritionData[0]) {
     results.push(`${nutritionData[0][key]}`);
-    console.log(results[4]);
   }
 
   let displayedResults = [
@@ -50,14 +49,36 @@ const Result = (props) => {
 
   let displayedResults2 = displayedResults?.map((element, index) => {
     return (
-      <div>
-        <h2>Name:{element.Name}</h2>
-        <li>Calories:{element.Calories}</li>
-        <li>Carbohydrates:{element.Carbohydrates}</li>
-        <li>Protein:{element.Protein}</li>
-        <li>Fat:{element.Fat}</li>
-        <li>Serving Size(g):{element.ServingSizeg}</li>
-      </div>
+      <tr>
+        <td className="px-3 py-3">
+          <strong>{element.Name}</strong>
+        </td>
+        <td className="px-3 py-3">
+          <strong>⚡</strong>
+          {element.Calories}
+        </td>
+        <td className="px-3 py-3">
+          <strong>C</strong>
+          {element.Carbohydrates}
+        </td>
+        <td className="px-3 py-3">
+          <strong>P</strong>
+          {element.Protein}
+        </td>
+        <td className="px-3 py-3">
+          <strong>F</strong>
+          {element.Fat}
+        </td>
+        <td className="px-3 py-3">
+          <strong>(g)</strong>
+          {element.ServingSizeg}
+        </td>
+        <td>
+          <button onClick={() => props.handleClick(element)}>
+            Food Choice?
+          </button>
+        </td>
+      </tr>
     );
   });
 
@@ -65,11 +86,10 @@ const Result = (props) => {
   //                        FUNCTION
   // =====================================================
 
-  useEffect(() => {
-    props.setNutritionDataToCalculate(displayedResults);
-    setToggle(false);
-    console.log(props.nutritionDataToCalculate);
-  }, [toggle]);
+  // useEffect(() => {
+  //   props.setNutritionDataToCalculate(displayedResults);
+  //   setToggle(false);
+  // }, [toggle]);
 
   const handleSubmit = async () => {
     await fetchNutritionAPI(search);
@@ -89,7 +109,19 @@ const Result = (props) => {
         Submit
       </button>
       <br></br>
-      {displayedResults2}
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th className="px-3 py-3">Calories</th>
+            <th className="px-3 py-3">Carbohydrate</th>
+            <th className="px-3 py-3">Protein</th>
+            <th className="px-3 py-3">Fat</th>
+            <th className="px-3 py-3">Serving Size</th>
+          </tr>
+        </thead>
+        <tbody>{displayedResults2}</tbody>
+      </table>
     </div>
   );
 };
