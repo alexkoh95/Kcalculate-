@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FoodCard from './FoodCard';
-import LogDisplayNav from './LogDisplayNav';
 import { Tab } from '@headlessui/react'
 
 const dayjs = require('dayjs')
@@ -46,10 +45,17 @@ const LogDisplay = () => {
         <div className="relative space-y-10 pb-2 p-4 rounded-lg border-2 border-white">
             <Tab.Group>
                 <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
-                <Tab >Breakfast</Tab>
-                <Tab >Lunch</Tab>
-                <Tab >Dinner</Tab>
-                <Tab >Snack</Tab>
+                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
+                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"> Breakfast</Tab>
+               
+                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
+                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60" >Lunch</Tab>
+               
+                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
+                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60">Dinner</Tab>
+                
+                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
+                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60">Snack</Tab>
                 </Tab.List>
                 
                 <Tab.Panels>
