@@ -1,20 +1,28 @@
-import React from 'react'
-import LogDisplay from './LogDisplay'
+import React, { useState } from "react";
+import Calculate from "./Calculate";
+import Search from "./Search";
+import Result from "./Result";
 
 const Log = () => {
-    return (
-        <div>
-            <h1>this is log page</h1>
-            <div className='grid grid-cols-2 pt-5'>
-            <div>search component here 1</div>
-            
-                <div>
-                    <LogDisplay />
-            </div>
-            
-            </div>
-            </div>
-    )
-}
+  // =====================================================
+  //                  USE STATES & VARIABLES
+  // =====================================================
+  const [searchTerm, setSearchTerm] = useState("");
+  const [nutritionDataToCalculate, setNutritionDataToCalculate] = useState("");
 
-export default Log
+  console.log(nutritionDataToCalculate);
+  return (
+    <div>
+      <h1>this is log page</h1>
+      <Search setSearchTerm={setSearchTerm} />
+      <Result
+        searchTerm={searchTerm}
+        nutritionDataToCalculate={nutritionDataToCalculate}
+        setNutritionDataToCalculate={setNutritionDataToCalculate}
+      />
+      <Calculate nutritionDataToCalculate={nutritionDataToCalculate} />
+    </div>
+  );
+};
+
+export default Log;
