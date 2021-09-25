@@ -1,23 +1,17 @@
 import './App.css';
-import SideNavBar from './components/SideNavBar';
-import Dashboard from './components/Dashboard/Dashboard';
-import Log from './components/Log/Log';
-import History from './components/LogHistory/History';
-import Settings from './components/Settings/Settings';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import Signup from './components/SignupLogin/Signup';
 
 function App() {
   return (
     <Router>
     <div className="App">
-      <div className=""><SideNavBar /></div>
-      <main className="mx-4 p-9 pl-64">          
+      <main>          
           <Switch>
-            <Route path="/" exact component={Dashboard} />
-            <Route path="/log" exact component={Log} />
-            <Route path="/loghistory" exact component={History} />
-            <Route path="/settings" exact component={Settings} />
-
+            <Route path="/" exact component={Signup}/>
+            <Route path="/main" exact component={HomePage} className="mx-4 p-9 pl-64"/>
+          
           </Switch>
 
       </main>
