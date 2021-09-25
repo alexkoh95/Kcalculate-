@@ -15,7 +15,6 @@ const Log = () => {
     setNutritionDataToCalculate([...nutritionDataToCalculate, item]);
   };
 
-  console.log(nutritionDataToCalculate);
   return (
     <div>
       <h1>this is log page</h1>

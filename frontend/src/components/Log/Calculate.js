@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Calculate = (props) => {
   // =====================================================
@@ -44,6 +45,36 @@ const Calculate = (props) => {
 
   const handleInputChange = (event) => {
     setServingSize(event.target.value);
+  };
+
+  const submitToDataBase = async (event) => {
+    event.preventDefault();
+
+    const name = nutritionCalculated[0].Name;
+    const calories = nutritionCalculated[0].Calories;
+    const carbohydrates = nutritionCalculated[0].Carbohydrates;
+    const protein = nutritionCalculated[0].Protein;
+    const fats = nutritionCalculated[0].Fats;
+    const weight = nutritionCalculated[0].ServingSizeg;
+    const date = nutritionCalculated[0].date;
+    const mealtype = nutritionCalculated[0].mealType;
+
+    const submitToDataBase = {
+      name,
+      calories,
+      carbohydrates,
+      protein,
+      fats,
+      protein,
+      fats,
+      weight,
+      date,
+      mealtype,
+    };
+
+    axios
+      .post("http://localhost:5000/nutrition/", submitToDataBase)
+      .then((res) => console.log(res.data));
   };
 
   const handleCalculate = (event) => {
@@ -96,20 +127,22 @@ const Calculate = (props) => {
           <strong>(g)</strong>
           {element.ServingSizeg}
         </td>
+        <td>
+          <label>Meal Type</label>
+          <select
+            name="MealType"
+            onChange={handleMealTypeChange}
+            value={meal}
+            id={index}
+            type="text"
+          >
+            <option value="Snack">Snack</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+          </select>
+        </td>
 
-        <label>Meal Type</label>
-        <select
-          name="MealType"
-          onChange={handleMealTypeChange}
-          value={meal}
-          id={index}
-          type="text"
-        >
-          <option value="Snack">Snack</option>
-          <option value="Breakfast">Breakfast</option>
-          <option value="Lunch">Lunch</option>
-          <option value="Dinner">Dinner</option>
-        </select>
         <input
           onChange={handleDateChange}
           type="date"
@@ -127,6 +160,10 @@ const Calculate = (props) => {
             Calculate
           </button>
         </div>
+
+        <button className="outline-black" onClick={submitToDataBase}>
+          Add to Log
+        </button>
       </tr>
     );
   });
