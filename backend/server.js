@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //Use MongoAtlas
 const mongoose = require("mongoose");
-// const nutrition = require("./models/nutrition");
+const nutrition = require("./router/imanRoutes");
 
 const connection = mongoose.connection;
 
@@ -33,7 +33,7 @@ connectDB(mongoURI);
 //              ROUTES
 // ====================================
 
-// app.use("/nutrition", nutrition);
+app.use("/nutrition", nutrition);
 // app.use("/login", toDo);
 
 // ====================================
