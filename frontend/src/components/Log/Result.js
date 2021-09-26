@@ -49,36 +49,62 @@ const Result = (props) => {
 
   let displayedResults2 = displayedResults?.map((element, index) => {
     return (
-      <tr>
-        <td className="px-3 py-3">
-          <strong>{element.Name}</strong>
-        </td>
-        <td className="px-3 py-3">
-          <strong>⚡</strong>
-          {element.Calories}
-        </td>
-        <td className="px-3 py-3">
-          <strong>C</strong>
-          {element.Carbohydrates}
-        </td>
-        <td className="px-3 py-3">
-          <strong>P</strong>
-          {element.Protein}
-        </td>
-        <td className="px-3 py-3">
-          <strong>F</strong>
-          {element.Fat}
-        </td>
-        <td className="px-3 py-3">
-          <strong>(g)</strong>
-          {element.ServingSizeg}
-        </td>
-        <td>
-          <button onClick={() => props.handleClick(element)}>
-            Food Choice?
-          </button>
-        </td>
-      </tr>
+
+    <div className='grid grid-cols-4 flex py-2 m-4 bg-white bg-opacity-40 shadow-lg rounded-lg '>
+
+        <div className='my-auto capitalize text-lg font-bold'>
+          {element.Name}<br/>
+          
+        </div>
+
+        
+        <div className='text-xs text-left my-auto leading-3 '>
+        Carbs: <span className='text-bold'>{element.Carbohydrates}</span> <br/>
+        Protein: <span className='text-bold'>{element.Protein}</span> <br />
+        Fats: <span className='text-bold'>{element.Fat}</span> 
+        </div>
+
+        <div className='text-xs text-left leading-3 align-top'>
+        <br/>
+          Serving Size: <span className='text-bold'>{element.ServingSizeg}</span><br />
+          Calories: <span className='text-bold'>{element.Calories}</span>
+        </div>
+
+        <div className='my-auto'>
+        <button onClick={() => props.handleClick(element)} className='rounded-full bg-white px-5 py-1 text-sm shadow-md'> select </button>
+        </div>
+        
+    </div>
+      // <tr>
+      //   <td className="px-3 py-3">
+      //     <strong>{element.Name}</strong>
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>⚡</strong>
+      //     {element.Calories}
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>C</strong>
+      //     {element.Carbohydrates}
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>P</strong>
+      //     {element.Protein}
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>F</strong>
+      //     {element.Fat}
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>(g)</strong>
+      //     {element.ServingSizeg}
+      //   </td>
+      //   <td>
+      //     <button onClick={() => props.handleClick(element)}>
+      //       Food Choice?
+      //     </button>
+      //   </td>
+      // </tr>
     );
   });
 
@@ -96,20 +122,38 @@ const Result = (props) => {
     setToggle(true);
   };
 
+  const handleChange = (event) => {
+    props.setSearchTerm(event.target.value);
+  };
+
   // =====================================================
   //                       RETURN
   // =====================================================
 
   return (
-    <div className="card">
+    <div className="">
+      <div className='flex items-center justify-center space-x-2 pt-20'>
+       <input
+        className="inline-flex px-4 py-1 h-10 w-72 text-gray-700 text-md bg-transparent border-2 border-white rounded-full focus:outline-none shadow-md shadow-inner"
+        type="text"
+        placeholder="Enter Your food Name"
+        onChange={handleChange}
+      />
+
       <button
-        className="btn bg-green-900 shadow-md px-3 py-3 m-4 rounded-md hover:bg-purple-700"
+        className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white bg-opacity-70 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out hover:animate-pulse"
         onClick={handleSubmit}
       >
-        Submit
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+</svg>
       </button>
+      </div>
       <br></br>
-      <table>
+      {/* {[] ? <span></span> : (displayedResults2)} */}
+      {displayedResults2 === [] && <div> </div>}
+      {displayedResults2 !== [] && displayedResults2}
+      {/* <table>
         <thead>
           <tr>
             <th>Name</th>
@@ -121,7 +165,7 @@ const Result = (props) => {
           </tr>
         </thead>
         <tbody>{displayedResults2}</tbody>
-      </table>
+      </table> */}
     </div>
   );
 };
