@@ -78,9 +78,6 @@ const Calculate = (props) => {
       .post("http://localhost:5000/nutrition/", submitToDataBase)
       .then((res) => console.log(res.data));
 
-    const nutritionCalculatedArray = nutritionCalculated.filter(
-      (element, index) => index !== index
-    );
     props.setNutritionDataToCalculate([]);
     history.push("/log");
   };
