@@ -16,26 +16,27 @@ const Log = () => {
   };
 
   return (
-   
-      <div className="grid grid-cols-2 pt-2 space-x-5">
-          <div>
-              {/* <div className='relative items-center justify-center space-x-2 pt-20'>
+    <div className="grid grid-cols-2 pt-2 space-x-5">
+      <div>
+        {/* <div className='relative items-center justify-center space-x-2 pt-20'>
                   <div className="inline"> <Search setSearchTerm={setSearchTerm} /></div> */}
-                  <Result
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            nutritionDataToCalculate={nutritionDataToCalculate}
-            setNutritionDataToCalculate={setNutritionDataToCalculate}
-            handleClick={addToCalculate}
-                  />
-              
-          <Calculate nutritionDataToCalculate={nutritionDataToCalculate} />
-        </div>
-        <div>
-          <LogDisplay nutritionDataToCalculate={nutritionDataToCalculate}/>
-        </div>
-      </div>
+        <Result
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          nutritionDataToCalculate={nutritionDataToCalculate}
+          setNutritionDataToCalculate={setNutritionDataToCalculate}
+          handleClick={addToCalculate}
+        />
 
+        <Calculate
+          nutritionDataToCalculate={nutritionDataToCalculate}
+          setNutritionDataToCalculate={setNutritionDataToCalculate}
+        />
+      </div>
+      <div>
+        <LogDisplay nutritionDataToCalculate={nutritionDataToCalculate} />
+      </div>
+    </div>
   );
 };
 

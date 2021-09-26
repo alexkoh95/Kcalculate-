@@ -81,7 +81,7 @@ const Calculate = (props) => {
     const nutritionCalculatedArray = nutritionCalculated.filter(
       (element, index) => index !== index
     );
-    setNutritionCalculated(nutritionCalculatedArray);
+    props.setNutritionDataToCalculate(nutritionCalculatedArray);
     history.push("/log");
   };
 
