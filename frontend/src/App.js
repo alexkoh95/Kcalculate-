@@ -6,7 +6,7 @@ import Signup from "./components/SignupLogin/Signup";
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App bg-gradient-to-br from-yellow-50 via-pink-50 to-indigo-100 h-screen">
         <main>
           <Switch>
             <Route path="/" exact component={Signup} />

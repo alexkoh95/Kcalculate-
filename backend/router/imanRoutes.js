@@ -43,13 +43,13 @@ router.post('/', (req, res) => {
 // @route GET api/books/:id
 // @description Edit and Update 
 // @access Public
-// router.put('/:id', (req, res) => {
-//   Todo.findByIdAndUpdate(req.params.id, req.body)
-//     .then(todoitem => res.json({ msg: 'Updated successfully' }))
-//     .catch(err =>
-//       res.status(400).json({ error: 'Unable to update the Database' })
-//     );
-// });
+router.put('/:id', (req, res) => {
+  itemNutrition.findByIdAndUpdate(req.params.id, req.body)
+    .then(log => res.json({ msg: 'Updated successfully' }))
+    .catch(err =>
+      res.status(400).json({ error: 'Unable to update the Database' })
+    );
+});
 
 // @route GET api/books/:id
 // @description Delete todoitem by id
