@@ -32,7 +32,7 @@ const Log = () => {
           <Calculate nutritionDataToCalculate={nutritionDataToCalculate} />
         </div>
         <div>
-          <LogDisplay />
+          <LogDisplay nutritionDataToCalculate={nutritionDataToCalculate}/>
         </div>
       </div>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 const Calculate = (props) => {
   // =====================================================
@@ -11,6 +12,7 @@ const Calculate = (props) => {
   const [servingSize, setServingSize] = useState(0);
   let temporaryString = "Snack";
   const [meal, setMeal] = useState(temporaryString);
+  const history = useHistory();
 
   const [nutritionCalculated, setNutritionCalculated] = useState([]);
 
@@ -80,6 +82,7 @@ const Calculate = (props) => {
       (element, index) => index !== index
     );
     setNutritionCalculated(nutritionCalculatedArray);
+    history.push('/log') 
   };
 
   const handleCalculate = (event) => {

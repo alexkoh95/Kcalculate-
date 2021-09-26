@@ -5,7 +5,7 @@ import { Tab } from '@headlessui/react'
 
 const dayjs = require("dayjs");
 
-const LogDisplay = () => {
+const LogDisplay = (props) => {
 
     const [data, setData] = useState([])
 
@@ -39,7 +39,7 @@ const LogDisplay = () => {
     
     //getting snack data 
     const snack = data.filter(ele => ele.mealtype === 'Snack')
-    console.log(dinner)
+    console.log(snack)
     
     return (
         <div className="relative space-y-10 pb-2 p-4 rounded-lg border-2 border-white">
