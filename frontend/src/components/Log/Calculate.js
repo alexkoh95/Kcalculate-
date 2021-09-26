@@ -106,6 +106,14 @@ const Calculate = (props) => {
     });
   };
 
+  const removeFromList = (event) => {
+    event.preventDefault();
+    const listArray = nutritionCalculated.filter(
+      (element, index) => index !== index
+    );
+    setNutritionCalculated(listArray);
+  };
+
   let printMealTypeChange = nutritionCalculated?.map((element, index) => {
     return (
       <div
