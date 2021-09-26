@@ -6,6 +6,7 @@ import History from "../components/LogHistory/History";
 import Settings from "../components/Settings/Settings";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import EditLogModal from "./Log/EditLogModal";
+import Deletelog from "./Log/Deletelog";
 
 const HomePage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage = () => {
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/log" exact component={Log} />
             <Route path="/log/:id" exact component={EditLogModal} />
+            <Route path="/log/delete/:id" exact component={Deletelog} />
             <Route path="/loghistory" exact component={History} />
             <Route path="/settings" exact component={Settings} />
           </Switch>

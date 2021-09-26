@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import FoodCard from './FoodCard';
-import { Tab } from '@headlessui/react'
+import { Tab } from '@headlessui/react';
 
 const dayjs = require("dayjs");
 
 const LogDisplay = (props) => {
 
     const [data, setData] = useState([])
+    const history = useHistory();
+
 
     useEffect(() => {
         fetch("/nutrition")
@@ -41,6 +43,7 @@ const LogDisplay = (props) => {
     const snack = data.filter(ele => ele.mealtype === 'Snack')
     console.log(snack)
     
+
     return (
         <div className="relative space-y-10 pb-2 p-4 rounded-lg border-2 border-white">
             <Tab.Group>
@@ -62,9 +65,8 @@ const LogDisplay = (props) => {
                    
                     <Tab.Panel >
                     {mealtype !== breakfast && breakfast.map((itemNutrition) =>
-                      <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
-                        />
-                        </Link>
+                      <Link to={`/log/delete/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
+                        /> </Link>
                     )}
                         
                     </Tab.Panel>
