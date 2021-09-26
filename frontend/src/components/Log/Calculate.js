@@ -77,6 +77,7 @@ const Calculate = (props) => {
     axios
       .post("http://localhost:5000/nutrition/", submitToDataBase)
       .then((res) => console.log(res.data));
+
     props.setNutritionDataToCalculate([]);
     history.push("/log");
   };
