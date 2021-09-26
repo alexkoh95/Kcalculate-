@@ -54,7 +54,7 @@ const Calculate = (props) => {
     const calories = nutritionCalculated[0].Calories;
     const carbohydrates = nutritionCalculated[0].Carbohydrates;
     const protein = nutritionCalculated[0].Protein;
-    const fats = nutritionCalculated[0].Fats;
+    const fats = nutritionCalculated[0].Fat;
     const weight = nutritionCalculated[0].ServingSizeg;
     const date = nutritionCalculated[0].date;
     const mealtype = nutritionCalculated[0].mealType;
