@@ -10,12 +10,6 @@
   padding: 0;
 }
 
-body {
-  background-image: url('https://i.ibb.co/WVLWsLx/Vivid-blurred-colorful-wallpaper-background.jpg');
-  background-size: cover;
-  background-blend-mode: screen;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -62,7 +62,7 @@ const LogDisplay = () => {
                    
                     <Tab.Panel >
                     {mealtype !== breakfast && breakfast.map((itemNutrition) =>
-                      <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
+                      <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
                     )}
@@ -71,7 +71,7 @@ const LogDisplay = () => {
 
                     <Tab.Panel >
                     {mealtype !== lunch && lunch.map((itemNutrition) =>
-                      <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
+                      <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
                     )}
@@ -81,7 +81,7 @@ const LogDisplay = () => {
                 
                     <Tab.Panel >
                     {mealtype !== dinner && dinner.map((itemNutrition) =>
-                      <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
+                      <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
                     )}
@@ -90,7 +90,7 @@ const LogDisplay = () => {
 
                     <Tab.Panel >
                     {mealtype !== snack && snack.map((itemNutrition) =>
-                      <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
+                      <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
                     )}
