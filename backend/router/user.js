@@ -32,9 +32,6 @@ router.get("/", async (req, res) => {
 
 // New user profile (TO UPDATE REDIRECT TO DASHBOARD)
 router.post("/", async (req, res) => {
-  if () {
-
-  }
   await UserModel.create(req.body);
 
   res.json({ status: "ok", msg: "created" })
