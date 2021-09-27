@@ -7,6 +7,7 @@ import Settings from "../components/Settings/Settings";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import EditLogModal from "./Log/EditLogModal";
 import Deletelog from "./Log/Deletelog";
+import DailyInformationPage from "./LogHistory/DailyInformationPage";
 
 const HomePage = () => {
   return (
@@ -22,6 +23,11 @@ const HomePage = () => {
             <Route path="/log/:id" exact component={EditLogModal} />
             <Route path="/log/delete/:id" exact component={Deletelog} />
             <Route path="/loghistory" exact component={History} />
+            <Route
+              path="/loghistory/DailyInformationPage"
+              exact
+              component={DailyInformationPage}
+            />
             <Route path="/settings" exact component={Settings} />
           </Switch>
         </main>
