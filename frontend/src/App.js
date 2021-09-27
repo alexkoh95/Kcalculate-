@@ -15,7 +15,7 @@ function App() {
               exact
               component={HomePage}
               className="mx-4 p-9 pl-64"
-            ><Redirect to="/dashboard"/></Route>
+            ></Route>
           </Switch>
         </main>
       </div>
@@ -24,3 +24,5 @@ function App() {
 }
 
 export default App;
+
+{/* <Redirect to="/dashboard"/> */}
