@@ -4,6 +4,7 @@ import SideBar from "./SideBar";
 import WeekGraph from "./WeekGraph";
 import DailyInformationPage from "./DailyInformationPage";
 import DailyLogCard from "./DailyLogCard";
+import SideNavBar from "../SideNavBar";
 
 const moment = require("moment");
 
@@ -16,13 +17,21 @@ const History = () => {
   const userName = `Alex`;
   return (
     <div>
-      <h1>
-        Welcome {userName} <br></br>Today's Date is {today}
-      </h1>
+      <div className="">
+        <SideNavBar />
+      </div>
+      <main className="mx-4 p-9 pl-64">
+        <div className="grid grid-cols-2 pt-2 space-x-5">
+          <div className=""></div>
+          <h1>
+            Welcome {userName} <br></br>Today's Date is {today}
+          </h1>
 
-      <Overview />
-      <WeekGraph />
-      <SideBar />
+          <Overview />
+          <WeekGraph />
+          <SideBar />
+        </div>
+      </main>
     </div>
   );
 };
