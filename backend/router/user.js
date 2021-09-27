@@ -4,6 +4,7 @@ const UserModel = require("../models/User");
 // const bcrypt = require("bcrypt")
 // const auth = require('../middleware/auth')
 
+// // Login check
 // router.post('/login', async (req, res) => {
 //   const password = req.body.password
 //   const hash = "$2b$12$CjdZKDBdue89kUyt33wkp.s1gCmZBpYAc1O/G.SY3Vasq4bXNUU2O"
@@ -19,7 +20,6 @@ const UserModel = require("../models/User");
 //       .json({ status: "unauthorised", msg: "you are not logged in" })
 //   }
 // })
-
 
 
 // User profile (CURRENTLY USED FOR SEEDING TEST, TO BE UPDATED)
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
 router.put("/", async (req, res) => {
   user = new UserModel({
     password: req.body.newPassword,
-    // others: req.body.newOthers,
+    // others: req.body.newOthers, // user's profile/targets
   })
 
   await user.save()
@@ -59,7 +59,7 @@ router.delete("/", async (req, res) => {
 })
 
 
-// ENCRYPTION
+// Encryption
 // router.get('/get-hash', async (req, res) => {
 //   const hashPassword = await bcrypt.hash("password", 12)
 
@@ -77,8 +77,8 @@ router.get('/seed', async (req, res) => {
       { name: "iman", password: "healthy" },
     ],
     (err, data) => {
-      // res.json({ status: "ok", msg: "seeded" })
-      res.redirect("/nutrition/user")
+      res.json({ status: "ok", msg: "seeded" })
+      // res.redirect("/nutrition/user")
     }
   );
 });
