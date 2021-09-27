@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const Calculate = (props) => {
   // =====================================================
@@ -11,6 +12,7 @@ const Calculate = (props) => {
   const [servingSize, setServingSize] = useState(0);
   let temporaryString = "Snack";
   const [meal, setMeal] = useState(temporaryString);
+  const history = useHistory();
 
   const [nutritionCalculated, setNutritionCalculated] = useState([]);
 
@@ -54,7 +56,7 @@ const Calculate = (props) => {
     const calories = nutritionCalculated[0].Calories;
     const carbohydrates = nutritionCalculated[0].Carbohydrates;
     const protein = nutritionCalculated[0].Protein;
-    const fats = nutritionCalculated[0].Fats;
+    const fats = nutritionCalculated[0].Fat;
     const weight = nutritionCalculated[0].ServingSizeg;
     const date = nutritionCalculated[0].date;
     const mealtype = nutritionCalculated[0].mealType;
@@ -76,10 +78,8 @@ const Calculate = (props) => {
       .post("http://localhost:5000/nutrition/", submitToDataBase)
       .then((res) => console.log(res.data));
 
-    const nutritionCalculatedArray = nutritionCalculated.filter(
-      (element, index) => index !== index
-    );
-    setNutritionCalculated(nutritionCalculatedArray);
+    props.setNutritionDataToCalculate([]);
+    history.push("/log");
   };
 
   const handleCalculate = (event) => {
@@ -106,70 +106,152 @@ const Calculate = (props) => {
     });
   };
 
+  const removeFromList = (event) => {
+    event.preventDefault();
+    const listArray = nutritionCalculated.filter(
+      (element, index) => index !== index
+    );
+    setNutritionCalculated(listArray);
+  };
+
   let printMealTypeChange = nutritionCalculated?.map((element, index) => {
     return (
-      <tr key={index}>
-        <td className="px-3 py-3">
-          <strong>{element.Name}</strong>
-        </td>
-        <td className="px-3 py-3">
-          <strong>⚡</strong>
-          {element.Calories}
-        </td>
-        <td className="px-3 py-3">
-          <strong>C</strong>
-          {element.Carbohydrates}
-        </td>
-        <td className="px-3 py-3">
-          <strong>P</strong>
-          {element.Protein}
-        </td>
-        <td className="px-3 py-3">
-          <strong>F</strong>
-          {element.Fat}
-        </td>
-        <td className="px-3 py-3">
-          <strong>(g)</strong>
-          {element.ServingSizeg}
-        </td>
-        <td>
-          <label>Meal Type</label>
-          <select
-            name="MealType"
-            onChange={handleMealTypeChange}
-            value={meal}
-            id={index}
-            type="text"
-          >
-            <option value="Snack">Snack</option>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
-          </select>
-        </td>
+      <div
+        key={index}
+        className="py-3 m-4 mt-5 bg-white bg-white bg-opacity-40 shadow-lg rounded-lg"
+      >
+        <div className="grid grid-cols-2">
+          <div className="grid grid-rows-4 my-0 ">
+            <div>
+              <label>Meal Type</label>
+              <select
+                name="MealType"
+                onChange={handleMealTypeChange}
+                value={meal}
+                id={index}
+                type="text"
+              >
+                <option value="Snack">Snack</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+              </select>
+            </div>
 
-        <input
-          onChange={handleDateChange}
-          type="date"
-          className="input"
-        ></input>
-        <div className="ServingSize">
-          <label> No. Serving</label>
-          <input
-            onChange={handleInputChange}
-            value={servingSize}
-            type="text"
-            id={index}
-          ></input>
-          <button id={index} onClick={handleCalculate}>
-            Calculate
-          </button>
+            <div>
+              <input
+                onChange={handleDateChange}
+                type="date"
+                className="input"
+              ></input>
+            </div>
+
+            <div>
+              <label className="text-xs"> No. Serving</label>
+              <input
+                onChange={handleInputChange}
+                value={servingSize}
+                type="text"
+                id={index}
+              ></input>
+            </div>
+            <div className>
+              <button
+                id={index}
+                onClick={handleCalculate}
+                className="w-2/3 bg-black text-white uppercase tracking-wider px-5 py-1 mt-2 text-xs shadow-md"
+              >
+                {" "}
+                Calculate{" "}
+              </button>
+            </div>
+          </div>
+
+          <div className="my-auto">
+            <div className="text-3xl capitalize pt-1">
+              <strong>{element.Name}</strong> <br />
+              <strong>⚡</strong> {element.Calories}
+            </div>
+
+            <div className="text-md pt-1">
+              <strong>C</strong> {element.Carbohydrates}
+              <strong>P</strong> {element.Protein}
+              <strong>F</strong> {element.Fat}
+              <strong>(g)</strong> {element.ServingSizeg}
+            </div>
+            <button
+              className=" bg-black text-white uppercase tracking-wider px-3 py-1 mt-2 text-xs shadow-md"
+              onClick={submitToDataBase}
+            >
+              {" "}
+              Add to Log{" "}
+            </button>
+          </div>
         </div>
+      </div>
 
-        <button className="outline-black" onClick={submitToDataBase}>
-          Add to Log
-        </button>
-      </tr>
+      // <tr key={index}>
+      //   <td className="px-3 py-3">
+      //     <strong>{element.Name}</strong>
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>⚡</strong>
+      //     {element.Calories}
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>C</strong>
+      //     {element.Carbohydrates}
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>P</strong>
+      //     {element.Protein}
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>F</strong>
+      //     {element.Fat}
+      //   </td>
+      //   <td className="px-3 py-3">
+      //     <strong>(g)</strong>
+      //     {element.ServingSizeg}
+      //   </td>
+      //   <td>
+      //     <label>Meal Type</label>
+      //     <select
+      //       name="MealType"
+      //       onChange={handleMealTypeChange}
+      //       value={meal}
+      //       id={index}
+      //       type="text"
+      //     >
+      //       <option value="Snack">Snack</option>
+      //       <option value="Breakfast">Breakfast</option>
+      //       <option value="Lunch">Lunch</option>
+      //       <option value="Dinner">Dinner</option>
+      //     </select>
+      //   </td>
+
+      //   <input
+      //     onChange={handleDateChange}
+      //     type="date"
+      //     className="input"
+      //   ></input>
+      //   <div className="ServingSize">
+      //     <label> No. Serving</label>
+      //     <input
+      //       onChange={handleInputChange}
+      //       value={servingSize}
+      //       type="text"
+      //       id={index}
+      //     ></input>
+      //     <button id={index} onClick={handleCalculate}>
+      //       Calculate
+      //     </button>
+      //   </div>
+
+      //   <button className="outline-black" onClick={submitToDataBase}>
+      //     Add to Log
+      //   </button>
+      // </tr>
     );
   });
 

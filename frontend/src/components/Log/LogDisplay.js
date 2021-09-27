@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import FoodCard from './FoodCard';
-import { Tab } from '@headlessui/react'
+import { Tab } from '@headlessui/react';
 
 const dayjs = require("dayjs");
 
-const LogDisplay = () => {
+const LogDisplay = (props) => {
 
     const [data, setData] = useState([])
+    const history = useHistory();
+
 
     useEffect(() => {
         fetch("/nutrition")
@@ -39,8 +41,9 @@ const LogDisplay = () => {
     
     //getting snack data 
     const snack = data.filter(ele => ele.mealtype === 'Snack')
-    console.log(dinner)
+    console.log(snack)
     
+
     return (
         <div className="relative space-y-10 pb-2 p-4 rounded-lg border-2 border-white">
             <Tab.Group>
@@ -62,16 +65,15 @@ const LogDisplay = () => {
                    
                     <Tab.Panel >
                     {mealtype !== breakfast && breakfast.map((itemNutrition) =>
-                      <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
-                        />
-                        </Link>
+                      <Link to={`/log/delete/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
+                        /> </Link>
                     )}
                         
                     </Tab.Panel>
 
                     <Tab.Panel >
                     {mealtype !== lunch && lunch.map((itemNutrition) =>
-                      <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
+                      <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
                     )}
@@ -81,7 +83,7 @@ const LogDisplay = () => {
                 
                     <Tab.Panel >
                     {mealtype !== dinner && dinner.map((itemNutrition) =>
-                      <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
+                      <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
                     )}
@@ -90,7 +92,7 @@ const LogDisplay = () => {
 
                     <Tab.Panel >
                     {mealtype !== snack && snack.map((itemNutrition) =>
-                      <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
+                      <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
                     )}

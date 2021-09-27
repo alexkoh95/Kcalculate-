@@ -8,7 +8,7 @@ const Search = (props) => {
   return (
     <div>
       <input
-        className="bg-green-900 shadow-md px-3 py-3 m-4 rounded-md"
+        className="px-4 py-1 h-10 w-72 text-gray-700 text-md bg-transparent border-2 border-white rounded-full focus:outline-none shadow-md shadow-inner"
         type="text"
         placeholder="Enter Your food Name"
         onChange={handleChange}

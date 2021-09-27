@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Calculate from "./Calculate";
-import Search from "./Search";
+// import Search from "./Search";
 import Result from "./Result";
 import LogDisplay from "./LogDisplay";
 
@@ -16,22 +16,25 @@ const Log = () => {
   };
 
   return (
-    <div>
-      <h1>this is log page</h1>
-      <div className="grid grid-cols-2 pt-5">
-        <div>
-          <Search setSearchTerm={setSearchTerm} />
-          <Result
-            searchTerm={searchTerm}
-            nutritionDataToCalculate={nutritionDataToCalculate}
-            setNutritionDataToCalculate={setNutritionDataToCalculate}
-            handleClick={addToCalculate}
-          />
-          <Calculate nutritionDataToCalculate={nutritionDataToCalculate} />
-        </div>
-        <div>
-          <LogDisplay />
-        </div>
+    <div className="grid grid-cols-2 pt-2 space-x-5">
+      <div>
+        {/* <div className='relative items-center justify-center space-x-2 pt-20'>
+                  <div className="inline"> <Search setSearchTerm={setSearchTerm} /></div> */}
+        <Result
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          nutritionDataToCalculate={nutritionDataToCalculate}
+          setNutritionDataToCalculate={setNutritionDataToCalculate}
+          handleClick={addToCalculate}
+        />
+
+        <Calculate
+          nutritionDataToCalculate={nutritionDataToCalculate}
+          setNutritionDataToCalculate={setNutritionDataToCalculate}
+        />
+      </div>
+      <div>
+        <LogDisplay nutritionDataToCalculate={nutritionDataToCalculate} />
       </div>
     </div>
   );

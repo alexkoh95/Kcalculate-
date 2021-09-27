@@ -51,14 +51,14 @@ router.put('/:id', (req, res) => {
     );
 });
 
-// @route GET api/books/:id
-// @description Delete todoitem by id
+// @route GET nutrition/:id
+// @description Delete item log by id
 // @access Public
 
-// router.delete('/:id', (req, res) => {
-//   Todo.findByIdAndRemove(req.params.id, req.body)
-//     .then(todoitem => res.json({ mgs: 'todo item deleted successfully' }))
-//     .catch(err => res.status(404).json({ error: 'No such a item' }));
-// });
+router.delete('/:id', (req, res) => {
+  itemNutrition.findByIdAndRemove(req.params.id, req.body)
+    .then(log => res.json({ mgs: 'item log deleted successfully' }))
+    .catch(err => res.status(404).json({ error: 'No such a item' }));
+});
 
 module.exports = router;
