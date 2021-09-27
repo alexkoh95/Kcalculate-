@@ -22,7 +22,6 @@ function App() {
       <div className="App bg-gradient-to-br from-yellow-50 via-pink-50 to-indigo-100 min-h-screen">
         <main>
           <Switch>
-  
             <Route path="/main">
               <Redirect to="/dashboard"></Redirect>
             </Route>
@@ -31,14 +30,13 @@ function App() {
             <Route path="/signin" exact component={SignIn} />
             <Route path="/signup" exact component={Signup} />
 
-
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/log" exact component={Log} />
             <Route path="/log/:id" exact component={EditLogModal} />
             <Route path="/log/delete/:id" exact component={Deletelog} />
             <Route path="/loghistory" exact component={History} />
             <Route
-              path="/loghistory/DailyInformationPage"
+              path="/loghistory/DailyInformationPage/:date"
               exact
               component={DailyInformationPage}
             />
