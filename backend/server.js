@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 //Use MongoAtlas
 const mongoose = require("mongoose");
 const nutrition = require("./router/imanRoutes");
+const user = require("./router/user");
 
 const connection = mongoose.connection;
 
@@ -29,12 +30,27 @@ const connectDB = require("./models/db");
 const mongoURI = "mongodb://localhost:27017/nutrition";
 connectDB(mongoURI);
 
+// const store = new MongoDBStore({
+//   uri: mongoURI,
+//   collection: "currentSessions",
+// })
+
+// app.use(
+//   session({
+//     secret: "secret",
+//     resave: false,
+//     saveUninitialized: false,
+//     store: store,
+//     maxAge: 24 * 60 * 60 * 1000
+//   })
+// )
+
 // ====================================
 //              ROUTES
 // ====================================
 
 app.use("/nutrition", nutrition);
-// app.use("/login", toDo);
+app.use("/nutrition/user", user);
 
 // ====================================
 //                 PORT
