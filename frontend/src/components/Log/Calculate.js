@@ -78,10 +78,7 @@ const Calculate = (props) => {
       .post("http://localhost:5000/nutrition/", submitToDataBase)
       .then((res) => console.log(res.data));
 
-    const nutritionCalculatedArray = nutritionCalculated.filter(
-      (element, index) => index !== index
-    );
-    setNutritionCalculated(nutritionCalculatedArray);
+    props.setNutritionDataToCalculate([]);
     history.push("/log");
   };
 
@@ -107,6 +104,14 @@ const Calculate = (props) => {
       newArray.splice(event.target.id, 1, newItem);
       return newArray;
     });
+  };
+
+  const removeFromList = (event) => {
+    event.preventDefault();
+    const listArray = nutritionCalculated.filter(
+      (element, index) => index !== index
+    );
+    setNutritionCalculated(listArray);
   };
 
   let printMealTypeChange = nutritionCalculated?.map((element, index) => {
