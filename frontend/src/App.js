@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import Signup from "./components/SignupLogin/Signup";
 
@@ -15,7 +15,7 @@ function App() {
               exact
               component={HomePage}
               className="mx-4 p-9 pl-64"
-            />
+            ><Redirect to="/dashboard"/></Route>
           </Switch>
         </main>
       </div>
