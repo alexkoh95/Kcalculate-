@@ -102,6 +102,8 @@ const Calculate = (props) => {
         }
       }
       newArray.splice(event.target.id, 1, newItem);
+      console.log(event.target.id);
+      console.log(newArray);
       return newArray;
     });
   };
