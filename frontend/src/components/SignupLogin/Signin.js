@@ -17,20 +17,32 @@ const Signin = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const user = {
+    const existingUser = {
       username: username,
       password: password
     }
-    // console.log(user)
 
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user)
+      body: JSON.stringify(existingUser)
     }
-    const res = await fetch("http://localhost:5000/nutrition/user", requestOptions)
-    const data = await res.json()
-    console.log(data)
+
+    try {
+      const res = await fetch("http://localhost:5000/nutrition/user/f", requestOptions)
+      const data = await res.json()
+      console.log(data.msg)
+    } catch (err) {
+      console.log(err)
+    }
+
+
+
+    // if (data.msg === "ok") {
+    //   console.log("pass")
+    // } else {
+    //   console.log("fail")
+    // }
 
   }
 

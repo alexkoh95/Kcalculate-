@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom';
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("")
+  const history = useHistory()
 
   const handleUsernameChange = async (event) => {
     await setUsername(event.target.value)
@@ -23,21 +25,28 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const newUser = {
-      username: username,
-      password: password
-    }
-    // console.log(newUser)
+    if (password === verifyPassword) {
+      const newUser = {
+        username: username,
+        password: password
+      }
+      // console.log(newUser)
 
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser)
-    }
-    const res = await fetch("http://localhost:5000/nutrition/user", requestOptions)
-    const data = await res.json()
-    console.log(data)
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newUser)
+      }
 
+      const res = await fetch("http://localhost:5000/nutrition/user", requestOptions)
+
+      console.log(res)
+      // GOT TO SOLVE THIS REDIRECT PROBLEM
+      history.push('/settings')
+
+    } else {
+      console.log("Passwords do not match. Please try again")
+    }
   }
 
   return (
