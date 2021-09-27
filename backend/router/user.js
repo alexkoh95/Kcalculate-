@@ -2,36 +2,38 @@ const express = require("express");
 const router = express.Router();
 const UserModel = require("../models/User");
 // const bcrypt = require("bcrypt")
-// const auth = require('../middleware/auth')
+const auth = require('../middleware/auth')
 
 // // Login check
-// router.post('/login', async (req, res) => {
-//   const password = req.body.password
-//   const hash = "$2b$12$CjdZKDBdue89kUyt33wkp.s1gCmZBpYAc1O/G.SY3Vasq4bXNUU2O"
-//   const valid = await bcrypt.compare(password, hash)
+router.post('/login', async (req, res) => {
+  const password = req.body.password
+  const hash = "$2b$12$CjdZKDBdue89kUyt33wkp.s1gCmZBpYAc1O/G.SY3Vasq4bXNUU2O"
+  const valid = await bcrypt.compare(password, hash)
 
-//   if (valid) {
-//     req.session.auth = true
-//     res.json({ status: 'ok', msg: 'you are logged in' })
-//   } else {
-//     req.session.auth = false
-//     res
-//       .status(403)
-//       .json({ status: "unauthorised", msg: "you are not logged in" })
-//   }
-// })
+  if (valid) {
+    req.session.auth = true
+    res.json({ status: 'ok', msg: 'you are logged in' })
+  } else {
+    req.session.auth = false
+    res
+      .status(403)
+      .json({ status: "unauthorised", msg: "you are not logged in" })
+  }
+})
 
 
 // User profile (CURRENTLY USED FOR SEEDING TEST, TO BE UPDATED)
-router.get("/", async (req, res) => {
-  const allUsers = await UserModel.find()
-
-  res.send(allUsers);
+router.post("/f", auth, async (req, res) => {
+  console.log(req.body)
+  await UserModel.find({ username: req.body.username })
+  // console.log(oneUser)
+  res.send({ msg: "ok" });
 })
 
 
 // New user profile (TO UPDATE REDIRECT TO DASHBOARD)
 router.post("/", async (req, res) => {
+  console.log(req.body)
   await UserModel.create(req.body);
 
   res.json({ status: "ok", msg: "created" })
@@ -40,7 +42,7 @@ router.post("/", async (req, res) => {
 
 // Update user profile
 router.put("/", async (req, res) => {
-  user = new UserModel({
+  user = UserModel({
     password: req.body.newPassword,
     // others: req.body.newOthers, // user's profile/targets
   })
@@ -73,8 +75,8 @@ router.get('/seed', async (req, res) => {
 
   await UserModel.create(
     [
-      { name: "alex", password: "lean" },
-      { name: "iman", password: "healthy" },
+      { username: "alex", password: "lean" },
+      { username: "iman", password: "healthy" },
     ],
     (err, data) => {
       res.json({ status: "ok", msg: "seeded" })
