@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 
-const Signup = () => {
+const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [verifyPassword, setVerifyPassword] = useState("")
 
   const handleUsernameChange = async (event) => {
     await setUsername(event.target.value)
@@ -15,24 +14,19 @@ const Signup = () => {
     console.log(password)
   }
 
-  const handleVerifyPasswordChange = async (event) => {
-    await setVerifyPassword(event.target.value)
-    console.log(verifyPassword)
-  }
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const newUser = {
+    const user = {
       username: username,
       password: password
     }
-    // console.log(newUser)
+    // console.log(user)
 
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser)
+      body: JSON.stringify(user)
     }
     const res = await fetch("http://localhost:5000/nutrition/user", requestOptions)
     const data = await res.json()
@@ -42,8 +36,8 @@ const Signup = () => {
 
   return (
     <div>
-      <h1>This is Sign up page</h1>
-      <a href="/signin">Already have an account? Sign in here</a>
+      <h1>This is Sign in page</h1>
+      <a href="/signup">Don't have an account? Create one here</a>
       <form>
         <div className="mt-12">
           <label className="" >Username</label>
@@ -58,12 +52,6 @@ const Signup = () => {
           <input className="m-1 p-1 rounded text-center" type="password" onChange={handlePasswordChange} />
         </div>
         <div className="mt-4">
-          <label className="">Verify Password</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="password" onChange={handleVerifyPasswordChange} />
-        </div>
-        <div className="mt-4">
           <button className="black border-3 border-white border-opacity-100" type="submit" onClick={handleSubmit} >Submit</button>
         </div>
       </form>
@@ -71,4 +59,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Signin

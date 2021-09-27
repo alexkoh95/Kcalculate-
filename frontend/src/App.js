@@ -1,7 +1,9 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "./components/HomePage";
-import Signup from "./components/SignupLogin/Signup";
+import Main from "./components/SignupLogin/Main";
+import SignIn from "./components/SignupLogin/Signin";
+import SignUp from "./components/SignupLogin/Signup";
 
 function App() {
   return (
@@ -9,7 +11,9 @@ function App() {
       <div className="App bg-gradient-to-br from-yellow-50 via-pink-50 to-indigo-100 h-screen">
         <main>
           <Switch>
-            <Route path="/" exact component={Signup} />
+            <Route path="/" exact component={Main} />
+            <Route path="/signin" exact component={SignIn} />
+            <Route path="/signup" exact component={SignUp} />
             <Route
               path="/main"
               exact
