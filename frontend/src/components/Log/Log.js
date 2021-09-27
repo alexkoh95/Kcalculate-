@@ -3,6 +3,7 @@ import Calculate from "./Calculate";
 // import Search from "./Search";
 import Result from "./Result";
 import LogDisplay from "./LogDisplay";
+import SideNavBar from "../SideNavBar";
 
 const Log = () => {
   // =====================================================
@@ -16,8 +17,11 @@ const Log = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 pt-2 space-x-5">
       <div>
+          <div className=""><SideNavBar /></div>
+            <main className="mx-4 p-9 pl-64">
+              <div className="grid grid-cols-2 pt-2 space-x-5">
+                  <div>
         {/* <div className='relative items-center justify-center space-x-2 pt-20'>
                   <div className="inline"> <Search setSearchTerm={setSearchTerm} /></div> */}
         <Result
@@ -35,7 +39,8 @@ const Log = () => {
       </div>
       <div>
         <LogDisplay nutritionDataToCalculate={nutritionDataToCalculate} />
-      </div>
+      </div></div>
+      </main>
     </div>
   );
 };
