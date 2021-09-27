@@ -18,21 +18,18 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
 
   console.log(data);
 
-  //handle changes
-  const [nutritionCalculated, setNutritionCalculated] = useState({
-    data,
-  });
-
+  // handle changes
+  const [nutritionCalculated, setNutritionCalculated] = useState([data]);
   // useEffect(() => {
-  //     setNutritionCalculated([...nutritionDataToCalculate]);
-  //   }, [nutritionDataToCalculate]);
+  //   setNutritionCalculated([...nutritionDataToCalculate]);
+  // }, [nutritionDataToCalculate]);
 
   const handleMealTypeChange = async (e) => {
     await setMeal((prevstate) => {
       return e.target.value;
     });
     await setNutritionCalculated((prevState) => {
-      const newArray = [...nutritionCalculated];
+      const newArray = [nutritionCalculated];
       let addedMealType = [
         Object.assign(newArray[0], { mealType: e.target.value }),
       ];
@@ -51,46 +48,51 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
 
   const handleInputChange = (event) => {
     setServingSize(event.target.value);
-    console.log(nutritionCalculated);
   };
 
   const handleCalculate = (event) => {
     event.preventDefault();
     setNutritionCalculated((prevState) => {
-      console.log(nutritionCalculated);
-      // const newArray = [...nutritionCalculated];
-      // const chosenItem = newArray[event.target.id];
-      // const newItem = {};
-      // for (const [key, value] of Object.entries(chosenItem)) {
-      //   if (
-      //     key == "Calories" ||
-      //     key == "Carbohydrates" ||
-      //     key == "Protein" ||
-      //     key == "Fat" ||
-      //     key == "ServingSizeg"
-      //   ) {
-      //     newItem[key] = Math.round(value * servingSize);
-      //   } else {
-      //     newItem[key] = value;
-      //   }
-      // }
-      // newArray.splice(event.target.id, 1, newItem);
-      // return newArray;
+      const newArray = [data];
+      const newArray2 = data;
+      const newItem = {};
+      for (const [key, value] of Object.entries(newArray2)) {
+        // console.log(newArray2);
+        // console.log(`This is the key:${key}, this is the value:${value}`);
+        if (
+          key == "calories" ||
+          key == "carbohydrates" ||
+          key == "protein" ||
+          key == "fats" ||
+          key == "weight"
+        ) {
+          newItem[key] = Math.round(
+            (value / (newArray2.weight * 0.01)) * servingSize
+          );
+        } else {
+          newItem[key] = value;
+        }
+      }
+      // console.log("This is old newArray (before Splice):", newArray);
+      // console.log(newItem);
+      newArray.splice(0, 1, newItem);
+      console.log("This is newArray after Splice:", newArray);
+      return newArray;
     });
   };
 
   //update to database
   const submitToDataBase = async (event) => {
     event.preventDefault();
-
-    const name = nutritionCalculated[0].Name;
-    const calories = nutritionCalculated[0].Calories;
-    const carbohydrates = nutritionCalculated[0].Carbohydrates;
-    const protein = nutritionCalculated[0].Protein;
-    const fats = nutritionCalculated[0].Fats;
-    const weight = nutritionCalculated[0].ServingSizeg;
-    const date = nutritionCalculated[0].date;
-    const mealtype = nutritionCalculated[0].mealType;
+    console.log(data.name);
+    const name = data.name;
+    const calories = data.calories;
+    const carbohydrates = data.carbohydrates;
+    const protein = data.protein;
+    const fats = data.fats;
+    const weight = data.weightg;
+    const date = data.date;
+    const mealtype = data.mealType;
 
     const submitToDataBase = {
       name,
@@ -106,16 +108,9 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
     };
 
     axios
-      .put(
-        `http://localhost:5000/nutrition/${match.params.id}`,
-        submitToDataBase
-      )
+      .put(`http://localhost:5000/nutrition/${data._id}`, submitToDataBase)
       .then((res) => console.log(res.data));
 
-    const nutritionCalculatedArray = nutritionCalculated.filter(
-      (element, index) => index !== index
-    );
-    setNutritionCalculated(nutritionCalculatedArray);
     history.push("/log");
   };
   // const submitToDataBase = (e) => {
@@ -168,7 +163,7 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
               <input
                 name="weight"
                 onChange={handleInputChange}
-                value={data.servingSize}
+                value={servingSize}
                 placeholder={data.weight}
                 type="text"
                 //    id={index}

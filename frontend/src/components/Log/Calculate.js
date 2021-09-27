@@ -87,6 +87,7 @@ const Calculate = (props) => {
     setNutritionCalculated((prevState) => {
       const newArray = [...nutritionCalculated];
       const chosenItem = newArray[event.target.id];
+      console.log(chosenItem);
       const newItem = {};
       for (const [key, value] of Object.entries(chosenItem)) {
         if (
@@ -102,6 +103,9 @@ const Calculate = (props) => {
         }
       }
       newArray.splice(event.target.id, 1, newItem);
+      console.log(event.target.id);
+      console.log(newArray);
+      console.log(chosenItem);
       return newArray;
     });
   };
