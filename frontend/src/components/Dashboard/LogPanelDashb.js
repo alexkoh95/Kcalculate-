@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
-const LogPanelDashb = ({ meal }) => {
+const LogPanelDashb = ({ todayMeals }) => {
 
- 
-     //getting breakfast data by date
-    const breakfast = meal.filter(ele => ele.mealtype === 'Breakfast' && ele.date === '2020-02-14T16:00:00.000Z')
+
+    //getting breakfast data
+    const breakfast = todayMeals.filter(ele => ele.mealtype === 'Breakfast')
     const breakfastKcal = breakfast.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
     console.log(breakfastKcal)
 
      //getting lunch data by date
-     const lunch = meal.filter(ele => ele.mealtype === 'Lunch' && ele.date === '2020-02-14T16:00:00.000Z')
+     const lunch = todayMeals.filter(ele => ele.mealtype === 'Lunch')
      const lunchKcal = lunch.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
      console.log(lunchKcal)
  
  
      //getting dinner data by date
-     const dinner = meal.filter(ele => ele.mealtype === 'Dinner' && ele.date === '2020-02-14T16:00:00.000Z')
+     const dinner = todayMeals.filter(ele => ele.mealtype === 'Dinner')
      const dinnerKcal = dinner.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
      console.log(dinnerKcal)
      
      //getting snack data by date
-     const snack = meal.filter(ele => ele.mealtype === 'Snack' && ele.date === '2020-02-14T16:00:00.000Z')
+     const snack = todayMeals.filter(ele => ele.mealtype === 'Snack')
      const snackKcal = snack.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
     console.log(snackKcal)
     
