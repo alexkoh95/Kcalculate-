@@ -6,33 +6,36 @@ const auth = require('../middleware/auth')
 
 // // Login check
 router.post('/login', async (req, res) => {
-  const password = req.body.password
-  const hash = "$2b$12$CjdZKDBdue89kUyt33wkp.s1gCmZBpYAc1O/G.SY3Vasq4bXNUU2O"
-  const valid = await bcrypt.compare(password, hash)
+  const enteredPassword = req.body.password
+  console.log("enter: ", enteredPassword)
+  const dbPassword = await UserModel.find({ username: req.body.username })
+  console.log("db: ", dbPassword)
 
-  if (valid) {
-    req.session.auth = true
+  if (enteredPassword === dbPassword[0].password) {
+    // req.session.auth = true
     res.json({ status: 'ok', msg: 'you are logged in' })
+    console.log("passwords match")
+
   } else {
-    req.session.auth = false
+    // req.session.auth = false
     res
       .status(403)
       .json({ status: "unauthorised", msg: "you are not logged in" })
+    console.log("passwords do not match")
   }
 })
 
-
 // User profile (CURRENTLY USED FOR SEEDING TEST, TO BE UPDATED)
-router.post("/f", auth, async (req, res) => {
+router.get("/find", async (req, res) => {
   console.log(req.body)
-  await UserModel.find({ username: req.body.username })
-  // console.log(oneUser)
-  res.send({ msg: "ok" });
+  const aa = await UserModel.find({ username: req.body.username })
+  console.log(aa)
+  res.json({ msg: "found" });
 })
 
 
 // New user profile (TO UPDATE REDIRECT TO DASHBOARD)
-router.post("/", async (req, res) => {
+router.post("/create", async (req, res) => {
   console.log(req.body)
   await UserModel.create(req.body);
 
@@ -41,11 +44,29 @@ router.post("/", async (req, res) => {
 })
 
 // Update user profile
-router.put("/", async (req, res) => {
-  user = UserModel({
-    password: req.body.newPassword,
-    // others: req.body.newOthers, // user's profile/targets
-  })
+router.put("/update", async (req, res) => {
+  await UserModel.updateOne(
+    {
+      username: req.body.username,
+    },
+    // password: password,
+    // targetCalories: calories,
+    // targetCarbohydrates: carbohydrates,
+    // targetProtein: protein,
+    // targetFats: fats,
+    // currentWeight: currentWeight,
+    // targetWeight: targetWeight,
+    {
+      username: req.body.newUsername,
+      password: req.body.newPassword,
+      targetCalories: req.body.newCalories,
+      targetCarbohydrates: req.body.newCarbohydrates,
+      targetProtein: req.body.newProtein,
+      targetFats: req.body.newFats,
+      currentWeight: req.body.newCurrentWeight,
+      targetWeight: req.body.newTargetWeight,
+    }
+  )
 
   await user.save()
 
@@ -53,21 +74,12 @@ router.put("/", async (req, res) => {
 })
 
 // Remove user account
-router.delete("/", async (req, res) => {
+router.delete("/delete", async (req, res) => {
   const { name } = req.body;
   await UserModel.deleteOne({ name })
 
   res.json({ status: "ok", msg: "deleted" })
 })
-
-
-// Encryption
-// router.get('/get-hash', async (req, res) => {
-//   const hashPassword = await bcrypt.hash("password", 12)
-
-//   res.send(hashPassword)
-// })
-
 
 // SEED TESTING - START - TO COMMENT-OUT/DELETE
 router.get('/seed', async (req, res) => {
@@ -75,8 +87,36 @@ router.get('/seed', async (req, res) => {
 
   await UserModel.create(
     [
-      { username: "alex", password: "lean" },
-      { username: "iman", password: "healthy" },
+      {
+        username: "Alex",
+        password: "123",
+        targetCalories: 99,
+        targetCarbohydrates: 99,
+        targetProtein: 99,
+        targetFats: 99,
+        currentWeight: 99,
+        targetWeight: 99
+      },
+      {
+        username: "Iman",
+        password: "456",
+        targetCalories: 99,
+        targetCarbohydrates: 99,
+        targetProtein: 99,
+        targetFats: 99,
+        currentWeight: 99,
+        targetWeight: 99
+      },
+      {
+        username: "Wei Hong",
+        password: "789",
+        targetCalories: 99,
+        targetCarbohydrates: 99,
+        targetProtein: 99,
+        targetFats: 99,
+        currentWeight: 99,
+        targetWeight: 99
+      }
     ],
     (err, data) => {
       res.json({ status: "ok", msg: "seeded" })
