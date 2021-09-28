@@ -3,6 +3,8 @@ import DisplayTracker from './DisplayTracker'
 import LogPanelDashb from './LogPanelDashb';
 import MacroBreakdown from './MacroBreakdown'
 import SideNavBar from "../SideNavBar";
+import WeightTracker from './WeightTracker';
+import { Link } from "react-router-dom"
 
 const Dashboard = () => {
 
@@ -14,6 +16,10 @@ const Dashboard = () => {
             .then(res => res.json())
             .then(meal => setMeal(meal))
     }, []);
+
+    const moment = require("moment");
+    const today = moment().format("dddd MMMM Do YYYY");
+    console.log(today);
     
     const targetKcal = 5190 
     let totalKcal = meal.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
@@ -28,13 +34,18 @@ const Dashboard = () => {
             <div className="grid grid-cols-3 space-x-5 my-auto">
 
                 <div className="col-span-2">
-                    <div className='h-44 bg-white py-2 px-2 m-3 text-gray-700 rounded-lg m-3 bg-opacity-20 shadow-lg text-left pl-8 pt-5'>
-                        <h1 className="text-3xl">Hello, Peter</h1>
+                        <div className="h-52 bg-gradient-to-br from-yellow-100 via-red-100 to-pink-100 py-2 px-2 m-3 text-gray-700 rounded-lg bg-opacity-20 text-left pl-8 pt-12 
+                        bg-cover bg-center filter brightness-105" style={{backgroundImage:`url('https://i.ibb.co/Fn5LVQB/dashboard-banner.jpg')`}}>
+                        <h1 className="text-4xl font-bold">Hello, Alex</h1>
+                            <h1 className="text-lg pb-4">{today}</h1>
+                            <button className="text-xs border-2 border-indigo-600 uppercase spacing-widest text-xs px-6 py-2 rounded-full border-opacity-40 hover:bg-indigo-600 hover:text-white"><Link to ="/log">Log Meal</Link></button>
+                            <button className="text-xs border-2 border-indigo-600 uppercase spacing-widest text-xs px-6 py-2 ml-3 rounded-full border-opacity-40 hover:bg-indigo-600 hover:text-white"><Link to ="/loghistory">Review Logs</Link></button>
                     </div>
 
-                    <div className="grid grid-cols-2 space-x-5">
-                        <div>
-yumme banner here
+                    <div className="grid grid-cols-2 space-x-5 pt-5">
+                        
+                            <div>
+                        <WeightTracker />
                         </div>
 
                         <div>

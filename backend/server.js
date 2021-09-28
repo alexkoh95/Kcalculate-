@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 const mongoose = require("mongoose");
 const nutrition = require("./router/imanRoutes");
 const user = require("./router/user");
+const weight = require("./router/weightRouter");
 
 const connection = mongoose.connection;
 
@@ -29,6 +30,10 @@ connection.once("open", function () {
 const connectDB = require("./models/db");
 const mongoURI = "mongodb://localhost:27017/nutrition";
 connectDB(mongoURI);
+
+// const connectDBWeight = require("./models/dbWeight");
+// const mongoURI2 = "mongodb://localhost:27017/nutrition/weight";
+// connectDBWeight(mongoURI2);
 
 // const store = new MongoDBStore({
 //   uri: mongoURI,
@@ -50,7 +55,9 @@ connectDB(mongoURI);
 // ====================================
 
 app.use("/nutrition", nutrition);
+app.use("/nutrition/weight", weight);
 app.use("/nutrition/user", user);
+
 
 // ====================================
 //                 PORT
