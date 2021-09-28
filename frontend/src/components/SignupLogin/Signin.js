@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom';
 
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const history = useHistory()
 
   const handleUsernameChange = async (event) => {
     await setUsername(event.target.value)
@@ -29,9 +32,14 @@ const Signin = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/nutrition/user/f", requestOptions)
+      const res = await fetch("http://localhost:5000/nutrition/user/login", requestOptions)
       const data = await res.json()
-      console.log(data.msg)
+      console.log(data.status)
+      if (data.status === "ok") {
+        history.push("/main")
+      } else {
+        console.log("passwords not match")
+      }
     } catch (err) {
       console.log(err)
     }
