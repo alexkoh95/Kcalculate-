@@ -80,7 +80,7 @@ const WeightForm = () => {
         <div>
                     <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="date" name="date" value={values.date} onChange={handleChange} />
         </div>
-<button type="submit" onSubmit={handleSubmit} className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold py-2 px-4 mt-5 rounded focus:outline-none focus:shadow-outline">log new weight</button>
+<button type="submit" onSubmit={handleSubmit} className="block w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold py-2 px-4 mt-5 rounded focus:outline-none focus:shadow-outline">Log New Weight</button>
                 </form>
                 <div className="border-t-2 border-indigo-600 pt-4 mt-4 grid grid-cols-2">
                     <div className="text-left my-auto uppercase text-sm">Current Weight:</div> <div className="text-right text-2xl my-auto">{}kg</div>

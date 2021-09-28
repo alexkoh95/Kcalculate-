@@ -4,7 +4,8 @@ import axios from "axios";
 
 const EditLogModal = ({ match, nutritionDataToCalculate }) => {
   const currentDate = new Date();
-  const [data, setMeal] = useState({});
+  const [data, setData] = useState({});
+  const [meal, setMeal] = useState({});
   const isoDate = currentDate.toISOString().split("T")[0];
   const [date, setDate] = useState(isoDate);
   const [servingSize, setServingSize] = useState(0);
@@ -13,34 +14,30 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
   useEffect(() => {
     fetch(`/nutrition/${match.params.id}`)
       .then((res) => res.json())
-      .then((data) => setMeal(data));
+      .then((data) => setData(data));
   }, [match]);
 
-  console.log(data);
-
-  // handle changes
   const [nutritionCalculated, setNutritionCalculated] = useState([data]);
-  // useEffect(() => {
-  //   setNutritionCalculated([...nutritionDataToCalculate]);
-  // }, [nutritionDataToCalculate]);
 
   const handleMealTypeChange = async (e) => {
     await setMeal((prevstate) => {
       return e.target.value;
     });
     await setNutritionCalculated((prevState) => {
-      const newArray = [nutritionCalculated];
+      const newArray = [data];
       let addedMealType = [
-        Object.assign(newArray[0], { mealType: e.target.value }),
+        Object.assign(newArray[0], { mealtype: e.target.value.toString() }),
       ];
+      console.log(addedMealType);
       return addedMealType;
     });
   };
 
+  //error in date change - needs to click twice before it logs
   const handleDateChange = (event) => {
     setDate(event.target.value);
     setNutritionCalculated((prevState) => {
-      const newArray = [...nutritionCalculated];
+      const newArray = [data];
       let addedDate = [Object.assign(newArray[0], { date: date })];
       return addedDate;
     });
@@ -84,15 +81,15 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
   //update to database
   const submitToDataBase = async (event) => {
     event.preventDefault();
-    console.log(data.name);
-    const name = data.name;
-    const calories = data.calories;
-    const carbohydrates = data.carbohydrates;
-    const protein = data.protein;
-    const fats = data.fats;
-    const weight = data.weightg;
-    const date = data.date;
-    const mealtype = data.mealType;
+    console.log(nutritionCalculated.name);
+    const name = nutritionCalculated.name;
+    const calories = nutritionCalculated.calories;
+    const carbohydrates = nutritionCalculated.carbohydrates;
+    const protein = nutritionCalculated.protein;
+    const fats = nutritionCalculated.fats;
+    const weight = nutritionCalculated.weightg;
+    const date = nutritionCalculated.date;
+    const mealtype = nutritionCalculated.mealType;
 
     const submitToDataBase = {
       name,
@@ -113,21 +110,7 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
 
     history.push("/log");
   };
-  // const submitToDataBase = (e) => {
-  //     e.preventDefault();
-  //     fetch(`/nutrition/${match.params.id}`, {
-  //         method: "PUT",
-  //         headers: {
-  //             'Content-type': "application/json"},
-  //         body: JSON.stringify(data)
-  //       })
-  //         .then(res => res.json())
-  //         .then(data => console.log(data))
-  //         // history.go(-1)
-  //         // history.push('/log')
-  // }
-
-  // console.log(data)
+  console.log(data);
 
   return (
     <div>
@@ -139,7 +122,6 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
               <select
                 name="MealType"
                 onChange={handleMealTypeChange}
-                value={data.mealtype}
                 //    id={index}
                 type="text"
               >
@@ -182,6 +164,7 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
           </div>
 
           <div className="my-auto">
+            <h2>OLD DATA</h2>
             <div className="text-3xl capitalize pt-1">
               <strong>{data.name}</strong> <br />
               <strong>⚡</strong> {data.calories}
@@ -193,6 +176,34 @@ const EditLogModal = ({ match, nutritionDataToCalculate }) => {
               <strong>F</strong> {data.fats}
               <strong>(g)</strong> {data.weight}
             </div>
+
+            <h2>NEW DATA</h2>
+            {nutritionCalculated?.map((element) => (
+              <div>
+                <div className="text-3xl capitalize pt-1">
+                  <strong>{element.name}</strong> <br />
+                  <strong>⚡</strong> {element.calories}
+                </div>
+                <div className="text-md pt-1">
+                  <strong>C</strong> {element.carbohydrates}
+                  <strong>P</strong> {element.protein}
+                  <strong>F</strong> {element.fats}
+                  <strong>(g)</strong> {element.weight}
+                </div>
+              </div>
+            ))}
+            {/* <div className="text-3xl capitalize pt-1">
+              <strong>{nutritionCalculated[0].name}</strong> <br />
+              <strong>⚡</strong> {nutritionCalculated[0].calories}
+            </div>
+
+            <div className="text-md pt-1">
+              <strong>C</strong> {nutritionCalculated[0].carbohydrates}
+              <strong>P</strong> {nutritionCalculated[0].protein}
+              <strong>F</strong> {nutritionCalculated[0].fats}
+              <strong>(g)</strong> {nutritionCalculated[0].weight}
+            </div> */}
+
             <button
               className=" bg-black text-white uppercase tracking-wider px-3 py-1 mt-2 text-xs shadow-md"
               onSubmit={submitToDataBase}

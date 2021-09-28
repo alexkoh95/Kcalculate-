@@ -6,9 +6,6 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-// const session = require('express-session')
-// const MongoDBStore = require('connect-mongodb-session')(session)
-
 
 app.use(cors());
 app.use(express.json());
@@ -33,10 +30,6 @@ connection.once("open", function () {
 const connectDB = require("./models/db");
 const mongoURI = "mongodb://localhost:27017/nutrition";
 connectDB(mongoURI);
-
-// const connectDBWeight = require("./models/dbWeight");
-// const mongoURI2 = "mongodb://localhost:27017/nutrition/weight";
-// connectDBWeight(mongoURI2);
 
 // const store = new MongoDBStore({
 //   uri: mongoURI,

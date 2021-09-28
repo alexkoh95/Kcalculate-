@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import SideNavBar from "../SideNavBar";
 
 const Settings = () => {
     const [username, setUsername] = useState("")
@@ -91,10 +90,11 @@ const Settings = () => {
     }
 
     return (
-        <div>
-            <div className=""><SideNavBar /></div>
-            <main className="mx-4 p-9 pl-64">
-                <h1>this is Settings Page</h1>
+        <div className="container mx-auto flex-1 flex flex-col items-center justify-center px-2 min-h-screen">
+          
+            <main className="bg-white bg-opacity-40 shadow-lg rounded-xl px-8 pt-7 pb-8 mb-4 text-left grid grid-cols-2">
+            <h1 className="text-left text-2xl leading-tight font-bold pb-4">Settings.</h1>
+                <div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Details</div>
                     <div>Current</div>
@@ -120,6 +120,8 @@ const Settings = () => {
                     <div>{carbohydrates}</div>
                     <input type="number" onChange={handleCarbohydratesChange} />
                 </div>
+                </div>
+                <div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Protein</div>
                     <div>{protein}</div>
@@ -139,6 +141,7 @@ const Settings = () => {
                     <div>Target Weight</div>
                     <div>{targetWeight}</div>
                     <input type="number" onChange={handleTargetWeightChange} />
+                </div>
                 </div>
                 <div>
                     <button type="submit" onClick={handleSubmit} >Save</button>

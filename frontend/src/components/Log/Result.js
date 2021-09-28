@@ -50,7 +50,7 @@ const Result = (props) => {
   let displayedResults2 = displayedResults?.map((element, index) => {
     return (
 
-    <div className='grid grid-cols-4 flex py-2 m-4 bg-white bg-opacity-40 shadow-lg rounded-lg '>
+    <div className='grid grid-cols-4 flex py-3 m-4 bg-white bg-opacity-40 shadow-lg rounded-lg '>
 
         <div className='my-auto capitalize text-lg font-bold'>
           {element.Name}<br/>
@@ -71,7 +71,7 @@ const Result = (props) => {
         </div>
 
         <div className='my-auto'>
-        <button onClick={() => props.handleClick(element)} className='rounded-full bg-indigo-600 text-white px-5 py-1 text-sm shadow-md'> select </button>
+        <button onClick={() => props.handleClick(element)} className='rounded-full bg-indigo-600 text-white px-5 py-1 text-sm shadow-md hover:bg-indigo-700'> select </button>
         </div>
         
     </div>
@@ -141,7 +141,7 @@ const Result = (props) => {
       />
 
       <button
-        className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-indigo-600 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out hover:animate-pulse"
+        className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-indigo-600 shadow-lg transform hover:bg-indigo-700 hover:scale-105 transition duration-500 ease-in-out hover:animate-pulse"
         onClick={handleSubmit}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
