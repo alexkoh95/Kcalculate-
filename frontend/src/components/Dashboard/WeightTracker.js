@@ -1,14 +1,14 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2';
 
-const WeightTracker = ({ targetWeight }) => {
+const WeightTracker = ({ targetWeight, weight }) => {
 
     const data = {
         labels: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
         datasets: [
           {
             label: 'Weight',
-            data: [70, 69.5, 69, 68.3, 67.8, 67.2],
+            data: [weight[0].weight, weight[1].weight, weight[2].weight, weight[3].weight, weight[4].weight, weight[5].weight],
             fill: false,
             backgroundColor: 'rgb(153, 102, 255)',
             borderColor: 'rgba(153, 102, 255, 0.2)',

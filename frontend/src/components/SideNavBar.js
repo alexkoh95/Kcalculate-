@@ -16,7 +16,6 @@ const SideNavBar = () => {
           {" "}
           <Link
             to="/dashboard"
-            className="hover:bg-white hover:bg-opacity-40 "
           >
             Dashboard{" "}
           </Link>{" "}
@@ -25,7 +24,6 @@ const SideNavBar = () => {
           {" "}
           <Link
             to="/log"
-            className="hover:bg-white active:bg-opacity-40 "
           >
             {" "}
             Log{" "}
@@ -41,7 +39,7 @@ const SideNavBar = () => {
         </div>
       </div>
 
-      <div className="text-xs absolute inset-x-0 bottom-0 pb-8 text-gray-500">
+      <div className="text-xs font-light uppercase tracking-wide absolute inset-x-0 bottom-0 pb-8 text-gray-500">
         ©2021 Counting Bros
       </div>
     </div>
