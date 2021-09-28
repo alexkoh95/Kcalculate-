@@ -78,7 +78,7 @@ const Settings = () => {
             currentWeight: currentWeight,
             targetWeight: targetWeight
         }
-        // console.log(newUser)
+        // console.log(editUser)
 
         const requestOptions = {
             method: "POST",

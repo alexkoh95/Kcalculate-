@@ -3,39 +3,39 @@ import { Link } from "react-router-dom";
 
 const SideNavBar = () => {
   return (
-    <div className=" fixed h-screen w-60 bg-white bg-opacity-20 object-center">
+    <div className=" fixed h-screen w-60 bg-white bg-opacity-20 object-center shadow-lg">
       <div className="pt-12">
         {" "}
-        <h1 className="font-extrabold text-xl">
-          <em>kcal</em>culate
+        <h1 className="font-extrabold text-xl text-indigo-600">
+          <Link to='/dashboard'><em>kcal</em>culate</Link>
         </h1>{" "}
       </div>
 
-      <div className="pt-32 relative space-y-7 text-sm grid row-4 ">
-        <div className="uppercase font-normal tracking-widest">
+      <div className="pt-32 relative space-y-2 text-sm grid row-4 ">
+        <div className="uppercase font-normal tracking-widest hover:shadow-md py-3 hover:text-white hover:bg-indigo-600">
           {" "}
           <Link
             to="/dashboard"
-            className="hover:bg-white hover:bg-opacity-40 hover:shadow-md rounded-full py-3 px-9"
+            className="hover:bg-white hover:bg-opacity-40 "
           >
             Dashboard{" "}
           </Link>{" "}
         </div>
-        <div className="uppercase font-normal tracking-widest">
+        <div className="uppercase font-normal tracking-widest hover:shadow-md py-3 hover:text-white hover:bg-indigo-600 ">
           {" "}
           <Link
             to="/log"
-            className="hover:bg-white active:bg-opacity-40 active:shadow-md rounded-full py-3 px-9"
+            className="hover:bg-white active:bg-opacity-40 "
           >
             {" "}
             Log{" "}
           </Link>
         </div>
-        <div className="uppercase font-normal tracking-widest">
+        <div className="uppercase font-normal tracking-widest hover:shadow-md py-3 hover:text-white hover:bg-indigo-600">
           {" "}
           <Link to="/loghistory"> Log History </Link>{" "}
         </div>
-        <div className="uppercase font-normal tracking-widest">
+        <div className="uppercase font-normal tracking-widest hover:shadow-md py-3 hover:text-white hover:bg-indigo-600">
           {" "}
           <Link to="/settings"> Settings </Link>
         </div>

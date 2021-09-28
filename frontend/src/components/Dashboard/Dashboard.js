@@ -20,11 +20,20 @@ const Dashboard = () => {
     const moment = require("moment");
     const today = moment().format("dddd MMMM Do YYYY");
     console.log(today);
+
+    // today's nutrition
+    const todayMeals = meal.filter(
+        (element) => moment(element.date).format("dddd MMMM Do YYYY") === today
+      );
     
-    const targetKcal = 5190 
-    let totalKcal = meal.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
+    const targetKcal = 3300 
+    // let totalKcal = meal.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
+    let totalKcal = todayMeals.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
     const leftKcal = targetKcal - totalKcal
 
+
+    console.log('hello');
+    console.log(todayMeals);
     console.log(totalKcal);
 
     return (
@@ -49,7 +58,7 @@ const Dashboard = () => {
                         </div>
 
                         <div>
-                        <LogPanelDashb meal={meal} />
+                        <LogPanelDashb todayMeals={todayMeals} />
                         </div>
 
                     </div>
@@ -64,7 +73,7 @@ const Dashboard = () => {
 
                     </div>
                     <div className="m-3 pb-3"><DisplayTracker leftKcal={leftKcal} totalKcal={totalKcal}/></div>
-                    <div className="m-3 border-t-2 pt-3"><MacroBreakdown meal={meal} /></div>
+                    <div className="m-3 border-t-2 pt-3"><MacroBreakdown todayMeals={todayMeals} /></div>
                     
                     <div></div>
                 </div>

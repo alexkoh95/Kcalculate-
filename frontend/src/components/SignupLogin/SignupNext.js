@@ -38,8 +38,8 @@ const SignupNext = () => {
     event.preventDefault();
 
     const newUser = {
-      username: username,
-      password: password,
+      // username: username,
+      // password: password,
       targetCalories: calories,
       targetCarbohydrates: carbohydrates,
       targetProtein: protein,

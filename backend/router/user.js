@@ -25,12 +25,28 @@ router.post('/login', async (req, res) => {
   }
 })
 
-// User profile (CURRENTLY USED FOR SEEDING TEST, TO BE UPDATED)
+// Find user profile (CURRENTLY USED FOR SEEDING TEST, TO BE UPDATED)
 router.get("/find", async (req, res) => {
   console.log(req.body)
-  const aa = await UserModel.find({ username: req.body.username })
-  console.log(aa)
-  res.json({ msg: "found" });
+  try {
+    const found = await UserModel.find({ username: req.body.username })
+    console.log(found)
+    res.json({ status: "ok", found });
+  } catch (error) {
+    res.json({ status: "not ok", msg: "user not found" });
+  }
+})
+
+// Find user profile 2
+router.get("/:id", async (req, res) => {
+  console.log(req.body)
+  try {
+    const found = await UserModel.find({ username: req.params.id })
+    console.log(found)
+    res.json({ found });
+  } catch (error) {
+    res.json({ status: "not ok", msg: "user not found" });
+  }
 })
 
 
