@@ -67,11 +67,11 @@ router.delete("/:id", (req, res) => {
 
 // @route GET /nutrition/:date
 // @description Get single todoitem by date
-router.get("/getDate/:date", (req, res) => {
-  itemNutrition
-    .find(req.params.id)
-    .then((item) => res.json(item))
-    .catch((err) => res.status(404).json({ noLogFound: "No item found" }));
-});
+// router.get("/getDate/:date", (req, res) => {
+//   itemNutrition
+//     .find(req.params.id)
+//     .then((item) => res.json(item))
+//     .catch((err) => res.status(404).json({ noLogFound: "No item found" }));
+// });
 
 module.exports = router;
