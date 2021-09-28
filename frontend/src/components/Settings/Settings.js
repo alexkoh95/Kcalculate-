@@ -16,14 +16,14 @@ const Settings = () => {
             const res = await fetch("http://localhost:5000/nutrition/user/find");
             const data = await res.json();
             console.log(data)
-            setUsername()
-            setPassword()
-            setCalories()
-            setCarbohydrates()
-            setProtein()
-            setFats()
-            setCurrentWeight()
-            setTargetWeight()
+            // setUsername()
+            // setPassword()
+            // setCalories()
+            // setCarbohydrates()
+            // setProtein()
+            // setFats()
+            // setCurrentWeight()
+            // setTargetWeight()
         } catch (err) {
             console.log(err)
         }
@@ -102,7 +102,7 @@ const Settings = () => {
                 </div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Username</div>
-                    <div>value..</div>
+                    <div>{username}</div>
                     <input type="text" onChange={handleUsernameChange} />
                 </div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
@@ -112,32 +112,32 @@ const Settings = () => {
                 </div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Target Calories</div>
-                    <div>value..</div>
+                    <div>{calories}</div>
                     <input type="number" onChange={handleCaloriesChange} />
                 </div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Target Carbs</div>
-                    <div>value..</div>
+                    <div>Target Carbohydrates</div>
+                    <div>{carbohydrates}</div>
                     <input type="number" onChange={handleCarbohydratesChange} />
                 </div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Protein</div>
-                    <div>value..</div>
+                    <div>{protein}</div>
                     <input type="number" onChange={handleProteinChange} />
                 </div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Fats</div>
-                    <div>value..</div>
+                    <div>{fats}</div>
                     <input type="number" onChange={handleFatsChange} />
                 </div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Weight</div>
-                    <div>value..</div>
+                    <div>{currentWeight}</div>
                     <input type="number" onChange={handleCurrentWeightChange} />
                 </div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Target Weight</div>
-                    <div>value..</div>
+                    <div>{targetWeight}</div>
                     <input type="number" onChange={handleTargetWeightChange} />
                 </div>
                 <div>
