@@ -22,23 +22,19 @@ const History = () => {
       </div>
       <main className="mx-4 p-9 pl-64">
         <div className="grid grid-cols-3 pt-2 space-x-5">
-        
           <div>
-        <SideBar />
-        </div>
-
-        <div className="col-span-2 bg-white p-3">
-        <h1>
-            Welcome {userName} <br></br>Today's Date is {today}
-          </h1>
-
-          <Overview />
-        <WeekGraph />
-        </div>
-
-
+            <SideBar />
           </div>
-        
+
+          <div className="col-span-2 p-3">
+            <h1>
+              Welcome {userName} <br></br>Today's Date is {today}
+            </h1>
+
+            <Overview />
+            <WeekGraph />
+          </div>
+        </div>
       </main>
     </div>
   );

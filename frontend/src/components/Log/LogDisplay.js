@@ -15,87 +15,143 @@ const LogDisplay = (props) => {
         fetch("/nutrition")
             .then(res => res.json())
             .then(data => setData(data))
+        history.push('/log')
     }, []);
 
     console.log(data)
 
-    // getting date to display day 
-    // const day = dayjs(data[0].date).format('dddd, MMMM D, YYYY')
-    // console.log(day)
+    const moment = require("moment");
+    const today = moment().format("dddd MMMM Do YYYY");
+    console.log(today);
+
+    // today's nutrition
+    const todayMeals = data.filter(
+        (element) => moment(element.date).format("dddd MMMM Do YYYY") === today
+      );
 
     // getting all meals data
-    const mealtype = data.map(meal => meal.mealtype)
+    const mealtype = todayMeals.map(meal => meal.mealtype)
     console.log(mealtype)
 
     //getting breakfast data 
-    const breakfast = data.filter(ele => ele.mealtype === 'Breakfast')
+    const breakfast = todayMeals.filter(ele => ele.mealtype === 'Breakfast')
     console.log(breakfast)
 
     //getting lunch data 
-    const lunch = data.filter(ele => ele.mealtype === 'Lunch')
+    const lunch = todayMeals.filter(ele => ele.mealtype === 'Lunch')
     console.log(lunch)
 
     //getting dinner data 
-    const dinner = data.filter(ele => ele.mealtype === 'Dinner')
+    const dinner = todayMeals.filter(ele => ele.mealtype === 'Dinner')
     console.log(dinner)
     
     //getting snack data 
-    const snack = data.filter(ele => ele.mealtype === 'Snack')
+    const snack = todayMeals.filter(ele => ele.mealtype === 'Snack')
     console.log(snack)
     
 
     return (
-        <div className="relative space-y-10 pb-2 p-4 rounded-lg border-2 border-white">
+        <div className="relative space-y-10 pb-2 p-4 rounded-xl border-2 border-indigo-600 mt-5">
             <Tab.Group>
-                <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
-                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
-                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"> Breakfast</Tab>
-               
-                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
-                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60" >Lunch</Tab>
-               
-                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
-                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60">Dinner</Tab>
+                <Tab.List className="flex p-1 space-x-1 bg-indigo-700 bg-opacity-10 rounded-full">
+                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-full
+                  focus:bg-indigo-600 outline-none focus:text-white
+                  "> Breakfast</Tab>
                 
-                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
-                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60">Snack</Tab>
+                    <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-full
+                  focus:bg-indigo-600 outline-none focus:text-white
+                  "> Lunch</Tab>
+                    
+                    <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-full
+                  focus:bg-indigo-600 outline-none focus:text-white
+                  "> Dinner</Tab>
+                    
+                    <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-full
+                  focus:bg-indigo-600 outline-none focus:text-white
+                  "> Snack</Tab>
+               
+               
                 </Tab.List>
                 
                 <Tab.Panels>
                    
                     <Tab.Panel >
+                        <div className="pb-3">
                     {mealtype !== breakfast && breakfast.map((itemNutrition) =>
                       <Link to={`/log/delete/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         /> </Link>
-                    )}
+                        )}</div>
+                        <div className="grid grid-cols-2 border-t-2 border-indigo-500 pt-5 text-gray-800">
+                <div className=" text-left leading-3 pl-5 tracking-wide">
+                    <span className="text-left text-xs font-medium uppercase">total Carbs: <span className="text-indigo-600 font-bold">{breakfast.map(item => item.carbohydrates).reduce((prev, curr) => prev + curr, 0)}g</span></span><br/>
+                    <span className="text-left text-xs font-medium uppercase">total Protein: <span className="text-indigo-600 font-bold">{breakfast.map(item => item.protein).reduce((prev, curr) => prev + curr, 0)}g</span></span><br/>
+                    <span className="text-left text-xs font-medium uppercase">total fats: <span className="text-indigo-600 font-bold">{breakfast.map(item => item.fats).reduce((prev, curr) => prev + curr, 0)}g</span></span>
+                    </div>
+            <div>
+                <h1 className="text-right pr-5 text-3xl font-base">{breakfast.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)}kcal</h1>
+            </div>
+        </div>
                         
                     </Tab.Panel>
 
                     <Tab.Panel >
+                    <div className="pb-3">
                     {mealtype !== lunch && lunch.map((itemNutrition) =>
                       <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
-                    )}
+                        )}</div>
+                        <div className="grid grid-cols-2 border-t-2 border-indigo-500 pt-5 text-gray-800">
+                <div className=" text-left leading-3 pl-5 tracking-wide">
+                    <span className="text-left text-xs font-medium uppercase">total Carbs: <span className="text-indigo-600 font-bold">{lunch.map(item => item.carbohydrates).reduce((prev, curr) => prev + curr, 0)}g</span></span><br/>
+                    <span className="text-left text-xs font-medium uppercase">total Protein: <span className="text-indigo-600 font-bold">{lunch.map(item => item.protein).reduce((prev, curr) => prev + curr, 0)}g</span></span><br/>
+                    <span className="text-left text-xs font-medium uppercase">total fats: <span className="text-indigo-600 font-bold">{lunch.map(item => item.fats).reduce((prev, curr) => prev + curr, 0)}g</span></span>
+                    </div>
+            <div>
+                <h1 className="text-right pr-5 text-3xl font-base">{lunch.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)}kcal</h1>
+            </div>
+        </div>
                         
                     </Tab.Panel>
 
                 
                     <Tab.Panel >
+                    <div className="pb-3">
                     {mealtype !== dinner && dinner.map((itemNutrition) =>
                       <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
-                    )}
+                            )}</div>
+                         <div className="grid grid-cols-2 border-t-2 border-indigo-500 pt-5 text-gray-800">
+                <div className=" text-left leading-3 pl-5 tracking-wide">
+                    <span className="text-left text-xs font-medium uppercase">total Carbs: <span className="text-indigo-600 font-bold">{dinner.map(item => item.carbohydrates).reduce((prev, curr) => prev + curr, 0)}g</span></span><br/>
+                    <span className="text-left text-xs font-medium uppercase">total Protein: <span className="text-indigo-600 font-bold">{dinner.map(item => item.protein).reduce((prev, curr) => prev + curr, 0)}g</span></span><br/>
+                    <span className="text-left text-xs font-medium uppercase">total fats: <span className="text-indigo-600 font-bold">{dinner.map(item => item.fats).reduce((prev, curr) => prev + curr, 0)}g</span></span>
+                    </div>
+            <div>
+                <h1 className="text-right pr-5 text-3xl font-base">{dinner.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)}kcal</h1>
+            </div>
+        </div>
                         
                     </Tab.Panel>
 
                     <Tab.Panel >
+                    <div className="pb-3">
                     {mealtype !== snack && snack.map((itemNutrition) =>
                       <Link to={`/log/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
                         />
                         </Link>
-                    )}
+                            )}</div>
+                         <div className="grid grid-cols-2 border-t-2 border-indigo-500 pt-5 text-gray-800">
+                <div className=" text-left leading-3 pl-5 tracking-wide">
+                    <span className="text-left text-xs font-medium uppercase">total Carbs: <span className="text-indigo-600 font-bold">{snack.map(item => item.carbohydrates).reduce((prev, curr) => prev + curr, 0)}g</span></span><br/>
+                    <span className="text-left text-xs font-medium uppercase">total Protein: <span className="text-indigo-600 font-bold">{snack.map(item => item.protein).reduce((prev, curr) => prev + curr, 0)}g</span></span><br/>
+                    <span className="text-left text-xs font-medium uppercase">total fats: <span className="text-indigo-600 font-bold">{snack.map(item => item.fats).reduce((prev, curr) => prev + curr, 0)}g</span></span>
+                    </div>
+            <div>
+                <h1 className="text-right pr-5 text-3xl font-base">{snack.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)}kcal</h1>
+            </div>
+        </div>
                         
                     </Tab.Panel>
 
@@ -113,17 +169,7 @@ const LogDisplay = (props) => {
                         </Link>
                     )} */}
                 </div>
-            <div className="grid grid-cols-4">
-                <div></div>
-                <div className="col-span-2 ">
-                    <h1 className="text-left text-xs font-medium">total carbohydrates: {data.map(item => item.carbohydrates).reduce((prev, curr) => prev + curr, 0)}g</h1>
-                    <h1 className="text-left text-xs font-medium">total protein: {data.map(item => item.protein).reduce((prev, curr) => prev + curr, 0)}g</h1>
-                    <h1 className="text-left text-xs font-medium">total fats: {data.map(item => item.fats).reduce((prev, curr) => prev + curr, 0)}g</h1>
-                    </div>
-            <div>
-                <h1 className="text-right pr-5 text-3xl font-bold">{data.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)}</h1>
             </div>
-        </div></div>
     )
 }
 

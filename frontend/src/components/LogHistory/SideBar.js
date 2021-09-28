@@ -105,6 +105,13 @@ const SideBar = () => {
     ?.map((element) => element.fats)
     .reduce((prev, curr) => prev + curr, 0);
 
+  const todayNutritionCollated = {
+    calories: todayCalories,
+    carbohydrates: todayCarbs,
+    protein: todayProtein,
+    fats: todayFats,
+  };
+
   //L1 Day Nutrition Data
   const l1NutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l1DayCheck
@@ -121,6 +128,13 @@ const SideBar = () => {
   const l1Fats = l1NutritionData
     ?.map((element) => element.fats)
     .reduce((prev, curr) => prev + curr, 0);
+
+  const l1NutritionCollated = {
+    calories: l1Calories,
+    carbohydrates: l1Carbs,
+    protein: l1Protein,
+    fats: l1Fats,
+  };
 
   //L2 Day Nutrition Data
   const l2NutritionData = data?.filter(
@@ -139,6 +153,13 @@ const SideBar = () => {
     ?.map((element) => element.fats)
     .reduce((prev, curr) => prev + curr, 0);
 
+  const l2NutritionCollated = {
+    calories: l2Calories,
+    carbohydrates: l2Carbs,
+    protein: l2Protein,
+    fats: l2Fats,
+  };
+
   //L3 Day Nutrition Data
   const l3NutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l3DayCheck
@@ -155,6 +176,13 @@ const SideBar = () => {
   const l3Fats = l3NutritionData
     ?.map((element) => element.fats)
     .reduce((prev, curr) => prev + curr, 0);
+
+  const l3NutritionCollated = {
+    calories: l3Calories,
+    carbohydrates: l3Carbs,
+    protein: l3Protein,
+    fats: l3Fats,
+  };
 
   //L4 Day Nutrition Data
   const l4NutritionData = data?.filter(
@@ -173,6 +201,13 @@ const SideBar = () => {
     ?.map((element) => element.fats)
     .reduce((prev, curr) => prev + curr, 0);
 
+  const l4NutritionCollated = {
+    calories: l4Calories,
+    carbohydrates: l4Carbs,
+    protein: l4Protein,
+    fats: l4Fats,
+  };
+
   //L5 Day Nutrition Data
   const l5NutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l5DayCheck
@@ -189,6 +224,13 @@ const SideBar = () => {
   const l5Fats = l5NutritionData
     ?.map((element) => element.fats)
     .reduce((prev, curr) => prev + curr, 0);
+
+  const l5NutritionCollated = {
+    calories: l5Calories,
+    carbohydrates: l5Carbs,
+    protein: l5Protein,
+    fats: l5Fats,
+  };
 
   //L6 Day Nutrition Data
   const l6NutritionData = data?.filter(
@@ -207,51 +249,52 @@ const SideBar = () => {
     ?.map((element) => element.fats)
     .reduce((prev, curr) => prev + curr, 0);
 
+  const l6NutritionCollated = {
+    calories: l6Calories,
+    carbohydrates: l6Carbs,
+    protein: l6Protein,
+    fats: l6Fats,
+  };
+
   const dateArray = [
     {
       displayDate: todayDisplay,
       paramsDate: paramsTodayDisplay,
-      nutritionData: todayNutritionData,
+      nutritionData: todayNutritionCollated,
     },
     {
       displayDate: l1DayDisplay,
       paramsDate: paramsl1DayDisplay,
-      nutritionData: l1NutritionData,
+      nutritionData: l1NutritionCollated,
     },
     {
       displayDate: l2DayDisplay,
       paramsDate: paramsl2DayDisplay,
-      nutritionData: l2NutritionData,
+      nutritionData: l2NutritionCollated,
     },
     {
       displayDate: l3DayDisplay,
       paramsDate: paramsl3DayDisplay,
-      nutritionData: l3NutritionData,
+      nutritionData: l3NutritionCollated,
     },
     {
       displayDate: l4DayDisplay,
       paramsDate: paramsl4DayDisplay,
-      nutritionData: l4NutritionData,
+      nutritionData: l4NutritionCollated,
     },
     {
       displayDate: l5DayDisplay,
       paramsDate: paramsl5DayDisplay,
-      nutritionData: l5NutritionData,
+      nutritionData: l5NutritionCollated,
     },
     {
       displayDate: l6DayDisplay,
       paramsDate: paramsl6DayDisplay,
-      nutritionData: l6NutritionData,
+      nutritionData: l6NutritionCollated,
     },
   ];
 
-  // console.log(data);
-  // console.log(l1NutritionData);
-  // console.log(l2NutritionData);
-  // console.log(l3NutritionData);
-  // console.log(l4NutritionData);
-  // console.log(l5NutritionData);
-  // console.log(l6NutritionData);
+  console.log(dateArray);
 
   return (
     <div className="relative space-y-10 pb-2 p-4 rounded-lg border-2 border-white">
@@ -260,7 +303,7 @@ const SideBar = () => {
           <div className="py-2 px-2 text-s text-gray-700 flex grid rounded-md hover: bg-opacity-50 m-3 divide-x divide-white bg-opacity-40 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out hover:animate-pulse">
             <Link to={`/loghistory/DailyInformationPage/${element.paramsDate}`}>
               <h3>{element.displayDate}</h3>
-              <DailyLogCard {...element.nutritionData} />
+              <DailyLogCard nutritionData={element.nutritionData} />
             </Link>
           </div>
         ))}
