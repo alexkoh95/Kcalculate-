@@ -106,12 +106,12 @@ router.get('/seed', async (req, res) => {
       {
         username: "Alex",
         password: "123",
-        targetCalories: 99,
-        targetCarbohydrates: 99,
-        targetProtein: 99,
-        targetFats: 99,
-        currentWeight: 99,
-        targetWeight: 99
+        targetCalories: 2152,
+        targetCarbohydrates: 242,
+        targetProtein: 161,
+        targetFats: 60,
+        currentWeight: 78,
+        targetWeight: 70
       },
       {
         username: "Iman",
