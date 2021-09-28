@@ -15,6 +15,7 @@ import Deletelog from "./components/Log/Deletelog";
 import DailyInformationPage from "./components/LogHistory/DailyInformationPage";
 import Main from "./components/SignupLogin/Main";
 import SignIn from "./components/SignupLogin/Signin";
+import SignupNext from "./components/SignupLogin/SignupNext";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" exact component={Main} />
             <Route path="/signin" exact component={SignIn} />
             <Route path="/signup" exact component={Signup} />
+            <Route path="/signupnext" exact component={SignupNext} />
 
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/log" exact component={Log} />
