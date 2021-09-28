@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Tab } from '@headlessui/react';
+import { Link } from "react-router-dom";
 
 const LogPanelDashb = ({ meal }) => {
 
@@ -27,60 +27,28 @@ const LogPanelDashb = ({ meal }) => {
     
     return (
         <div className="">
-            <h1 className="text-left m-3">Monday, 16 November 2021</h1>
-            <div className="items-center justify-center grid grid-cols-3 bg-white py-3 px-4 text-gray-400 rounded-lg m-3 bg-opacity-20 shadow-lg">
-              <div className="col-span-2 uppercase tracking-wode text-left my-auto text-md font-semibold my-auto">  Breakfast </div>
-               <div className="text-lg my-auto text-center"> {breakfastKcal}kcal </div>
+            <h1 className="text-left m-3 font-bold text-gray-600">Overview</h1>
+            <div className="items-center justify-center grid grid-cols-3 bg-white py-2 px-4 text-gray-700 rounded-lg m-3 bg-opacity-20 shadow-lg">
+              <div className="col-span-2 uppercase tracking-wider text-left my-auto text-xs my-auto">  Breakfast </div>
+               <div className="text-md my-auto text-center text-indigo-600"> {breakfastKcal}kcal </div>
             </div>
             
-                <div className="items-center justify-center bg-white py-2 px-2 text-gray-700 rounded-lg m-3 bg-opacity-20 shadow-lg">
-                Lunch {lunchKcal}kcal</div>
+                <div className="items-center justify-center grid grid-cols-3 bg-white py-2 px-4 text-gray-700 rounded-lg m-3 bg-opacity-20 shadow-lg">
+                <div className="col-span-2 uppercase tracking-wider text-left my-auto text-xs my-auto">  Lunch </div>
+                <div className="text-md my-auto text-center text-indigo-600"> {lunchKcal}kcal </div></div>
             
-                <div className="items-center justify-center bg-white py-2 px-2 text-gray-700 rounded-lg m-3 bg-opacity-20 shadow-lg">
-                Dinner {dinnerKcal}kcal</div>
-         {/* <Tab.Group>
-                <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
-                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
-                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"> Breakfast</Tab>
-               
-                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
-                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60" >Lunch</Tab>
-               
-                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
-                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60">Dinner</Tab>
-                
-                <Tab className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
-                  focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60">Snack</Tab>
-                </Tab.List>
-                
-                <Tab.Panels>
-                   
-                    <Tab.Panel >
-                   {breakfastKcal}
-                        
-                    </Tab.Panel>
-
-                    <Tab.Panel >
-                   {lunchKcal}
-                        
-                    </Tab.Panel>
-
-                
-                    <Tab.Panel >
-                   
-                       {dinnerKcal}
-                      
-                   
-                        
-                    </Tab.Panel>
-
-                    <Tab.Panel >
-                   {snackKcal}
-                    </Tab.Panel>
-
-
-                </Tab.Panels>
-            </Tab.Group> */}
+                <div className="items-center justify-center grid grid-cols-3 bg-white py-2 px-4 text-gray-700 rounded-lg m-3 bg-opacity-20 shadow-lg">
+                <div className="col-span-2 uppercase tracking-wider text-left my-auto text-xs my-auto">  Dinner </div>
+                <div className="text-md my-auto text-center text-indigo-600"> {dinnerKcal}kcal </div></div>
+            
+                <div className="items-center justify-center grid grid-cols-3 bg-white py-2 px-4 text-gray-700 rounded-lg m-3 bg-opacity-20 shadow-lg">
+                <div className="col-span-2 uppercase tracking-wider text-left my-auto text-xs my-auto">  Snack </div>
+                <div className="text-md my-auto text-center text-indigo-600"> {snackKcal}kcal </div></div>
+            
+                <div className="items-center justify-center bg-base border-indigo-600 border-2 border-dashed py-2 px-4 text-indigo-600 rounded-md m-3 opacity-50 hover:opacity-100 hover:border-solid">
+                <Link to="/log" className="col-span-2 uppercase tracking-wode text-center my-auto text-xs font-medium my-auto">  + Add Item </Link>
+                </div>
+        
         </div>
     )
 }
