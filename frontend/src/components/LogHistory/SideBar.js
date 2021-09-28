@@ -17,8 +17,7 @@ const SideBar = () => {
   const fixTheFetchProblem = () => {
     fetch("/nutrition")
       .then((res) => res.json())
-      .then((data) => setData(data))
-      .then((data) => setNutritionData(data));
+      .then((data) => setData(data));
   };
 
   useEffect(() => {
@@ -42,7 +41,6 @@ const SideBar = () => {
     .toISOString()
     .substring(0, 10)
     .concat(NoTime);
-  console.log(paramsTodayDisplay);
 
   const paramsl1DayDisplay = moment()
     .subtract(1, "day")
@@ -80,15 +78,6 @@ const SideBar = () => {
     .substring(0, 10)
     .concat(NoTime);
 
-  const dateArray = [
-    { displayDate: todayDisplay, paramsDate: paramsTodayDisplay },
-    { displayDate: l1DayDisplay, paramsDate: paramsl1DayDisplay },
-    { displayDate: l2DayDisplay, paramsDate: paramsl2DayDisplay },
-    { displayDate: l3DayDisplay, paramsDate: paramsl3DayDisplay },
-    { displayDate: l4DayDisplay, paramsDate: paramsl4DayDisplay },
-    { displayDate: l5DayDisplay, paramsDate: paramsl5DayDisplay },
-    { displayDate: l6DayDisplay, paramsDate: paramsl6DayDisplay },
-  ];
   //Check Date
   const todayCheck = moment().format("dddd MMMM Do YYYY");
   const l1DayCheck = moment().subtract(1, "day").format("dddd MMMM Do YYYY");
@@ -100,7 +89,7 @@ const SideBar = () => {
 
   //Filter data by date
   //today's Nutrition Data
-  const todayNutritionData = nutritionData?.filter(
+  const todayNutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === todayCheck
   );
   const todayCalories = todayNutritionData
@@ -117,7 +106,7 @@ const SideBar = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L1 Day Nutrition Data
-  const l1NutritionData = nutritionData?.filter(
+  const l1NutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l1DayCheck
   );
   const l1Calories = l1NutritionData
@@ -134,7 +123,7 @@ const SideBar = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L2 Day Nutrition Data
-  const l2NutritionData = nutritionData?.filter(
+  const l2NutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l2DayCheck
   );
   const l2Calories = l2NutritionData
@@ -151,7 +140,7 @@ const SideBar = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L3 Day Nutrition Data
-  const l3NutritionData = nutritionData?.filter(
+  const l3NutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l3DayCheck
   );
   const l3Calories = l3NutritionData
@@ -168,7 +157,7 @@ const SideBar = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L4 Day Nutrition Data
-  const l4NutritionData = nutritionData?.filter(
+  const l4NutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l4DayCheck
   );
   const l4Calories = l4NutritionData
@@ -185,7 +174,7 @@ const SideBar = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L5 Day Nutrition Data
-  const l5NutritionData = nutritionData?.filter(
+  const l5NutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l5DayCheck
   );
   const l5Calories = l5NutritionData
@@ -202,7 +191,7 @@ const SideBar = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L6 Day Nutrition Data
-  const l6NutritionData = nutritionData?.filter(
+  const l6NutritionData = data?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l6DayCheck
   );
   const l6Calories = l6NutritionData
@@ -218,6 +207,52 @@ const SideBar = () => {
     ?.map((element) => element.fats)
     .reduce((prev, curr) => prev + curr, 0);
 
+  const dateArray = [
+    {
+      displayDate: todayDisplay,
+      paramsDate: paramsTodayDisplay,
+      nutritionData: todayNutritionData,
+    },
+    {
+      displayDate: l1DayDisplay,
+      paramsDate: paramsl1DayDisplay,
+      nutritionData: l1NutritionData,
+    },
+    {
+      displayDate: l2DayDisplay,
+      paramsDate: paramsl2DayDisplay,
+      nutritionData: l2NutritionData,
+    },
+    {
+      displayDate: l3DayDisplay,
+      paramsDate: paramsl3DayDisplay,
+      nutritionData: l3NutritionData,
+    },
+    {
+      displayDate: l4DayDisplay,
+      paramsDate: paramsl4DayDisplay,
+      nutritionData: l4NutritionData,
+    },
+    {
+      displayDate: l5DayDisplay,
+      paramsDate: paramsl5DayDisplay,
+      nutritionData: l5NutritionData,
+    },
+    {
+      displayDate: l6DayDisplay,
+      paramsDate: paramsl6DayDisplay,
+      nutritionData: l6NutritionData,
+    },
+  ];
+
+  // console.log(data);
+  // console.log(l1NutritionData);
+  // console.log(l2NutritionData);
+  // console.log(l3NutritionData);
+  // console.log(l4NutritionData);
+  // console.log(l5NutritionData);
+  // console.log(l6NutritionData);
+
   return (
     <div className="relative space-y-10 pb-2 p-4 rounded-lg border-2 border-white">
       <div>
@@ -225,7 +260,7 @@ const SideBar = () => {
           <div className="py-2 px-2 text-s text-gray-700 flex grid rounded-md hover: bg-opacity-50 m-3 divide-x divide-white bg-opacity-40 shadow-lg transform hover:scale-105 transition duration-500 ease-in-out hover:animate-pulse">
             <Link to={`/loghistory/DailyInformationPage/${element.paramsDate}`}>
               <h3>{element.displayDate}</h3>
-              <DailyLogCard />
+              <DailyLogCard {...element.nutritionData} />
             </Link>
           </div>
         ))}

@@ -43,15 +43,6 @@ const Signin = () => {
     } catch (err) {
       console.log(err)
     }
-
-
-
-    // if (data.msg === "ok") {
-    //   console.log("pass")
-    // } else {
-    //   console.log("fail")
-    // }
-
   }
 
   return (
