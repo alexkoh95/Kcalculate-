@@ -9,75 +9,115 @@ import axios from 'axios';
 
 const Dashboard = () => {
 
-    const [meal, setMeal] = useState([])
-    // const [user, setUser] = useState([])
-    // const [weight, setWeight] = useState([])
+    const [meal, setMeal] = useState(null)
+    const [user, setUser] = useState([])
+    const [weight, setWeight] = useState(null)
+    const moment = require("moment");
+    const today = moment().format("dddd MMMM Do YYYY");
+    // const [isPending, setIsPending] = useState(true);
+    // const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
     // const history = useHistory();
 
-    //fetch nutrition data
-    useEffect(() => {
+    //from user data
+    let userName, userTargetWeight, userProtein, userFats, userCarbs, targetKcal, weightForChart, todayMeals, totalKcal, leftKcal 
+
+    // const fetchAllData = () => {
+    //     fetch("/nutrition")
+    //     .then(res => {
+    //         if (!res.ok) { // error coming back from server
+    //           throw Error('could not fetch the data for that resource');
+    //         } 
+    //         return res.json();
+    //     })
+    //         .then(meal => {
+    //             setIsPending(false);
+    //             setMeal(meal);
+    //             setError(null);
+    //         })
+    //         .catch(err => {
+    //             setIsPending(false);
+    //             setError(err.message);
+    //     })
+    //     fetch("/nutrition/user/Alex")
+    //     .then(res => {
+    //         if (!res.ok) { // error coming back from server
+    //           throw Error('could not fetch the data for that resource');
+    //         } 
+    //         return res.json();
+    //     })
+    //         .then(user => {
+    //             setIsPending(false);
+    //             setUser(user)
+    //             setError(null);
+    //         })
+    
+    //     fetch("/nutrition/weight/all")
+    //     .then(res => {
+    //         if (!res.ok) { // error coming back from server
+    //           throw Error('could not fetch the data for that resource');
+    //         } 
+    //         return res.json();
+    //     })
+    //         .then(weight => {
+    //             setIsPending(false);
+    //             setWeight(weight)
+    //             setError(null);
+    //         })
+    // }
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         fetchAllData()
+    //     }, 1000);
+    // }, []);
+    
+    const fetchAllData = () => {
         fetch("/nutrition")
             .then(res => res.json())
             .then(meal => setMeal(meal))
-        
-        // fetch("/nutrition/user/Alex")
-        //     .then(res => res.json())
-        //     .then(user => setUser(user))
-        
-        // fetch("/nutrition/weight/all")
-        //     .then(res => res.json())
-        //     .then(weight => setWeight(weight))
-            
-        
+    
+        fetch("/nutrition/user/Alex")
+            .then(res => res.json())
+            .then(user => setUser(user))
+    
+        fetch("/nutrition/weight/all")
+            .then(res => res.json())
+            .then(weight => setWeight(weight))
+    }
+
+      useEffect(() => {
+       fetchAllData()
     }, []);
 
-    //fetch user data
-    // useEffect(() => {
-    //     fetch("/nutrition/user/Alex")
-    //         .then(res => res.json())
-    //         .then(user => setUser(user))
-    // }, []);
-    // console.log("fetcing user")
-    // console.log(user)
-    // console.log(user.found[0].targetWeight)
-    // console.log(user.found[0].username)
-
-    // console.log("fetching weight")
-    // console.log(weight)
-
-    //getting the last 6 data from weight array
-    // const weightForChart = weight.slice(-6)
-    // console.log(weightForChart)
+    useEffect(() => {
+        if (user && meal && weight) {
+        userName = user.found[0].username
+        userTargetWeight = user.found[0].targetWeight
+        userProtein = user.found[0].targetProtein
+        userFats = user.found[0].targetFats
+        userCarbs = user.found[0].targetCarbohydrates
+        targetKcal = user.found[0].targetCalories
+            
+        todayMeals = meal.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today)
+        totalKcal = todayMeals.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
+        leftKcal = targetKcal - totalKcal
+            
+        weightForChart = weight.slice(-6)
+            
+        console.log("this is :" , user)
+        console.log("this is :", userName)
+        console.log("this is :", totalKcal)
+        console.log("this is :", targetKcal)
+        console.log("this is :", meal)
+        }
+    }, [user && meal && weight])
     
-
-
-    //defining all the values i need for user
-    
-    // const userName = user.found[0].username
-    // const userTargetWeight = user.found[0].targetWeight
-    // const userProtein = user.found[0].targetProtein
-    // const userFats = user.found[0].targetFats
-    // const userCarbs = user.found[0].targetCarbohydrates
-
-    const moment = require("moment");
-    const today = moment().format("dddd MMMM Do YYYY");
-    // console.log(today);
-
-    // today's nutrition
-    // const todayMeals = meal.filter(
-    //     (element) => moment(element.date).format("dddd MMMM Do YYYY") === today
-    //   );
     
     // const targetKcal = user.found[0].targetCalories
     // const targetKcal = 2350
-    // let totalKcal = meal.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
     // let totalKcal = todayMeals.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
     // const leftKcal = targetKcal - totalKcal
-
-
-    // console.log('hello');
-    // console.log(todayMeals);
-    // console.log(totalKcal);
 
     return (
         <div className="">
@@ -88,8 +128,8 @@ const Dashboard = () => {
                 <div className="col-span-2">
                         <div className="h-52 bg-gradient-to-br from-yellow-100 via-red-100 to-pink-100 py-2 px-2 m-3 text-gray-700 rounded-lg bg-opacity-20 text-left pl-8 pt-12 
                         bg-cover bg-center filter brightness-105" style={{backgroundImage:`url('https://i.ibb.co/Fn5LVQB/dashboard-banner.jpg')`}}>
-                            {/* {user && <h1 className="text-4xl font-bold">Hello, {userName}</h1>} */}
-                            <h1 className="text-4xl font-bold">Hello, Alex</h1>
+                            <h1 className="text-4xl font-bold">Hello, {loading ? <p> </p> : { userName }}</h1>
+                            {/* <h1 className="text-4xl font-bold">Hello, Alex</h1> */}
                             <h1 className="text-lg pb-4">{today}</h1>
                             <button className="text-xs border-2 border-indigo-600 uppercase spacing-widest text-xs px-6 py-2 rounded-full border-opacity-80 hover:bg-indigo-600 hover:text-white"><Link to ="/log">Log Meal</Link></button>
                             <button className="text-xs border-2 border-indigo-600 uppercase spacing-widest text-xs px-6 py-2 ml-3 rounded-full border-opacity-80 hover:bg-indigo-600 hover:text-white"><Link to ="/loghistory">Review Logs</Link></button>
@@ -99,11 +139,11 @@ const Dashboard = () => {
                         
                             <div>
                                 {/* {weight && <WeightTracker targetWeight={userTargetWeight} />} */}
-                                {/* {weight && <WeightTracker weight={weightForChart} targetWeight={userTargetWeight} />} */}
+                                {/* <WeightTracker weight={weightForChart} targetWeight={userTargetWeight} /> */}
                         </div>
 
                         <div>
-                                {/* {meal && <LogPanelDashb todayMeals={todayMeals} />} */}
+                                {/* <LogPanelDashb meal={meal} /> */}
                         </div>
 
                     </div>
@@ -112,13 +152,13 @@ const Dashboard = () => {
                 <div className='items-center justify-center bg-white py-2 px-2 text-gray-700 rounded-lg m-3 bg-opacity-20 shadow-lg '>
                     <div className="pt-3">
                         <p className="tracking-widest uppercase text-xs text-yellow-500 text-opacity-70">Remaining calories:</p>
-                        {/* <h1 className="text-3xl font-medium">{leftKcal}kcal</h1> */}
-                        {/* <p className="tracking-wider uppercase text-sm text-indigo-500">Goal: {targetKcal}kcal</p> */}
+                        <h1 className="text-3xl font-medium">{leftKcal}kcal</h1>
+                        <p className="tracking-wider uppercase text-sm text-indigo-500">Goal: {targetKcal}kcal</p>
 
 
                     </div>
-                    {/* <div className="m-3 pb-3"><DisplayTracker leftKcal={leftKcal} totalKcal={totalKcal}/></div> */}
-                        {/* <div className="m-3 border-t-2 pt-3">{meal && <MacroBreakdown todayMeals={todayMeals} protein={userProtein} carbs={userCarbs} fats={userFats} />}</div> */}
+                    <div className="m-3 pb-3"><DisplayTracker leftKcal={leftKcal} totalKcal={totalKcal}/></div>
+                        {/* <div className="m-3 border-t-2 pt-3"><MacroBreakdown protein={userProtein} carbs={userCarbs} fats={userFats} /></div> */}
                         {/* <div className="m-3 border-t-2 pt-3"><MacroBreakdown todayMeals={todayMeals} /></div> */}
                     
                     <div></div>

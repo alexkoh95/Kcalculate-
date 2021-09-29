@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect }from 'react';
 import { Link } from "react-router-dom";
 
-const LogPanelDashb = ({ todayMeals }) => {
+const LogPanelDashb = () => {
 
+    const [meal, setMeal] = useState(null)
+    const moment = require("moment");
+    const today = moment().format("dddd MMMM Do YYYY");
+  let todayMeals
 
+  const fetchAllData = () => {
+    fetch("/nutrition")
+        .then(res => res.json())
+        .then(meal => setMeal(meal))
+  }
+  
+  useEffect(() => {
+    fetchAllData()
+
+ }, []);
+
+ useEffect(() => {
+     if (meal) {      
+     todayMeals = meal.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today)
+     }
+ }, [meal])
+
+ 
+    
+    
     //getting breakfast data
     const breakfast = todayMeals.filter(ele => ele.mealtype === 'Breakfast')
     const breakfastKcal = breakfast.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)

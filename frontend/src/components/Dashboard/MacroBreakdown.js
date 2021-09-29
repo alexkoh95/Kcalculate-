@@ -1,8 +1,31 @@
 import React, { useState, useEffect, useHistory } from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const MacroBreakdown = ({ todayMeals, protein, carbs, fats }) => {
+const MacroBreakdown = ({protein, carbs, fats }) => {
 
+  const [meal, setMeal] = useState(null)
+  let todayMeals
+
+  const fetchAllData = () => {
+    fetch("/nutrition")
+        .then(res => res.json())
+        .then(meal => setMeal(meal))
+  }
+  
+  useEffect(() => {
+    fetchAllData()
+
+ }, []);
+
+ useEffect(() => {
+     if (meal) {      
+     todayMeals = meal.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today)
+     }
+ }, [meal])
+
+    const moment = require("moment");
+    const today = moment().format("dddd MMMM Do YYYY");
+    
     const targetProtein = protein 
     let totalProtein = todayMeals.map(item => item.protein).reduce((prev, curr) => prev + curr, 0)
     

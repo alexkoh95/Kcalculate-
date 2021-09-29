@@ -1,14 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2';
 
-const WeightTracker = ({ targetWeight, weight }) => {
+const WeightTracker = ({ targetWeight }) => {
+
+    const [weight, setWeight] = useState({})
+    const [user, setUser] = useState(null)
+
+    let userTargetWeight, weightForChart
+
+    const fetchAllData = () => {
+    
+        fetch("/nutrition/user/Alex")
+            .then(res => res.json())
+            .then(user => setUser(user))
+    
+        fetch("/nutrition/weight/all")
+            .then(res => res.json())
+            .then(weight => setWeight(weight))
+    }
+
+
+    //fetch all data
+    useEffect(() => {
+       fetchAllData()
+
+    }, []);
+
+    useEffect(() => {
+        if (user && weight) {
+
+        userTargetWeight = user.found[0].targetWeight
+
+        }
+    }, [user && weight])
+
+    weightForChart = weight.slice(-6)
 
     const data = {
         labels: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
         datasets: [
           {
             label: 'Weight',
-            data: [weight[0].weight, weight[1].weight, weight[2].weight, weight[3].weight, weight[4].weight, weight[5].weight],
+            data: [weightForChart[0].weight, weightForChart[1].weight, weightForChart[2].weight, weightForChart[3].weight, weightForChart[4].weight, weightForChart[5].weight],
             fill: false,
             backgroundColor: 'rgb(153, 102, 255)',
             borderColor: 'rgba(153, 102, 255, 0.2)',
