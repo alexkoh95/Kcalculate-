@@ -20,12 +20,17 @@ const LogDisplay = (props) => {
   }, []);
 
   const [todayMeals, setTodayMeals] = useState([])
-            
+  
+  
+  
     useEffect(() => {
-        if (data) {
-            
+      if (data) {
+          
+        const interval = setInterval(() => {
         setTodayMeals(data.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today))
-        // history.push("/log");
+        }, 1000)
+          
+        return () => clearInterval(interval)
         }
     }, [data])
     
@@ -46,8 +51,11 @@ const LogDisplay = (props) => {
   //getting snack data
   const snack = todayMeals.filter((ele) => ele.mealtype === "Snack");
 
+  
   return (
     <div className="relative space-y-10 pb-2 p-4 rounded-xl border-2 border-indigo-600 mt-5">
+    
+    
       <Tab.Group>
         <Tab.List className="flex p-1 space-x-1 bg-indigo-700 bg-opacity-10 rounded-full">
           <Tab
@@ -300,6 +308,7 @@ const LogDisplay = (props) => {
 
       {/* <h1 className='text-left font-bold pl-3 text-white'>{day}</h1> */}
       <div className="">
+      
         {/* {data !== [] &&
                     data.map((itemNutrition) =>
                       <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
@@ -307,6 +316,8 @@ const LogDisplay = (props) => {
                         </Link>
                     )} */}
       </div>
+
+      
     </div>
   );
 };

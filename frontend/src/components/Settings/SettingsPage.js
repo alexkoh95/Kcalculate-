@@ -10,7 +10,7 @@ const SettingsPage = ({ user }) => {
             <main className="mx-4 p-9 pl-64">
                 <div className="grid grid-cols-3 space-x-5">
                     <div className="col-span-2">
-                        <Settings user={user} />
+                        {/* <Settings user={user} /> */}
                     </div>
 
 
