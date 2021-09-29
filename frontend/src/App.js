@@ -75,6 +75,12 @@ function App() {
               exact
               component={Dashboard}
             />
+            {/* <Route
+             
+              path="/dashboard"
+              exact
+              Component={Dashboard}
+            /> */}
 
             <Route path="/log" component={Log} exact />
             {/*}  <Route path="/log" exact component={Log} /> */}
@@ -91,24 +97,24 @@ function App() {
   );
 }
 
-// function PrivateRoute({ auth, Component, path, location, ...rest }) {
-//   //if auth is true then show Route else redirect to login
-//   return (
-//     <>
-//       {auth ? (
-//         <Route path={path}>
-//           <Component {...rest} />
-//         </Route>
-//       ) : (
-//         <Redirect
-//           to={{
-//             pathname: "/",
-//             state: { from: location },
-//           }}
-//         />
-//       )}
-//     </>
-//   );
-// }
+function PrivateRoute({ auth, Component, path, location, ...rest }) {
+  //if auth is true then show Route else redirect to login
+  return (
+    <>
+      {auth ? (
+        <Route path={path}>
+          <Component {...rest} />
+        </Route>
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/",
+            state: { from: location },
+          }}
+        />
+      )}
+    </>
+  );
+}
 
 export default App;

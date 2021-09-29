@@ -2,29 +2,39 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import FoodCard from "./FoodCard";
 import { Tab } from "@headlessui/react";
+import { Dialog } from '@headlessui/react'
 
-const dayjs = require("dayjs");
 
 const LogDisplay = (props) => {
   const [data, setData] = useState([]);
   const history = useHistory();
-
+  const moment = require("moment");
+  const today = moment().format("dddd MMMM Do YYYY");
+  let [isOpen, setIsOpen] = useState(true)
+  
   useEffect(() => {
     fetch("/nutrition")
       .then((res) => res.json())
       .then((data) => setData(data));
-    history.push("/log");
+    
   }, []);
 
-  console.log(data);
+  const [todayMeals, setTodayMeals] = useState([])
+  
+  
+  
+    useEffect(() => {
+      if (data) {
+          
+        const interval = setInterval(() => {
+        setTodayMeals(data.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today))
+        }, 1000)
+          
+        return () => clearInterval(interval)
+        }
+    }, [data])
+    
 
-  const moment = require("moment");
-  const today = moment().format("dddd MMMM Do YYYY");
-
-  // today's nutrition
-  const todayMeals = data.filter(
-    (element) => moment(element.date).format("dddd MMMM Do YYYY") === today
-  );
 
   // getting all meals data
   const mealtype = todayMeals.map((meal) => meal.mealtype);
@@ -41,8 +51,11 @@ const LogDisplay = (props) => {
   //getting snack data
   const snack = todayMeals.filter((ele) => ele.mealtype === "Snack");
 
+  
   return (
     <div className="relative space-y-10 pb-2 p-4 rounded-xl border-2 border-indigo-600 mt-5">
+    
+    
       <Tab.Group>
         <Tab.List className="flex p-1 space-x-1 bg-indigo-700 bg-opacity-10 rounded-full">
           <Tab
@@ -295,6 +308,7 @@ const LogDisplay = (props) => {
 
       {/* <h1 className='text-left font-bold pl-3 text-white'>{day}</h1> */}
       <div className="">
+      
         {/* {data !== [] &&
                     data.map((itemNutrition) =>
                       <Link to={`/nutrition/${itemNutrition._id}`}><FoodCard  {...itemNutrition}
@@ -302,6 +316,8 @@ const LogDisplay = (props) => {
                         </Link>
                     )} */}
       </div>
+
+      
     </div>
   );
 };

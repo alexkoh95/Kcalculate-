@@ -33,7 +33,7 @@ const connectDB = require("./models/db");
 // const mongoURI = "mongodb://localhost:27017/nutrition";
 const mongoURI =
   // "mongodb+srv://alexKoh:CountingBros123@cluster0.8vipm.mongodb.net/Cluster0?retryWrites=true&w=majority";
-  "mongodb+srv://WeiHongSoh:CountingBros123@cluster0.8vipm.mongodb.net/Cluster0?retryWrites=true&w=majority";
+  "mongodb+srv://ImanMaliki:CountingBros123@cluster0.8vipm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 connectDB();
 

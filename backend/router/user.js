@@ -7,12 +7,20 @@ const session = require("express-session")
 
 // // Login check
 router.post('/login', async (req, res) => {
-  const enteredPassword = req.body.password
   const user = await UserModel.find({ username: req.body.username })
+  const enteredPassword = req.body.password
+  // console.log("user..: ", user[0])
 
   if (enteredPassword === user[0].password) {
     req.session.auth = true
-    // console.log(req)
+
+    req.session.userObject = user[0]
+    // console.log("userobj", req.session.userObject)
+    // console.log(req.session.userObject.username)
+    // ways to use req session
+    // req.session.userObj.username = "Desmond"
+
+    // console.log(req.session)
     res.json({ status: 'ok', msg: 'you are logged in', user: user[0] })
     console.log("passwords match")
 
@@ -27,11 +35,11 @@ router.post('/login', async (req, res) => {
 
 
 // NEED TO ADD BACK AUTH, ASYNC ...
-
+//
 // Find user profile (CURRENTLY USED FOR SEEDING TEST, TO BE UPDATED)
 router.get("/find", async (req, res) => {
   try {
-    // console.log(req)
+    console.log("rsu", req.session.userObject)
     // const user = await UserModel.find({ username: req.body.username })
     // res.json({ user });
   } catch (error) {
@@ -43,7 +51,7 @@ router.get("/find", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const user = await UserModel.find({ username: req.params.id })
-    console.log(user)
+    console.log("userprofile2 :", user)
     res.json({ user: user[0] });
   } catch (error) {
     res.json({ status: "not ok", msg: "user not found" });
@@ -61,6 +69,8 @@ router.post("/create", async (req, res) => {
 
 // Update user profile
 router.put("/update", async (req, res) => {
+  console.log("between put")
+
   await UserModel.updateOne(
     {
       username: req.body.username,
@@ -73,23 +83,23 @@ router.put("/update", async (req, res) => {
     // currentWeight: currentWeight,
     // targetWeight: targetWeight,
     {
-      username: req.body.newUsername,
-      password: req.body.newPassword,
-      targetCalories: req.body.newCalories,
-      targetCarbohydrates: req.body.newCarbohydrates,
-      targetProtein: req.body.newProtein,
-      targetFats: req.body.newFats,
-      currentWeight: req.body.newCurrentWeight,
-      targetWeight: req.body.newTargetWeight,
+      // username: req.body.newUsername,
+      password: req.body.password,
+      targetCalories: req.body.targetCalories,
+      targetCarbohydrates: req.body.targetCarbohydrates,
+      targetProtein: req.body.targetProtein,
+      targetFats: req.body.targetFats,
+      currentWeight: req.body.currentWeight,
+      targetWeight: req.body.targetWeight,
     }
   )
-
-  await user.save()
+  // await user.save()
 
   res.json({ status: "ok", msg: "updated" })
 })
 
-// Remove user account
+// Remove user account (to close account)
+// Do we really need?
 router.delete("/delete", async (req, res) => {
   const { name } = req.body;
   await UserModel.deleteOne({ name })
