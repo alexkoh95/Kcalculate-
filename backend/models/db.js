@@ -1,15 +1,17 @@
 const mongoose = require("mongoose");
 
-const mongoURI = "mongodb://localhost:27017/nutrition";
+const mongoURI =
+  "mongodb+srv://alexKoh:CountingBros123@cluster0.8vipm.mongodb.net/Cluster0?retryWrites=true&w=majority";
 
-const connectDB = async (uri) => {
+const connectDB = async (mongoUri) => {
   try {
     await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
-    console.log("DB Connected");
+    console.log("MongoDB Connected (MongoAtlas)");
   } catch (err) {
-    console.error(err.message);
+    console.log(err, "MongoDB Connection Error");
     process.exit(1);
   }
 };
