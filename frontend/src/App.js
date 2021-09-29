@@ -70,6 +70,12 @@ function App() {
               exact
               Component={Dashboard}
             />
+            {/* <Route
+             
+              path="/dashboard"
+              exact
+              Component={Dashboard}
+            /> */}
 
             <PrivateRoute auth={auth} path="/log" Component={Log} exact />
             {/*}  <Route path="/log" exact component={Log} /> */}
