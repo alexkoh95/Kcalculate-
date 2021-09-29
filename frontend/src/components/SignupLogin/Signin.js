@@ -47,16 +47,17 @@ const Signin = (props) => {
         // console.log(data.user)
         // console.log(data.user.password)
 
-        // if (data.status === "ok") {
-        // set user and set auth
-        // props.setAuth(true)
-        props.handleChange(data.user)
-        console.log("signin :", data.user)
-        history.push("/settings")
-        console.log("pass")
-        // } else {
-        // console.log("passwords not match")
-        // }
+        if (data.status === "ok") {
+          // set user and set auth
+          // props.setAuth(true)
+          console.log("user valid")
+          console.log("signin: ", data.user)
+          props.handleChange(data.user)
+          history.push("/settings")
+          // console.log(theUser)
+        } else {
+          console.log("username/password invalid")
+        }
       } catch (err) {
         console.log(err)
       }
