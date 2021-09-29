@@ -77,7 +77,7 @@ const Signup = () => {
 
       const res = await fetch("http://localhost:5000/nutrition/user/create", requestOptions)
 
-      history.push('/main')
+      history.push('/signin')
 
     } else {
       console.log("Passwords do not match. Please try again")
@@ -86,31 +86,31 @@ const Signup = () => {
 
   return (
     <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 min-h-screen">
-      
+
       <div className="bg-white px-6 py-4 rounded-lg shadow-lg text-black w-full my-10">
-      <h1 className="font-bold text-3xl">Sign Up.</h1>
-  
-      <Link to="/signin" className="text-sm text-indigo-600 pb-6">Already have an account? Sign in here</Link>
-      <form className="pt-4">
-       
-          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="text" placeholder="Username" onChange={handleUsernameChange} /> 
+        <h1 className="font-bold text-3xl">Sign Up.</h1>
+
+        <Link to="/signin" className="text-sm text-indigo-600 pb-6">Already have an account? Sign in here</Link>
+        <form className="pt-4">
+
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="text" placeholder="Username" onChange={handleUsernameChange} />
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="password" placeholder="Password" onChange={handlePasswordChange} />
 
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="password" placeholder="Verify Password" onChange={handleVerifyPasswordChange} />
-    
+
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Calories" onChange={handleCaloriesChange} />
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Carbohydrates" onChange={handleCarbohydratesChange} />
-   
+
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Protein" onChange={handleProteinChange} />
-    
+
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Fats" onChange={handleFatsChange} />
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Current Weight" onChange={handleCurrentWeightChange} />
 
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Weight" onChange={handleTargetWeightChange} />
 
-      
+
           <button className="block bg-indigo-600 text-white hover:bg-indigo-700 w-full p-3 rounded mb-4" type="submit" onClick={handleSubmit} >Next</button>
-   
+
         </form>
       </div>
       <span className="text-xs relative inset-x-0 bottom-0 pb-8 text-xs font-light uppercase tracking-wide">©2021 Counting Bros</span>
