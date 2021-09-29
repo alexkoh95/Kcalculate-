@@ -9,7 +9,12 @@ const Settings = ({ user }) => {
     const [fats, setFats] = useState("")
     const [currentWeight, setCurrentWeight] = useState("")
     const [targetWeight, setTargetWeight] = useState("")
+    // below state for testing ack
+    const [ack, setAck] = useState("")
 
+
+    // MAYBE NO NEED TO USE THIS ANYMORE, DIRECT SET PROPS TO INPUT VALUES
+    //
     const checkUser = async () => {
         try {
             const res = await fetch("http://localhost:5000/nutrition/user/find");
@@ -70,24 +75,25 @@ const Settings = ({ user }) => {
         event.preventDefault();
 
         const editUser = {
-            // username: user.username,
-            password: user.password,
-            targetCalories: user.calories,
-            targetCarbohydrates: user.carbohydrates,
-            targetProtein: user.protein,
-            targetFats: user.fats,
-            currentWeight: user.currentWeight,
-            targetWeight: user.targetWeight
+            username: user.username,
+            password: password,
+            targetCalories: calories,
+            targetCarbohydrates: carbohydrates,
+            targetProtein: protein,
+            targetFats: fats,
+            currentWeight: currentWeight,
+            targetWeight: targetWeight
         }
-        // console.log(editUser)
 
         const requestOptions = {
-            method: "POST",
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(editUser)
         }
-
         const res = await fetch("http://localhost:5000/nutrition/user/update", requestOptions)
+
+        const data = await res.json()
+        console.log("data", data)
     }
 
     return (
@@ -98,50 +104,50 @@ const Settings = ({ user }) => {
                 <div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Details</div>
-                        <div>Current</div>
-                        <div>New</div>
+                        <div className="text-center">Current</div>
+                        <div className="text-center">New</div>
                     </div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Username</div>
-                        <div>{username}</div>
+                        <div className="text-center">{user.username}</div>
                         {/*}                    <input type="text" onChange={handleUsernameChange} />   */}
                     </div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Password</div>
-                        <div>*</div>
-                        <input type="password" onChange={handlePasswordChange} />
+                        <div className="text-center">*</div>
+                        <input className="text-center" type="password" onChange={handlePasswordChange} />
                     </div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Target Calories</div>
-                        <div>{user.targetCalories}</div>
-                        <input type="number" onChange={handleCaloriesChange} />
+                        <div className="text-center">{user.targetCalories}</div>
+                        <input className="text-center" type="number" value={user.targetCalories} onChange={handleCaloriesChange} />
                     </div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Target Carbohydrates</div>
-                        <div>{carbohydrates}</div>
-                        <input type="number" onChange={handleCarbohydratesChange} />
+                        <div className="text-center">{user.targetCarbohydrates}</div>
+                        <input className="text-center" type="number" value="321" onChange={handleCarbohydratesChange} />
                     </div>
                 </div>
                 <div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Protein</div>
-                        <div>{protein}</div>
-                        <input type="number" onChange={handleProteinChange} />
+                        <div className="text-center">{user.targetProtein}</div>
+                        <input className="text-center" type="number" onChange={handleProteinChange} />
                     </div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Fats</div>
-                        <div>{fats}</div>
-                        <input type="number" onChange={handleFatsChange} />
+                        <div className="text-center">{user.targetFats}</div>
+                        <input className="text-center" type="number" onChange={handleFatsChange} />
                     </div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Weight</div>
-                        <div>{currentWeight}</div>
-                        <input type="number" onChange={handleCurrentWeightChange} />
+                        <div className="text-center">{user.currentWeight}</div>
+                        <input className="text-center" type="number" onChange={handleCurrentWeightChange} />
                     </div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Target Weight</div>
-                        <div>{targetWeight}</div>
-                        <input type="number" onChange={handleTargetWeightChange} />
+                        <div className="text-center">{user.targetWeight}</div>
+                        <input className="text-center" type="number" onChange={handleTargetWeightChange} />
                     </div>
                 </div>
                 <div>
