@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -84,68 +85,35 @@ const Signup = () => {
   }
 
   return (
-    <div>
-      <h1>This is Sign up page</h1>
-      <a href="/signin">Already have an account? Sign in here</a>
-      <form>
-        <div className="mt-12">
-          <label className="" >Username</label>
-        </div>
-        <div className="">
-          <input className="m-1 p-1 rounded border-3 border-blue-800 text-center" type="text" onChange={handleUsernameChange} />
-        </div>
-        <div className="mt-4">
-          <label className="">Password</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="password" onChange={handlePasswordChange} />
-        </div>
-        <div className="mt-4">
-          <label className="">Verify Password</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="password" onChange={handleVerifyPasswordChange} />
-        </div>
-        <div className="mt-4">
-          <label className="">Set Target Calories</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="number" onChange={handleCaloriesChange} />
-        </div>
-        <div className="mt-4">
-          <label className="">Set Target Carbohydrates</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="number" onChange={handleCarbohydratesChange} />
-        </div>
-        <div className="mt-4">
-          <label className="">Set Target Protein</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="number" onChange={handleProteinChange} />
-        </div>
-        <div className="mt-4">
-          <label className="">Set Target Fats</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="number" onChange={handleFatsChange} />
-        </div>
-        <div className="mt-4">
-          <label className="">Set Current Weight</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="number" onChange={handleCurrentWeightChange} />
-        </div>
-        <div className="mt-4">
-          <label className="">Set Target Weight</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="number" onChange={handleTargetWeightChange} />
-        </div>
-        <div className="mt-4">
-          <button className="black border-3 border-white border-opacity-100" type="submit" onClick={handleSubmit} >Next</button>
-        </div>
-      </form>
+    <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 min-h-screen">
+      
+      <div className="bg-white px-6 py-4 rounded-lg shadow-lg text-black w-full my-10">
+      <h1 className="font-bold text-3xl">Sign Up.</h1>
+  
+      <Link to="/signin" className="text-sm text-indigo-600 pb-6">Already have an account? Sign in here</Link>
+      <form className="pt-4">
+       
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="text" placeholder="Username" onChange={handleUsernameChange} /> 
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="password" placeholder="Password" onChange={handlePasswordChange} />
+
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="password" placeholder="Verify Password" onChange={handleVerifyPasswordChange} />
+    
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Calories" onChange={handleCaloriesChange} />
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Carbohydrates" onChange={handleCarbohydratesChange} />
+   
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Protein" onChange={handleProteinChange} />
+    
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Fats" onChange={handleFatsChange} />
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Current Weight" onChange={handleCurrentWeightChange} />
+
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="number" placeholder="Set Target Weight" onChange={handleTargetWeightChange} />
+
+      
+          <button className="block bg-indigo-600 text-white hover:bg-indigo-700 w-full p-3 rounded mb-4" type="submit" onClick={handleSubmit} >Next</button>
+   
+        </form>
+      </div>
+      <span className="text-xs relative inset-x-0 bottom-0 pb-8 text-xs font-light uppercase tracking-wide">©2021 Counting Bros</span>
     </div>
   )
 }

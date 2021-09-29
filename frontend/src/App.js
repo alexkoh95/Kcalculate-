@@ -10,13 +10,14 @@ import Signup from "./components/SignupLogin/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Log from "./components/Log/Log";
 import History from "./components/LogHistory/History";
-import Settings from "./components/Settings/Settings";
+// import Settings from "./components/Settings/Settings";
 import EditLogModal from "./components/Log/EditLogModal";
 import Deletelog from "./components/Log/Deletelog";
 import DailyInformationPage from "./components/LogHistory/DailyInformationPage";
 import Main from "./components/SignupLogin/Main";
 import SignIn from "./components/SignupLogin/Signin";
 import SignupNext from "./components/SignupLogin/SignupNext";
+import SettingsPage from "./components/Settings/SettingsPage";
 
 
 // Josiah notes:

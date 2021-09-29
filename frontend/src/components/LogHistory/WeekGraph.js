@@ -237,7 +237,6 @@ const WeekGraph = () => {
 
   return (
     <div>
-      This is WeekGraph
       <Bar data={data} options={options} />
     </div>
   );

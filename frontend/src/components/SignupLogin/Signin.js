@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Signin = (props) => {
   const [username, setUsername] = useState("");
@@ -62,26 +63,22 @@ const Signin = (props) => {
   }
 
   return (
-    <div>
-      <h1>This is Sign in page</h1>
-      <a href="/signup">Don't have an account? Create one here</a>
-      <form>
-        <div className="mt-12">
-          <label className="" >Username</label>
-        </div>
-        <div className="">
-          <input className="m-1 p-1 rounded border-3 border-blue-800 text-center" type="text" onChange={handleUsernameChange} />
-        </div>
-        <div className="mt-4">
-          <label className="">Password</label>
-        </div>
-        <div>
-          <input className="m-1 p-1 rounded text-center" type="password" onChange={handlePasswordChange} />
-        </div>
-        <div className="mt-4">
-          <button className="black border-3 border-white border-opacity-100" type="submit" onClick={handleSubmit} >Submit</button>
-        </div>
-      </form>
+    <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center min-h-screen px-2">
+     
+      <div className="bg-white px-6 py-4 rounded-lg shadow-lg text-black w-full my-10">
+      <h1 className="font-bold text-3xl">Sign In.</h1>
+      <Link to="/signup" className="text-sm text-indigo-600 pb-6">Don't have an account? Create one here</Link>
+      <form className="pt-4">
+       
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="text" placeholder="Username" onChange={handleUsernameChange} />
+          <input className="block border border-grey-light w-full p-3 rounded mb-4" type="password" placeholder="Password" onChange={handlePasswordChange} />
+ 
+     
+          <button className="block bg-indigo-600 text-white hover:bg-indigo-700 w-full p-3 rounded mb-4" type="submit" onClick={handleSubmit} >Submit</button>
+      
+        </form>
+      </div>
+      <span className="text-xs absolute inset-x-0 bottom-0 pb-8 text-xs font-light uppercase tracking-wide">©2021 Counting Bros</span>
     </div>
   )
 }

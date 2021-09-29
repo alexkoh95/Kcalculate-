@@ -21,15 +21,19 @@ const History = () => {
         <SideNavBar />
       </div>
       <main className="mx-4 p-9 pl-64">
-        <div className="grid grid-cols-2 pt-2 space-x-5">
-          <div className=""></div>
-          <h1>
-            Welcome {userName} <br></br>Today's Date is {today}
-          </h1>
+        <div className="grid grid-cols-3 pt-2 space-x-5">
+          <div>
+            <SideBar />
+          </div>
 
-          <Overview />
-          <WeekGraph />
-          <SideBar />
+          <div className="col-span-2 p-3">
+            <h1>
+              Welcome {userName} <br></br>Today's Date is {today}
+            </h1>
+
+            <Overview />
+            <WeekGraph />
+          </div>
         </div>
       </main>
     </div>

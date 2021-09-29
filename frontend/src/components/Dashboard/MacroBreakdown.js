@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useHistory } from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const MacroBreakdown = ({ meal }) => {
+const MacroBreakdown = ({ todayMeals, protein, carbs, fats }) => {
 
-    const targetProtein = 600 
-    let totalProtein = meal.map(item => item.protein).reduce((prev, curr) => prev + curr, 0)
+    const targetProtein = protein 
+    let totalProtein = todayMeals.map(item => item.protein).reduce((prev, curr) => prev + curr, 0)
     
-    const targetCarbs = 1500 
-    let totalCarbs = meal.map(item => item.carbohydrates).reduce((prev, curr) => prev + curr, 0)
+    const targetCarbs = carbs 
+    let totalCarbs = todayMeals.map(item => item.carbohydrates).reduce((prev, curr) => prev + curr, 0)
     
-    const targetFats = 60 
-    let totalFats = meal.map(item => item.fats).reduce((prev, curr) => prev + curr, 0)
+    const targetFats = fats 
+    let totalFats = todayMeals.map(item => item.fats).reduce((prev, curr) => prev + curr, 0)
     
 
     console.log(totalProtein);
