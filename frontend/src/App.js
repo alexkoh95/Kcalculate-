@@ -19,7 +19,6 @@ import SignIn from "./components/SignupLogin/Signin";
 import SignupNext from "./components/SignupLogin/SignupNext";
 import SettingsPage from "./components/Settings/SettingsPage";
 
-
 // Josiah notes:
 // done -- add props to sign-in props={ }
 // done -- add 2 states, pass them to sign-in
@@ -27,10 +26,9 @@ import SettingsPage from "./components/Settings/SettingsPage";
 // add logout component/function force auth state to be false
 // userState to be null after logout
 
-
 function App() {
-  const [auth, setAuth] = useState(false)
-  const [user, setUser] = useState(null)
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState(null);
 
   const handleChange = async (userData) => {
     console.log("App userdata: ", userData)
@@ -45,9 +43,9 @@ function App() {
 
   // NEED TO PROPS AND CALL THIS ALONG NAV BAR
   const handleLogout = () => {
-    setAuth(false)
-    setUser(null)
-  }
+    setAuth(false);
+    setUser(null);
+  };
 
   return (
     <Router>
@@ -67,9 +65,14 @@ function App() {
             <Route path="/signup" exact component={Signup} />
             <Route path="/signupnext" exact component={SignupNext} />
 
-            <PrivateRoute auth={auth} path="/dashboard" exact Component={Dashboard} />
+            <PrivateRoute
+              auth={auth}
+              path="/dashboard"
+              exact
+              Component={Dashboard}
+            />
 
-            <PrivateRoute auth={auth} path='/log' Component={Log} exact />
+            <PrivateRoute auth={auth} path="/log" Component={Log} exact />
             {/*}  <Route path="/log" exact component={Log} /> */}
 
             <PrivateRoute auth={auth} path="/log/:id" exact Component={EditLogModal} />
@@ -88,16 +91,20 @@ function PrivateRoute({ auth, Component, path, location, ...rest }) {
   //if auth is true then show Route else redirect to login
   return (
     <>
-      {(auth) ?
-        <Route path={path} >
+      {auth ? (
+        <Route path={path}>
           <Component {...rest} />
-        </Route> : <Redirect to={{
-          pathname: "/",
-          state: { from: location }
-        }} />
-      }
+        </Route>
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/",
+            state: { from: location },
+          }}
+        />
+      )}
     </>
-  )
+  );
 }
 
 export default App;
