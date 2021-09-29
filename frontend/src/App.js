@@ -31,15 +31,15 @@ function App() {
   const [user, setUser] = useState(null);
 
   const handleChange = async (userData) => {
-    console.log("App userdata: ", userData)
+    // console.log("App userdata: ", userData)
     setAuth(true)
     await setUser(userData)
-    console.log("inside auth :", auth)
-    console.log("inside user :", user)
+    // console.log("inside auth :", auth)
+    // console.log("inside user :", user)
 
   }
-  console.log("outside auth :", auth)
-  console.log("outside user :", user)
+  // console.log("outside auth :", auth)
+  // console.log("outside user :", user)
 
   // NEED TO PROPS AND CALL THIS ALONG NAV BAR
   const handleLogout = () => {
@@ -65,21 +65,25 @@ function App() {
             <Route path="/signup" exact component={Signup} />
             <Route path="/signupnext" exact component={SignupNext} />
 
-            <PrivateRoute
-              auth={auth}
+
+            {/* 7 private routes, auth{auth} */}
+            {/* components use capital C */}
+            {/* uncomment PrivateRoute function right at the bottom */}
+            <Route
+
               path="/dashboard"
               exact
-              Component={Dashboard}
+              component={Dashboard}
             />
 
-            <PrivateRoute auth={auth} path="/log" Component={Log} exact />
+            <Route path="/log" component={Log} exact />
             {/*}  <Route path="/log" exact component={Log} /> */}
 
-            <PrivateRoute auth={auth} path="/log/:id" exact Component={EditLogModal} />
-            <PrivateRoute auth={auth} path="/log/delete/:id" exact Component={Deletelog} />
-            <PrivateRoute auth={auth} path="/loghistory" exact Component={History} />
-            <PrivateRoute auth={auth} path="/loghistory/DailyInformationPage/:date" exact Component={DailyInformationPage} />
-            <PrivateRoute auth={auth} user={user} path="/settings" exact Component={SettingsPage} />
+            <Route path="/log/:id" exact component={EditLogModal} />
+            <Route path="/log/delete/:id" exact component={Deletelog} />
+            <Route path="/loghistory" exact component={History} />
+            <Route path="/loghistory/DailyInformationPage/:date" exact component={DailyInformationPage} />
+            <Route user={user} path="/settings" exact component={SettingsPage} />
           </Switch>
         </main>
       </div>
@@ -87,24 +91,24 @@ function App() {
   );
 }
 
-function PrivateRoute({ auth, Component, path, location, ...rest }) {
-  //if auth is true then show Route else redirect to login
-  return (
-    <>
-      {auth ? (
-        <Route path={path}>
-          <Component {...rest} />
-        </Route>
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/",
-            state: { from: location },
-          }}
-        />
-      )}
-    </>
-  );
-}
+// function PrivateRoute({ auth, Component, path, location, ...rest }) {
+//   //if auth is true then show Route else redirect to login
+//   return (
+//     <>
+//       {auth ? (
+//         <Route path={path}>
+//           <Component {...rest} />
+//         </Route>
+//       ) : (
+//         <Redirect
+//           to={{
+//             pathname: "/",
+//             state: { from: location },
+//           }}
+//         />
+//       )}
+//     </>
+//   );
+// }
 
 export default App;

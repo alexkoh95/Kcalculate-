@@ -25,8 +25,11 @@ router.post('/login', async (req, res) => {
   }
 })
 
+
+// NEED TO ADD BACK AUTH, ASYNC ...
+
 // Find user profile (CURRENTLY USED FOR SEEDING TEST, TO BE UPDATED)
-router.get("/find", auth, async (req, res) => {
+router.get("/find", async (req, res) => {
   try {
     // console.log(req)
     // const user = await UserModel.find({ username: req.body.username })
@@ -37,7 +40,7 @@ router.get("/find", auth, async (req, res) => {
 })
 
 // Find user profile 2
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const user = await UserModel.find({ username: req.params.id })
     console.log(user)
