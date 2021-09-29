@@ -9,28 +9,71 @@ const session = require("express-session")
 router.post('/login', async (req, res) => {
   const user = await UserModel.find({ username: req.body.username })
   const enteredPassword = req.body.password
-  // console.log("user..: ", user[0])
+  console.log("user..", user)
+  // console.log("req..", req.body.password)
+  // console.log("user..", user[0].password)
 
-  if (enteredPassword === user[0].password) {
-    req.session.auth = true
+  try {
+    if (enteredPassword === user[0].password) {
+      req.session.auth = true
 
-    req.session.userObject = user[0]
-    // console.log("userobj", req.session.userObject)
-    // console.log(req.session.userObject.username)
-    // ways to use req session
-    // req.session.userObj.username = "Desmond"
+      req.session.userObject = user[0]
+      // console.log("userobj", req.session.userObject)
+      // console.log(req.session.userObject.username)
+      // ways to use req session
+      // req.session.userObj.username = "Desmond"
 
-    // console.log(req.session)
-    res.json({ status: 'ok', msg: 'you are logged in', user: user[0] })
-    console.log("passwords match")
+      // console.log(req.session)
+      res.json({ status: 'ok', msg: 'you are logged in', user: user[0] })
+      console.log("passwords match")
+    } else {
+      req.session.auth = false
+      res
+        .status(403)
+        .json({ status: "unauthorised", msg: "you are not logged in" })
+      console.log("passwords do not match")
+    }
 
-  } else {
+  } catch (error) {
     req.session.auth = false
     res
       .status(403)
       .json({ status: "unauthorised", msg: "you are not logged in" })
-    console.log("passwords do not match")
+    console.log("User not found")
+
   }
+
+
+
+  // if (user === []) {
+  //   console.log("User not found")
+  // } else {
+
+  //   if (enteredPassword === user[0].password) {
+  //     req.session.auth = true
+
+  //     req.session.userObject = user[0]
+  //     // console.log("userobj", req.session.userObject)
+  //     // console.log(req.session.userObject.username)
+  //     // ways to use req session
+  //     // req.session.userObj.username = "Desmond"
+
+  //     // console.log(req.session)
+  //     res.json({ status: 'ok', msg: 'you are logged in', user: user[0] })
+  //     console.log("passwords match")
+
+  //   } else {
+  //     req.session.auth = false
+  //     res
+  //       .status(403)
+  //       .json({ status: "unauthorised", msg: "you are not logged in" })
+  //     console.log("passwords do not match")
+  //   }
+  // }
+
+
+
+
 })
 
 
