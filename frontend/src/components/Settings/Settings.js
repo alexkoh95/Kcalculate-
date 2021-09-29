@@ -97,64 +97,77 @@ const Settings = ({ user }) => {
     }
 
     return (
-        <div className="container mx-auto flex-1 flex flex-col items-center justify-center px-2 min-h-screen">
+        <div className="container mx-auto flex-1 flex flex-col px-2 bg-white bg-opacity-40 shadow-lg rounded-xl px-8 pt-7 pb-8 mb-4">
+            <h1 className="text-left text-2xl leading-tight font-bold pb-4 m-3">Settings.</h1>
+            <main className="grid grid-cols-2 space-x-7 justify-center text-left align-top m-3">
 
-            <main className="bg-white bg-opacity-40 shadow-lg rounded-xl px-8 pt-7 pb-8 mb-4 text-left grid grid-cols-2">
-                <h1 className="text-left text-2xl leading-tight font-bold pb-4">Settings.</h1>
-                <div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
+                <div className="space-y-4">
+                    {/* <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Details</div>
-                        <div className="text-center">Current</div>
-                        <div className="text-center">New</div>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                        <div>Username</div>
-                        <div className="text-center">{user.username}</div>
+                        <div>Current</div>
+                        <div>New</div>
+                    </div> */}
+                    <div className="pb-3">
+                        <label className="block text-indigo-600 text-sm tracking-wider uppercase font-medium mb-1">Username</label>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" onChange={handleUsernameChange}></input>
+                        <span className="text-xs capitalize">current: {username}</span>
                         {/*}                    <input type="text" onChange={handleUsernameChange} />   */}
                     </div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                        <div>Password</div>
-                        <div className="text-center">*</div>
-                        <input className="text-center" type="password" onChange={handlePasswordChange} />
+
+                    <div className="pb-3">
+                        <label className="block text-indigo-600 text-sm tracking-wider uppercase font-medium mb-1">Password*</label>
+
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" onChange={handlePasswordChange} />
                     </div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                        <div>Target Calories</div>
-                        <div className="text-center">{user.targetCalories}</div>
-                        <input className="text-center" type="number" value={user.targetCalories} onChange={handleCaloriesChange} />
+
+                    <div className="pb-3">
+                        <label className="block text-indigo-600 text-sm tracking-wider uppercase font-medium mb-1">Target Calories</label>
+
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={handleCaloriesChange} />
+                        {/* <span className="text-xs capitalize">current: {user.targetCalories}</span> */}
                     </div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                        <div>Target Carbohydrates</div>
-                        <div className="text-center">{user.targetCarbohydrates}</div>
-                        <input className="text-center" type="number" value="321" onChange={handleCarbohydratesChange} />
+
+                    <div className="pb-3">
+                        <label className="block text-indigo-600 text-sm tracking-wider uppercase font-medium mb-1">Target Carbohydrates</label>
+
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={handleCarbohydratesChange} />
+                        <span className="text-xs capitalize">Current: {carbohydrates}</span>
                     </div>
                 </div>
+
                 <div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                        <div>Protein</div>
-                        <div className="text-center">{user.targetProtein}</div>
-                        <input className="text-center" type="number" onChange={handleProteinChange} />
+                    <div className="pb-3">
+                        <label className="block text-indigo-600 text-sm tracking-wider uppercase font-medium mb-1">Target Protein</label>
+
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={handleProteinChange} />
+                        <span className="text-xs capitalize">Current:{protein}</span>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                        <div>Fats</div>
-                        <div className="text-center">{user.targetFats}</div>
-                        <input className="text-center" type="number" onChange={handleFatsChange} />
+
+                    <div className="pb-3">
+                        <label className="block text-indigo-600 text-sm tracking-wider uppercase font-medium mb-1">Target Fats</label>
+
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={handleFatsChange} />
+                        <span className="text-xs capitalize">Current:{fats}</span>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                        <div>Weight</div>
-                        <div className="text-center">{user.currentWeight}</div>
-                        <input className="text-center" type="number" onChange={handleCurrentWeightChange} />
+
+                    <div className="pb-3">
+                        <label className="block text-indigo-600 text-sm tracking-wider uppercase font-medium mb-1">Weight</label>
+
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={handleCurrentWeightChange} />
+                        <span className="text-xs capitalize">Current:{currentWeight}</span>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                        <div>Target Weight</div>
-                        <div className="text-center">{user.targetWeight}</div>
-                        <input className="text-center" type="number" onChange={handleTargetWeightChange} />
+                    <div className="pb-3">
+                        <label className="block text-indigo-600 text-sm tracking-wider uppercase font-medium mb-1">Target Weight</label>
+
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={handleTargetWeightChange} />
+                        <span className="text-xs capitalize">Current:{targetWeight}</span>
                     </div>
                 </div>
-                <div>
-                    <button type="submit" onClick={handleSubmit} >Save</button>
-                </div>
-            </main>
-        </div>
+
+
+            </main >
+            <button type="submit" onClick={handleSubmit} className="justify-center block w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold py-2 px-4 mt-5 rounded focus:outline-none focus:shadow-outline">Save</button>
+        </div >
     )
 }
 

@@ -6,6 +6,29 @@ const WeightForm = () => {
 
     const [user, setUser] = useState([])
 
+    useEffect(() => {
+        fetch("/nutrition/weight/all")
+            .then(res => res.json())
+            .then(user => setUser(user))
+    }, []);
+    
+    const [allWeight, setAllWeight] = useState([])
+
+    useEffect(() => {
+        if (user) {
+    
+        const interval = setInterval(() => {
+        setAllWeight(user.map(item => item.weight))
+        }, 1000)
+
+        return () => clearInterval(interval)
+        }
+    }, [user])
+
+    let updatedData = allWeight.slice(-1)
+    let updatedWeight = updatedData[0]
+
+
     const [values, setValues] = useState({
         weight: '',
         date: '',
@@ -19,14 +42,7 @@ const WeightForm = () => {
         })
     }
 
-    useEffect(() => {
-        fetch("/nutrition/user/Alex")
-            .then(res => res.json())
-            .then(user => setUser(user))
-    }, []);
-    // console.log("hello")
-    // console.log(user)
-    // console.log(user.found[0].targetWeight)
+    
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -41,26 +57,6 @@ const WeightForm = () => {
             // history.go(-1) > to go back where they from
             // history.push('/')
     }
-
-    // getting the latest weight
-
-    const [allWeight, setAllWeight] = useState({})
-
-    // useEffect(() => {
-    //     fetch("/nutrition/weight/all")
-    //         .then(res => res.json())
-    //         .then(weight => setAllWeight(weight))
-    // }, []);
-
-    // console.log(allWeight)
-
-    // let updatedData = allWeight.slice(-1)
-    // console.log(updatedData)
-
-    // let updatedWeight = updatedData[0].weight
-    // console.log(updatedWeight)
-
-        
 
     return (
 <div>
@@ -83,7 +79,7 @@ const WeightForm = () => {
 <button type="submit" onSubmit={handleSubmit} className="block w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold py-2 px-4 mt-5 rounded focus:outline-none focus:shadow-outline">Log New Weight</button>
                 </form>
                 <div className="border-t-2 border-indigo-600 pt-4 mt-4 grid grid-cols-2">
-                    <div className="text-left my-auto uppercase text-sm">Current Weight:</div> <div className="text-right text-2xl my-auto">{}kg</div>
+                    <div className="text-left my-auto uppercase text-sm leading-4">Current Weight:</div> <div className="text-right text-2xl my-auto">{updatedWeight}kg</div>
                     </div>
         </div></div>
     )

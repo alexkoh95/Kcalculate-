@@ -3,7 +3,6 @@ import { Doughnut } from 'react-chartjs-2'
 
 const DisplayTracker = ({ totalKcal, leftKcal }) => {
 
-
     const data = {
         labels: ['Total Kcal', 'Kcal left'],
         datasets: [

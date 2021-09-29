@@ -66,18 +66,30 @@ function App() {
             <Route path="/signupnext" exact component={SignupNext} />
 
 
-            {/* 7 private routes, auth{auth}
-            components use capital C
-            uncomment PrivateRoute function right at the bottom 
-            /settings to add/remove back user={user}
-          */}
-            <PrivateRoute auth={auth} user={user} path="/dashboard" exact Component={Dashboard} />
-            <PrivateRoute auth={auth} path="/log" Component={Log} exact />
-            <PrivateRoute auth={auth} path="/log/:id" exact Component={EditLogModal} />
-            <PrivateRoute auth={auth} path="/log/delete/:id" exact Component={Deletelog} />
-            <PrivateRoute auth={auth} path="/loghistory" exact Component={History} />
-            <PrivateRoute auth={auth} path="/loghistory/DailyInformationPage/:date" exact Component={DailyInformationPage} />
-            <PrivateRoute auth={auth} user={user} path="/settings" exact Component={SettingsPage} />
+            {/* 7 private routes, auth{auth} */}
+            {/* components use capital C */}
+            {/* uncomment PrivateRoute function right at the bottom */}
+            <Route
+
+              path="/dashboard"
+              exact
+              component={Dashboard}
+            />
+            {/* <Route
+             
+              path="/dashboard"
+              exact
+              Component={Dashboard}
+            /> */}
+
+            <Route path="/log" component={Log} exact />
+            {/*}  <Route path="/log" exact component={Log} /> */}
+
+            <Route path="/log/:id" exact component={EditLogModal} />
+            <Route path="/log/delete/:id" exact component={Deletelog} />
+            <Route path="/loghistory" exact component={History} />
+            <Route path="/loghistory/DailyInformationPage/:date" exact component={DailyInformationPage} />
+            <Route user={user} path="/settings" exact component={SettingsPage} />
           </Switch>
         </main>
       </div>
