@@ -66,9 +66,10 @@ function App() {
             <Route path="/signupnext" exact component={SignupNext} />
 
 
-            {/* 7 private routes, auth{auth} */}
-            {/* components use capital C */}
-            {/* uncomment PrivateRoute function right at the bottom */}
+            {/* 7 private routes, auth{auth}
+            components use capital C
+            settings add/remove user={user}
+            uncomment PrivateRoute function right at the bottom */}
             <Route
 
               path="/dashboard"
