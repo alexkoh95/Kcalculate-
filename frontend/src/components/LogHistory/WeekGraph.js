@@ -177,6 +177,7 @@ const WeekGraph = () => {
           l1Carbs,
           todayCarbs,
         ],
+
         backgroundColor: "rgb(54, 162, 235)",
       },
       {
@@ -190,6 +191,7 @@ const WeekGraph = () => {
           l1Protein,
           todayProtein,
         ],
+
         backgroundColor: "rgb(75, 192, 192)",
       },
       {
@@ -204,6 +206,8 @@ const WeekGraph = () => {
     scales: {
       yAxes: [
         {
+          display: true,
+          position: "left",
           stacked: true,
           ticks: {
             beginAtZero: true,
@@ -237,9 +241,16 @@ const WeekGraph = () => {
 
   return (
     <div>
+      <h1>Calories Graph</h1>
+      <Bar data={data} options={options} />
+      <h1>Macronutrients Graph</h1>
       <Bar data={data} options={options} />
     </div>
   );
 };
 
 export default WeekGraph;
+
+//Colour Scheme
+// 'rgba(153, 102, 255, 0.2)',
+//               'rgba(255, 159, 64, 0.2)',

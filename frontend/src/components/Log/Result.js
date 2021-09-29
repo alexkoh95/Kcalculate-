@@ -49,32 +49,37 @@ const Result = (props) => {
 
   let displayedResults2 = displayedResults?.map((element, index) => {
     return (
-
-    <div className='grid grid-cols-4 flex py-3 m-4 bg-white bg-opacity-40 shadow-lg rounded-lg '>
-
-        <div className='my-auto capitalize text-lg font-bold'>
-          {element.Name}<br/>
-          
+      <div className="grid grid-cols-4 flex py-3 m-4 bg-white bg-opacity-40 shadow-lg rounded-lg ">
+        <div className="my-auto capitalize text-lg font-bold">
+          {element.Name}
+          <br />
         </div>
 
-        
-        <div className='text-xs text-left my-auto leading-3 '>
-        Carbs: <span className='text-bold'>{element.Carbohydrates}</span> <br/>
-        Protein: <span className='text-bold'>{element.Protein}</span> <br />
-        Fats: <span className='text-bold'>{element.Fat}</span> 
+        <div className="text-xs text-left my-auto leading-3 ">
+          Carbs: <span className="text-bold">{element.Carbohydrates}</span>{" "}
+          <br />
+          Protein: <span className="text-bold">{element.Protein}</span> <br />
+          Fats: <span className="text-bold">{element.Fat}</span>
         </div>
 
-        <div className='text-xs text-left leading-3 my-auto align-top'>
-        <br/>
-          Serving Size: <span className='text-bold'>{element.ServingSizeg}</span><br />
-          Calories: <span className='text-bold'>{element.Calories}</span>
+        <div className="text-xs text-left leading-3 my-auto align-top">
+          <br />
+          Serving Size:{" "}
+          <span className="text-bold">{element.ServingSizeg}</span>
+          <br />
+          Calories: <span className="text-bold">{element.Calories}</span>
         </div>
 
-        <div className='my-auto'>
-        <button onClick={() => props.handleClick(element)} className='rounded-full bg-indigo-600 text-white px-5 py-1 text-sm shadow-md hover:bg-indigo-700'> select </button>
+        <div className="my-auto">
+          <button
+            onClick={() => props.handleClick(element)}
+            className="rounded-full bg-indigo-600 text-white px-5 py-1 text-sm shadow-md hover:bg-indigo-700"
+          >
+            {" "}
+            select{" "}
+          </button>
         </div>
-        
-    </div>
+      </div>
       // <tr>
       //   <td className="px-3 py-3">
       //     <strong>{element.Name}</strong>
@@ -132,22 +137,33 @@ const Result = (props) => {
 
   return (
     <div className="">
-      <div className='flex items-center justify-center space-x-2 pt-20'>
-       <input
-        className="inline-flex px-4 py-1 h-10 w-72 text-gray-700 text-md bg-transparent border-2 border-indigo-600 rounded-full focus:outline-none shadow-md shadow-inner"
-        type="text"
-        placeholder="Enter Your food Name"
-        onChange={handleChange}
-      />
+      <div className="flex items-center justify-center space-x-2 pt-20">
+        <input
+          className="inline-flex px-4 py-1 h-10 w-72 text-gray-700 text-md bg-transparent border-2 border-indigo-600 rounded-full focus:outline-none shadow-md shadow-inner"
+          type="text"
+          placeholder="Enter Your food Name"
+          onChange={handleChange}
+        />
 
-      <button
-        className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-indigo-600 shadow-lg transform hover:bg-indigo-700 hover:scale-105 transition duration-500 ease-in-out hover:animate-pulse"
-        onClick={handleSubmit}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-</svg>
-      </button>
+        <button
+          className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-indigo-600 shadow-lg transform hover:bg-indigo-700 hover:scale-105 transition duration-500 ease-in-out hover:animate-pulse"
+          onClick={handleSubmit}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="white"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </button>
       </div>
       <br></br>
       {/* {[] ? <span></span> : (displayedResults2)} */}

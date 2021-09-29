@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Calculate = (props) => {
   // =====================================================
@@ -13,8 +14,24 @@ const Calculate = (props) => {
   let temporaryString = "Snack";
   const [meal, setMeal] = useState(temporaryString);
   const history = useHistory();
+  const [nutritionCalculated, setNutritionCalculated] = useState();
 
-  const [nutritionCalculated, setNutritionCalculated] = useState([]);
+  // Getting USER
+  const [userName, setUserName] = useState(null);
+
+  const fetchUserData = () => {
+    //need to make this params eventually instead of hard-code "Iman"
+    fetch("/nutrition/user/Iman")
+      .then((res) => res.json())
+      .then((userName) => setUserName(userName));
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  // console.log(userName);
+  // console.log(userName.user.username);
 
   useEffect(() => {
     setNutritionCalculated([...props.nutritionDataToCalculate]);
@@ -70,6 +87,7 @@ const Calculate = (props) => {
     const weight = nutritionCalculated[0].ServingSizeg;
     const date = nutritionCalculated[0].date;
     const mealtype = nutritionCalculated[0].mealType;
+    const user = userName.user.username;
 
     const submitToDataBase = {
       name,
@@ -82,6 +100,7 @@ const Calculate = (props) => {
       weight,
       date,
       mealtype,
+      user,
     };
 
     axios

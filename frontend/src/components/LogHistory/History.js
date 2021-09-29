@@ -10,11 +10,6 @@ const moment = require("moment");
 
 const History = () => {
   //get date data
-  const today = moment().format("dddd MMMM Do YYYY");
-  console.log(today);
-  const lastSevenDays = moment().subtract(7, "days");
-
-  const userName = `Alex`;
   return (
     <div>
       <div className="">
@@ -27,10 +22,6 @@ const History = () => {
           </div>
 
           <div className="col-span-2 p-3">
-            <h1>
-              Welcome {userName} <br></br>Today's Date is {today}
-            </h1>
-
             <Overview />
             <WeekGraph />
           </div>
