@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const Signin = () => {
+const Signin = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  // send props from APP.js down to here
 
   const history = useHistory()
 
@@ -21,28 +23,42 @@ const Signin = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const existingUser = {
-      username: username,
-      password: password
-    }
+    if (username === "") {
+      console.log("Username cannot be empty")
+    } else {
 
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(existingUser)
-    }
 
-    try {
-      const res = await fetch("http://localhost:5000/nutrition/user/login", requestOptions)
-      const data = await res.json()
-      console.log(data.status)
-      if (data.status === "ok") {
-        history.push("/main")
-      } else {
-        console.log("passwords not match")
+      const existingUser = {
+        username: username,
+        password: password
       }
-    } catch (err) {
-      console.log(err)
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(existingUser)
+      }
+
+      try {
+        const res = await fetch("http://localhost:5000/nutrition/user/login", requestOptions)
+        const data = await res.json()
+        // console.log(data)
+        // console.log(data.status)
+        // console.log(data.user)
+        // console.log(data.user.password)
+
+        // if (data.status === "ok") {
+        // set user and set auth
+        // props.setAuth(true)
+        props.handleChange(data.user)
+        history.push("/settings")
+        console.log("pass")
+        // } else {
+        // console.log("passwords not match")
+        // }
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
