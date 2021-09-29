@@ -20,7 +20,7 @@ const WeightForm = () => {
     }
 
     useEffect(() => {
-        fetch("/nutrition/user/Alex")
+        fetch("/nutrition/user/Iman")
             .then(res => res.json())
             .then(user => setUser(user))
     }, []);

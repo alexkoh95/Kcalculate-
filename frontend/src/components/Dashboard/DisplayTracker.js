@@ -1,8 +1,25 @@
 import React, { useState, useEffect, useHistory } from 'react';
 import { Doughnut } from 'react-chartjs-2'
 
-const DisplayTracker = ({ totalKcal, leftKcal }) => {
+const DisplayTracker = () => {
 
+  const moment = require("moment");
+  const today = moment().format("dddd MMMM Do YYYY");
+  
+
+  const [meal, setMeal] = useState([])
+  let targetKcal, todayMeals, totalKcal, leftKcal 
+
+    useEffect(() => {
+      fetch("/nutrition")
+      .then(res => res.json())
+      .then(meal => setMeal(meal))
+  }, []);
+
+  
+  todayMeals = meal.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today)
+  totalKcal = todayMeals.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
+  leftKcal = 3500 - totalKcal
 
     const data = {
         labels: ['Total Kcal', 'Kcal left'],

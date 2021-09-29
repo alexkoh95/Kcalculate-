@@ -3,30 +3,22 @@ import { Link } from "react-router-dom";
 
 const LogPanelDashb = () => {
 
-    const [meal, setMeal] = useState(null)
     const moment = require("moment");
     const today = moment().format("dddd MMMM Do YYYY");
-  let todayMeals
-
-  const fetchAllData = () => {
-    fetch("/nutrition")
+    
+  
+    const [meal, setMeal] = useState([])
+    let todayMeals
+  
+      useEffect(() => {
+        fetch("/nutrition")
         .then(res => res.json())
         .then(meal => setMeal(meal))
-  }
+    }, []);
   
-  useEffect(() => {
-    fetchAllData()
-
- }, []);
-
- useEffect(() => {
-     if (meal) {      
-     todayMeals = meal.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today)
-     }
- }, [meal])
-
- 
     
+    todayMeals = meal.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today)
+  
     
     //getting breakfast data
     const breakfast = todayMeals.filter(ele => ele.mealtype === 'Breakfast')
