@@ -20,7 +20,6 @@ const LogDisplay = (props) => {
 
   const moment = require("moment");
   const today = moment().format("dddd MMMM Do YYYY");
-  console.log(today);
 
   // today's nutrition
   const todayMeals = data.filter(

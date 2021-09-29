@@ -24,23 +24,33 @@ const Calculate = (props) => {
   //                  FUNCTIONS
   // =====================================================
   const handleMealTypeChange = async (e) => {
-    await setMeal((prevstate) => {
+    await setMeal((prevState) => {
       return e.target.value;
     });
     await setNutritionCalculated((prevState) => {
       const newArray = [...nutritionCalculated];
-      let addedMealType = [
-        Object.assign(newArray[0], { mealType: e.target.value }),
-      ];
+      let addedMealType = [Object.assign(newArray[0], { mealType: meal })];
       return addedMealType;
     });
   };
 
   const handleDateChange = (event) => {
-    setDate(event.target.value);
+    setDate((prevState) => {
+      console.log(date);
+      return event.target.value;
+    });
+  };
+
+  const submitDate = (event) => {
+    // setDate((prevState) => {
+    //   console.log(date);
+    //   return event.target.value;
+    // });
     setNutritionCalculated((prevState) => {
       const newArray = [...nutritionCalculated];
       let addedDate = [Object.assign(newArray[0], { date: date })];
+      console.log(date);
+      console.log(newArray);
       return addedDate;
     });
   };
@@ -146,6 +156,14 @@ const Calculate = (props) => {
                 type="date"
                 className="input"
               ></input>
+            </div>
+            <div>
+              <button
+                className=" bg-black text-white uppercase tracking-wider px-5 py-1 mt-2 text-xs shadow-md"
+                onClick={submitDate}
+              >
+                Set Date
+              </button>
             </div>
 
             <div>
