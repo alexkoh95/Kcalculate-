@@ -1,42 +1,15 @@
 import React, { useState, useEffect, useHistory } from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const MacroBreakdown = ({ protein, fats, carbs }) => {
+const MacroBreakdown = ({ protein, fats, carbs, totalProtein, totalCarbs, totalFats}) => {
   
-  const moment = require("moment");
-  const today = moment().format("dddd MMMM Do YYYY");
-  
-
-  const [meal, setMeal] = useState([])
-  let targetKcal, todayMeals, totalKcal, leftKcal 
-
-    useEffect(() => {
-      fetch("/nutrition")
-      .then(res => res.json())
-      .then(meal => setMeal(meal))
-  }, []);
-
-  
-  todayMeals = meal.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today)
-  
-    const targetProtein = protein 
-    let totalProtein = todayMeals.map(item => item.protein).reduce((prev, curr) => prev + curr, 0)
-    
-    const targetCarbs = carbs 
-    let totalCarbs = todayMeals.map(item => item.carbohydrates).reduce((prev, curr) => prev + curr, 0)
-    
-    const targetFats = fats 
-    let totalFats = todayMeals.map(item => item.fats).reduce((prev, curr) => prev + curr, 0)
-    
-
-    console.log(totalProtein);
 
     const data = {
         labels: ['Total Protein', 'Target Protein', 'Total Carbs', 'Target Carbs', 'Total Fats', 'Target Fats' ],
         datasets: [
           {
             label: 'Macronutrients',
-            data: [totalProtein, targetProtein, totalCarbs, targetCarbs, totalFats, targetCarbs],
+            data: [totalProtein, protein, totalCarbs, carbs, totalFats, fats],
             backgroundColor: [
            
               'rgba(153, 102, 255, 0.2)',

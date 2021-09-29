@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2';
+import { Link } from 'react-router-dom'
 
 const WeightTracker = ({ weight, date, targetWeight }) => {
 
@@ -37,7 +38,7 @@ const WeightTracker = ({ weight, date, targetWeight }) => {
 
     return (
         <div>
-            <h1 className="text-left m-3 font-bold text-gray-600 align-middle ">Weight Watch <button className="text-xs border-2 border-indigo-600 rounded-md px-3 ml-2 border-opacity-70 hover:bg-indigo-600 hover:text-white">update</button></h1>
+            <h1 className="text-left m-3 font-bold text-gray-600 align-middle ">Weight Watch <button className="text-xs border-2 border-indigo-600 rounded-md px-3 ml-2 border-opacity-70 hover:bg-indigo-600 hover:text-white"><Link to="/settings">update</Link></button></h1>
             <Line data={data} options={options} />
             
             <div className="grid grid-cols-2 pt-2">

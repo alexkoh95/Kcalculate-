@@ -6,6 +6,22 @@ const WeightForm = () => {
 
     const [user, setUser] = useState([])
 
+    useEffect(() => {
+        fetch("/nutrition/user/Iman")
+            .then(res => res.json())
+            .then(user => setUser(user))
+    }, []);
+    
+    // const [userTargetWeight, setUserTargetWeight] = useState(0)
+
+    // useEffect(() => {
+    //     if ( user && weight) {
+
+    //     setUserTargetWeight(user.user.targetWeight)
+     
+    //     }
+    // }, [user, weight, meal])
+
     const [values, setValues] = useState({
         weight: '',
         date: '',
@@ -19,14 +35,7 @@ const WeightForm = () => {
         })
     }
 
-    useEffect(() => {
-        fetch("/nutrition/user/Iman")
-            .then(res => res.json())
-            .then(user => setUser(user))
-    }, []);
-    // console.log("hello")
-    // console.log(user)
-    // console.log(user.found[0].targetWeight)
+    
 
     const handleSubmit = e => {
         e.preventDefault();

@@ -34,8 +34,6 @@ const Dashboard = () => {
       useEffect(() => {
           fetchAllData()
     }, []);
-
-    console.log(weight)
    
     const [userName, setUserName] = useState('')
     const [userTargetKcal, setUserTargetKcal] = useState(0)
@@ -47,8 +45,16 @@ const Dashboard = () => {
     const [weightForChart, setWeightForChart] = useState([])
     const [dateForChart, setDateForChart] = useState([])
 
+    const [todayMeals, setTodayMeals] = useState([])
+    const [totalKcal, setTotalKcal] = useState(0)
+    const leftKcal = userTargetKcal - totalKcal
+
+    const [totalProtein, setTotalProtein] = useState(0)
+    const [totalCarbs, setTotalCarbs] = useState(0)
+    const [totalFats, setTotalFats] = useState(0)
+            
     useEffect(() => {
-        if ( user && weight ) {
+        if ( user && weight && meal) {
 
         setUserName(user.user.username)
         setUserTargetWeight(user.user.targetWeight)
@@ -61,21 +67,17 @@ const Dashboard = () => {
         setWeightForChart(weight.map(item => item.weight))
         setDateForChart(weight.map(item => item.date))
             
-        // todayMeals = meal.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today)
-        // totalKcal = todayMeals.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
-        //     leftKcal = targetKcal - totalKcal
-        //     console.log(todayMeals)
+        setTodayMeals(meal.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today))
+        setTotalKcal(todayMeals.map(item => item.calories).reduce((prev, curr) => prev + curr, 0))
+        
+        setTotalProtein(todayMeals.map(item => item.protein).reduce((prev, curr) => prev + curr, 0))
+        setTotalCarbs(todayMeals.map(item => item.carbohydrates).reduce((prev, curr) => prev + curr, 0))
+        setTotalFats(todayMeals.map(item => item.fats).reduce((prev, curr) => prev + curr, 0))
             
         }
-    }, [user, weight])
+    }, [user, weight, meal])
     
     
-    
-    // targetKcal = user.user.targetCalories
-    // const targetKcal = 2350
-    // let totalKcal = todayMeals.map(item => item.calories).reduce((prev, curr) => prev + curr, 0)
-    // const leftKcal = targetKcal - totalKcal
-
     return (
         <div className="">
             <div className=""><SideNavBar /></div>
@@ -86,7 +88,6 @@ const Dashboard = () => {
                         <div className="h-52 bg-gradient-to-br from-yellow-100 via-red-100 to-pink-100 py-2 px-2 m-3 text-gray-700 rounded-lg bg-opacity-20 text-left pl-8 pt-12 
                         bg-cover bg-center filter brightness-105" style={{backgroundImage:`url('https://i.ibb.co/Fn5LVQB/dashboard-banner.jpg')`}}>
                             <h1 className="text-4xl font-bold">Hello, { userName }</h1>
-                            {/* <h1 className="text-4xl font-bold">Hello, Alex</h1> */}
                             <h1 className="text-lg pb-4">{today}</h1>
                             <button className="text-xs border-2 border-indigo-600 uppercase spacing-widest text-xs px-6 py-2 rounded-full border-opacity-80 hover:bg-indigo-600 hover:text-white"><Link to ="/log">Log Meal</Link></button>
                             <button className="text-xs border-2 border-indigo-600 uppercase spacing-widest text-xs px-6 py-2 ml-3 rounded-full border-opacity-80 hover:bg-indigo-600 hover:text-white"><Link to ="/loghistory">Review Logs</Link></button>
@@ -95,13 +96,12 @@ const Dashboard = () => {
                     <div className="grid grid-cols-2 space-x-5 pt-5">
                         
                             <div>
-                                {/* {weight && <WeightTracker targetWeight={userTargetWeight} />} */}
                                 <WeightTracker weight={weightForChart} targetWeight={userTargetWeight} date={dateForChart}/>
-                                {/* <WeightTracker /> */}
+                         
                         </div>
 
                         <div>
-                                <LogPanelDashb />
+                                <LogPanelDashb todayMeals={todayMeals}/>
                         </div>
 
                     </div>
@@ -110,14 +110,14 @@ const Dashboard = () => {
                 <div className='items-center justify-center bg-white py-2 px-2 text-gray-700 rounded-lg m-3 bg-opacity-20 shadow-lg '>
                     <div className="pt-3">
                         <p className="tracking-widest uppercase text-xs text-yellow-500 text-opacity-70">Remaining calories:</p>
-                        <h1 className="text-3xl font-medium">{}kcal</h1>
+                        <h1 className="text-3xl font-medium">{leftKcal}kcal</h1>
                         <p className="tracking-wider uppercase text-sm text-indigo-500">Goal: {userTargetKcal}kcal</p>
 
 
                     </div>
-                    <div className="m-3 pb-3"><DisplayTracker/></div>
-                        <div className="m-3 border-t-2 pt-3"><MacroBreakdown protein={userProtein} carbs={userCarbs} fats={userFats} /></div>
-                        {/* <div className="m-3 border-t-2 pt-3"><MacroBreakdown /></div> */}
+                        <div className="m-3 pb-3"><DisplayTracker totalKcal={totalKcal} leftKcal={leftKcal}/></div>
+                        <div className="m-3 border-t-2 pt-3">
+                            <MacroBreakdown protein={userProtein} carbs={userCarbs} fats={userFats} totalProtein={totalProtein} totalCarbs={totalCarbs} totalFats={totalFats}/></div>
                     
                     <div></div>
                 </div>
