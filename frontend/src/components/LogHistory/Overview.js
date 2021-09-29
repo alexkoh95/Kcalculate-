@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
+const moment = require("moment");
 const Overview = () => {
+  const today = moment().format("dddd MMMM Do YYYY");
+  const fetchAllData = () => {
+    fetch("/nutrition").then((res) => res.json());
+
+    fetch("/nutrition/user/Iman").then((res) => res.json());
+
+    fetch("/nutrition/weight/all").then((res) => res.json());
+  };
+
+  const [userName, setUser] = useState("");
+
+  useEffect(() => {
+    fetchAllData();
+  }, []);
+
+  const lastSevenDays = moment().subtract(7, "days");
+
   return (
     <div>
       <div
@@ -9,7 +27,11 @@ const Overview = () => {
         style={{
           backgroundImage: `url('https://i.ibb.co/Fn5LVQB/dashboard-banner.jpg')`,
         }}
-      ></div>
+      >
+        {" "}
+        <h1 className="text-4xl font-bold">Hello, {userName}</h1>
+        <h1 className="text-lg pb-4">{today}</h1>
+      </div>
     </div>
   );
 };

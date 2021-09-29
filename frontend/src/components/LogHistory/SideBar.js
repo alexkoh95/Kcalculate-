@@ -13,16 +13,27 @@ const SideBar = () => {
   // =====================================================
   const [data, setData] = useState([]);
   const [nutritionData, setNutritionData] = useState([]);
+  const [userName, setUserName] = useState(null);
 
   const fixTheFetchProblem = () => {
     fetch("/nutrition")
       .then((res) => res.json())
       .then((data) => setData(data));
+
+    //need to make this params eventually instead of hard-code "Iman"
+    fetch("/nutrition/user/Iman")
+      .then((res) => res.json())
+      .then((userName) => setUserName(userName));
   };
 
   useEffect(() => {
     fixTheFetchProblem();
   }, []);
+
+  //filter Data based on username
+  const filterByUserName = data?.filter(
+    (element) => element.user === userName.user.username
+  );
 
   //Display Date
   const todayDisplay = moment().format("dddd MMMM Do YYYY");
@@ -89,7 +100,9 @@ const SideBar = () => {
 
   //Filter data by date
   //today's Nutrition Data
-  const todayNutritionData = data?.filter(
+
+  //NOTE, I have changed const todayNutritionData = data?.filter... to filterByUserName?.
+  const todayNutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === todayCheck
   );
   const todayCalories = todayNutritionData
@@ -113,7 +126,7 @@ const SideBar = () => {
   };
 
   //L1 Day Nutrition Data
-  const l1NutritionData = data?.filter(
+  const l1NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l1DayCheck
   );
   const l1Calories = l1NutritionData
@@ -137,7 +150,7 @@ const SideBar = () => {
   };
 
   //L2 Day Nutrition Data
-  const l2NutritionData = data?.filter(
+  const l2NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l2DayCheck
   );
   const l2Calories = l2NutritionData
@@ -161,7 +174,7 @@ const SideBar = () => {
   };
 
   //L3 Day Nutrition Data
-  const l3NutritionData = data?.filter(
+  const l3NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l3DayCheck
   );
   const l3Calories = l3NutritionData
@@ -185,7 +198,7 @@ const SideBar = () => {
   };
 
   //L4 Day Nutrition Data
-  const l4NutritionData = data?.filter(
+  const l4NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l4DayCheck
   );
   const l4Calories = l4NutritionData
@@ -209,7 +222,7 @@ const SideBar = () => {
   };
 
   //L5 Day Nutrition Data
-  const l5NutritionData = data?.filter(
+  const l5NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l5DayCheck
   );
   const l5Calories = l5NutritionData
@@ -233,7 +246,7 @@ const SideBar = () => {
   };
 
   //L6 Day Nutrition Data
-  const l6NutritionData = data?.filter(
+  const l6NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l6DayCheck
   );
   const l6Calories = l6NutritionData

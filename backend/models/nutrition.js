@@ -9,6 +9,7 @@ const NutritionSchema = new mongoose.Schema({
   weight: { type: Number },
   date: { type: Date },
   mealtype: { type: String },
+  user: { type: String },
 });
 
 const NutritionModel = mongoose.model("NutritionModel", NutritionSchema);
