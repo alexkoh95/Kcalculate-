@@ -50,12 +50,10 @@ const Signin = (props) => {
         if (data.status === "ok") {
           // set user and set auth
           // props.setAuth(true)
-          console.log("1")
+          console.log("user valid")
+          console.log("signin: ", data.user)
           props.handleChange(data.user)
-          console.log("2")
-          console.log("signin :", data.user)
           history.push("/settings")
-          console.log("pass")
           // console.log(theUser)
         } else {
           console.log("username/password invalid")
