@@ -31,25 +31,21 @@ const DailyInformationPage = ({ meal }) => {
   const breakfast = data.filter(
     (ele) => ele.mealtype === "Breakfast" && ele.date === dateParams.date
   );
-  console.log(breakfast);
 
   //getting lunch data
   const lunch = data.filter(
     (ele) => ele.mealtype === "Lunch" && ele.date === dateParams.date
   );
-  console.log(lunch);
 
   //getting lunch data
   const dinner = data.filter(
     (ele) => ele.mealtype === "Dinner" && ele.date === dateParams.date
   );
-  console.log(dinner);
 
   //getting snack data
   const snack = data.filter(
     (ele) => ele.mealtype === "Snack" && ele.date === dateParams.date
   );
-  console.log(snack);
 
   return (
     <div>
@@ -59,7 +55,7 @@ const DailyInformationPage = ({ meal }) => {
       <main className="mx-4 p-9 pl-64">
         <div className="relative space-y-10 pb-2 p-4 rounded-lg border-2 border-white">
           <Tab.Group>
-            <h2 className="font-medium">{gettingDate}</h2>
+            <h1>{gettingDate}</h1>
             <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
               <Tab
                 className="w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg
