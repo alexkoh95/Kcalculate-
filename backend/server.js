@@ -6,8 +6,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-// const session = require('express-session')
-// const MongoDBStore = require('connect-mongodb-session')(session)
+const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 
 app.use(cors());
@@ -38,20 +38,20 @@ connectDB(mongoURI);
 // const mongoURI2 = "mongodb://localhost:27017/nutrition/weight";
 // connectDBWeight(mongoURI2);
 
-// const store = new MongoDBStore({
-//   uri: mongoURI,
-//   collection: "currentSessions",
-// })
+const store = new MongoDBStore({
+  uri: mongoURI,
+  collection: "currentSessions",
+})
 
-// app.use(
-//   session({
-//     secret: "secret",
-//     resave: false,
-//     saveUninitialized: false,
-//     store: store,
-//     maxAge: 24 * 60 * 60 * 1000
-//   })
-// )
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    maxAge: 24 * 60 * 60 * 1000
+  })
+)
 
 // ====================================
 //              ROUTES

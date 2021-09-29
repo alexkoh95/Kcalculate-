@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SideNavBar from "../SideNavBar";
 
-const Settings = () => {
+const Settings = ({ user }) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [calories, setCalories] = useState("")
@@ -15,15 +15,16 @@ const Settings = () => {
         try {
             const res = await fetch("http://localhost:5000/nutrition/user/find");
             const data = await res.json();
-            console.log(data)
-            // setUsername()
-            // setPassword()
-            // setCalories()
-            // setCarbohydrates()
-            // setProtein()
-            // setFats()
-            // setCurrentWeight()
-            // setTargetWeight()
+            // console.log("checkuser: ", data.user)
+            setUsername(user.username)
+            // console.log("checkusername: ", user.username)
+            setPassword(user.password)
+            setCalories(user.targetCalories)
+            setCarbohydrates(user.targetCarbohydrates)
+            setProtein(user.targetProtein)
+            setFats(user.targetFats)
+            setCurrentWeight(user.currentWeight)
+            setTargetWeight(user.targetWeight)
         } catch (err) {
             console.log(err)
         }
@@ -69,14 +70,14 @@ const Settings = () => {
         event.preventDefault();
 
         const editUser = {
-            username: username,
-            password: password,
-            targetCalories: calories,
-            targetCarbohydrates: carbohydrates,
-            targetProtein: protein,
-            targetFats: fats,
-            currentWeight: currentWeight,
-            targetWeight: targetWeight
+            // username: user.username,
+            password: user.password,
+            targetCalories: user.calories,
+            targetCarbohydrates: user.carbohydrates,
+            targetProtein: user.protein,
+            targetFats: user.fats,
+            currentWeight: user.currentWeight,
+            targetWeight: user.targetWeight
         }
         // console.log(editUser)
 
@@ -87,7 +88,6 @@ const Settings = () => {
         }
 
         const res = await fetch("http://localhost:5000/nutrition/user/update", requestOptions)
-
     }
 
     return (
@@ -103,7 +103,7 @@ const Settings = () => {
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Username</div>
                     <div>{username}</div>
-                    <input type="text" onChange={handleUsernameChange} />
+                    {/*}                    <input type="text" onChange={handleUsernameChange} />   */}
                 </div>
                 <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                     <div>Password</div>

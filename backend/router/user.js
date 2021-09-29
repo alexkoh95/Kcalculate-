@@ -3,21 +3,21 @@ const router = express.Router();
 const UserModel = require("../models/User");
 // const bcrypt = require("bcrypt")
 const auth = require('../middleware/auth')
+const session = require("express-session")
 
 // // Login check
 router.post('/login', async (req, res) => {
   const enteredPassword = req.body.password
-  console.log("enter: ", enteredPassword)
-  const dbPassword = await UserModel.find({ username: req.body.username })
-  console.log("db: ", dbPassword)
+  const user = await UserModel.find({ username: req.body.username })
 
-  if (enteredPassword === dbPassword[0].password) {
-    // req.session.auth = true
-    res.json({ status: 'ok', msg: 'you are logged in' })
+  if (enteredPassword === user[0].password) {
+    req.session.auth = true
+    // console.log(req)
+    res.json({ status: 'ok', msg: 'you are logged in', user: user[0] })
     console.log("passwords match")
 
   } else {
-    // req.session.auth = false
+    req.session.auth = false
     res
       .status(403)
       .json({ status: "unauthorised", msg: "you are not logged in" })
@@ -26,37 +26,34 @@ router.post('/login', async (req, res) => {
 })
 
 // Find user profile (CURRENTLY USED FOR SEEDING TEST, TO BE UPDATED)
-router.get("/find", async (req, res) => {
-  console.log(req.body)
+router.get("/find", auth, async (req, res) => {
   try {
-    const found = await UserModel.find({ username: req.body.username })
-    console.log(found)
-    res.json({ status: "ok", found });
+    // console.log(req)
+    // const user = await UserModel.find({ username: req.body.username })
+    // res.json({ user });
   } catch (error) {
     res.json({ status: "not ok", msg: "user not found" });
   }
 })
 
 // Find user profile 2
-router.get("/:id", async (req, res) => {
-  console.log(req.body)
+router.get("/:id", auth, async (req, res) => {
   try {
-    const found = await UserModel.find({ username: req.params.id })
-    console.log(found)
-    res.json({ found });
+    const user = await UserModel.find({ username: req.params.id })
+    console.log(user)
+    res.json({ user: user[0] });
   } catch (error) {
     res.json({ status: "not ok", msg: "user not found" });
   }
 })
 
 
-// New user profile (TO UPDATE REDIRECT TO DASHBOARD)
+// New user profile
 router.post("/create", async (req, res) => {
   console.log(req.body)
   await UserModel.create(req.body);
 
   res.json({ status: "ok", msg: "created" })
-  // res.redirect("/")
 })
 
 // Update user profile
