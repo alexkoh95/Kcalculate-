@@ -51,6 +51,7 @@ const Signin = (props) => {
         // set user and set auth
         // props.setAuth(true)
         props.handleChange(data.user)
+        console.log("signin :", data.user)
         history.push("/settings")
         console.log("pass")
         // } else {
@@ -64,18 +65,18 @@ const Signin = (props) => {
 
   return (
     <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center min-h-screen px-2">
-     
+
       <div className="bg-white px-6 py-4 rounded-lg shadow-lg text-black w-full my-10">
-      <h1 className="font-bold text-3xl">Sign In.</h1>
-      <Link to="/signup" className="text-sm text-indigo-600 pb-6">Don't have an account? Create one here</Link>
-      <form className="pt-4">
-       
+        <h1 className="font-bold text-3xl">Sign In.</h1>
+        <Link to="/signup" className="text-sm text-indigo-600 pb-6">Don't have an account? Create one here</Link>
+        <form className="pt-4">
+
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="text" placeholder="Username" onChange={handleUsernameChange} />
           <input className="block border border-grey-light w-full p-3 rounded mb-4" type="password" placeholder="Password" onChange={handlePasswordChange} />
- 
-     
+
+
           <button className="block bg-indigo-600 text-white hover:bg-indigo-700 w-full p-3 rounded mb-4" type="submit" onClick={handleSubmit} >Submit</button>
-      
+
         </form>
       </div>
       <span className="text-xs absolute inset-x-0 bottom-0 pb-8 text-xs font-light uppercase tracking-wide">©2021 Counting Bros</span>

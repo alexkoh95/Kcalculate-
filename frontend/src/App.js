@@ -10,7 +10,7 @@ import Signup from "./components/SignupLogin/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Log from "./components/Log/Log";
 import History from "./components/LogHistory/History";
-// import Settings from "./components/Settings/Settings";
+import Settings from "./components/Settings/Settings";
 import EditLogModal from "./components/Log/EditLogModal";
 import Deletelog from "./components/Log/Deletelog";
 import DailyInformationPage from "./components/LogHistory/DailyInformationPage";
@@ -33,7 +33,7 @@ function App() {
   const [user, setUser] = useState(null)
 
   const handleChange = async (userData) => {
-    console.log(userData)
+    console.log("App userdata: ", userData)
     setAuth(true)
     await setUser(userData)
     console.log("inside auth :", auth)
@@ -43,7 +43,7 @@ function App() {
   console.log("outside auth :", auth)
   console.log("outside user :", user)
 
-  // need to prop to somewhere
+  // NEED TO PROPS AND CALL THIS ALONG NAV BAR
   const handleLogout = () => {
     setAuth(false)
     setUser(null)
@@ -76,7 +76,7 @@ function App() {
             <PrivateRoute auth={auth} path="/log/delete/:id" exact Component={Deletelog} />
             <PrivateRoute auth={auth} path="/loghistory" exact Component={History} />
             <PrivateRoute auth={auth} path="/loghistory/DailyInformationPage/:date" exact Component={DailyInformationPage} />
-            <PrivateRoute auth={auth} user={user} path="/settings" exact Component={Settings} />
+            <PrivateRoute auth={auth} user={user} path="/settings" exact Component={SettingsPage} />
           </Switch>
         </main>
       </div>
