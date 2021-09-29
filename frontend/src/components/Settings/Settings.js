@@ -111,9 +111,9 @@ const Settings = ({ user }) => {
                         <div>*</div>
                         <input type="password" onChange={handlePasswordChange} />
                     </div>
-                    <div className="grid grid-cols-3 gap-2 place-content-center h-16 border-blue">
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
                         <div>Target Calories</div>
-                        <div>{calories}</div>
+                        <div>{user.targetCalories}</div>
                         <input type="number" onChange={handleCaloriesChange} />
                     </div>
                     <div className="grid grid-cols-3 gap-2 place-content-center h-16">
