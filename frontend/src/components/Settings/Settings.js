@@ -14,9 +14,10 @@ const Settings = ({ user }) => {
         try {
             const res = await fetch("http://localhost:5000/nutrition/user/find");
             const data = await res.json();
-            // console.log("checkuser: ", data.user)
-            setUsername(user.username)
+            console.log("checkuser: ", data.user)
+            console.log(user)
             // console.log("checkusername: ", user.username)
+            setUsername(user.username)
             setPassword(user.password)
             setCalories(user.targetCalories)
             setCarbohydrates(user.targetCarbohydrates)
@@ -91,57 +92,57 @@ const Settings = ({ user }) => {
 
     return (
         <div className="container mx-auto flex-1 flex flex-col items-center justify-center px-2 min-h-screen">
-          
+
             <main className="bg-white bg-opacity-40 shadow-lg rounded-xl px-8 pt-7 pb-8 mb-4 text-left grid grid-cols-2">
-            <h1 className="text-left text-2xl leading-tight font-bold pb-4">Settings.</h1>
+                <h1 className="text-left text-2xl leading-tight font-bold pb-4">Settings.</h1>
                 <div>
-                <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Details</div>
-                    <div>Current</div>
-                    <div>New</div>
-                </div>
-                <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Username</div>
-                    <div>{username}</div>
-                    {/*}                    <input type="text" onChange={handleUsernameChange} />   */}
-                </div>
-                <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Password</div>
-                    <div>*</div>
-                    <input type="password" onChange={handlePasswordChange} />
-                </div>
-                <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Target Calories</div>
-                    <div>{calories}</div>
-                    <input type="number" onChange={handleCaloriesChange} />
-                </div>
-                <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Target Carbohydrates</div>
-                    <div>{carbohydrates}</div>
-                    <input type="number" onChange={handleCarbohydratesChange} />
-                </div>
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
+                        <div>Details</div>
+                        <div>Current</div>
+                        <div>New</div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
+                        <div>Username</div>
+                        <div>{username}</div>
+                        {/*}                    <input type="text" onChange={handleUsernameChange} />   */}
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
+                        <div>Password</div>
+                        <div>*</div>
+                        <input type="password" onChange={handlePasswordChange} />
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16 border-blue">
+                        <div>Target Calories</div>
+                        <div>{calories}</div>
+                        <input type="number" onChange={handleCaloriesChange} />
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
+                        <div>Target Carbohydrates</div>
+                        <div>{carbohydrates}</div>
+                        <input type="number" onChange={handleCarbohydratesChange} />
+                    </div>
                 </div>
                 <div>
-                <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Protein</div>
-                    <div>{protein}</div>
-                    <input type="number" onChange={handleProteinChange} />
-                </div>
-                <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Fats</div>
-                    <div>{fats}</div>
-                    <input type="number" onChange={handleFatsChange} />
-                </div>
-                <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Weight</div>
-                    <div>{currentWeight}</div>
-                    <input type="number" onChange={handleCurrentWeightChange} />
-                </div>
-                <div className="grid grid-cols-3 gap-2 place-content-center h-16">
-                    <div>Target Weight</div>
-                    <div>{targetWeight}</div>
-                    <input type="number" onChange={handleTargetWeightChange} />
-                </div>
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
+                        <div>Protein</div>
+                        <div>{protein}</div>
+                        <input type="number" onChange={handleProteinChange} />
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
+                        <div>Fats</div>
+                        <div>{fats}</div>
+                        <input type="number" onChange={handleFatsChange} />
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
+                        <div>Weight</div>
+                        <div>{currentWeight}</div>
+                        <input type="number" onChange={handleCurrentWeightChange} />
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 place-content-center h-16">
+                        <div>Target Weight</div>
+                        <div>{targetWeight}</div>
+                        <input type="number" onChange={handleTargetWeightChange} />
+                    </div>
                 </div>
                 <div>
                     <button type="submit" onClick={handleSubmit} >Save</button>

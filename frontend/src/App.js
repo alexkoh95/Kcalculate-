@@ -10,7 +10,7 @@ import Signup from "./components/SignupLogin/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Log from "./components/Log/Log";
 import History from "./components/LogHistory/History";
-// import Settings from "./components/Settings/Settings";
+import Settings from "./components/Settings/Settings";
 import EditLogModal from "./components/Log/EditLogModal";
 import Deletelog from "./components/Log/Deletelog";
 import DailyInformationPage from "./components/LogHistory/DailyInformationPage";
@@ -31,16 +31,17 @@ function App() {
   const [user, setUser] = useState(null);
 
   const handleChange = async (userData) => {
-    console.log(userData);
-    setAuth(true);
-    await setUser(userData);
-    console.log("inside auth :", auth);
-    console.log("inside user :", user);
-  };
-  console.log("outside auth :", auth);
-  console.log("outside user :", user);
+    console.log("App userdata: ", userData)
+    setAuth(true)
+    await setUser(userData)
+    console.log("inside auth :", auth)
+    console.log("inside user :", user)
 
-  // need to prop to somewhere
+  }
+  console.log("outside auth :", auth)
+  console.log("outside user :", user)
+
+  // NEED TO PROPS AND CALL THIS ALONG NAV BAR
   const handleLogout = () => {
     setAuth(false);
     setUser(null);
@@ -74,37 +75,11 @@ function App() {
             <PrivateRoute auth={auth} path="/log" Component={Log} exact />
             {/*}  <Route path="/log" exact component={Log} /> */}
 
-            <PrivateRoute
-              auth={auth}
-              path="/log/:id"
-              exact
-              Component={EditLogModal}
-            />
-            <PrivateRoute
-              auth={auth}
-              path="/log/delete/:id"
-              exact
-              Component={Deletelog}
-            />
-            <PrivateRoute
-              auth={auth}
-              path="/loghistory"
-              exact
-              Component={History}
-            />
-            <PrivateRoute
-              auth={auth}
-              path="/loghistory/DailyInformationPage/:date"
-              exact
-              Component={DailyInformationPage}
-            />
-            <PrivateRoute
-              auth={auth}
-              user={user}
-              path="/settings"
-              exact
-              Component={SettingsPage}
-            />
+            <PrivateRoute auth={auth} path="/log/:id" exact Component={EditLogModal} />
+            <PrivateRoute auth={auth} path="/log/delete/:id" exact Component={Deletelog} />
+            <PrivateRoute auth={auth} path="/loghistory" exact Component={History} />
+            <PrivateRoute auth={auth} path="/loghistory/DailyInformationPage/:date" exact Component={DailyInformationPage} />
+            <PrivateRoute auth={auth} user={user} path="/settings" exact Component={SettingsPage} />
           </Switch>
         </main>
       </div>
