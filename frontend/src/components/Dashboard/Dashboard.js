@@ -75,6 +75,9 @@ const Dashboard = ({userLogin}) => {
 
   useEffect(() => {
     if (allMeals) {
+
+      
+        
       setTodayMeals(
         allMeals.filter(
           (element) =>
@@ -102,15 +105,17 @@ const Dashboard = ({userLogin}) => {
           .map((item) => item.fats)
           .reduce((prev, curr) => prev + curr, 0)
       );
+      
+      
     }
   }, [allMeals])
 
-  let leftKcal = userTargetKcal - totalKcal;
+  let leftKcal = userTargetKcal - totalKcal
 
-  console.log("finding meals")
-  console.log(allMeals)
-  console.log(todayMeals)
-  console.log(userName)
+  // console.log("finding meals")
+  // console.log(allMeals)
+  // console.log(todayMeals)
+  // console.log(userName)
   
   return (
     <div className="">
@@ -157,22 +162,23 @@ const Dashboard = ({userLogin}) => {
               <p className="tracking-widest uppercase text-xs text-yellow-500 text-opacity-70">
                 Remaining calories:{" "}
               </p>
-              <h1 className="text-3xl font-medium">{leftKcal}kcal</h1>
+              <h1 className="text-3xl font-medium">{leftKcal || userTargetKcal - totalKcal}kcal</h1>
               <p className="tracking-wider uppercase text-sm text-indigo-500">
                 Goal: {userTargetKcal}kcal
               </p>
             </div>
             <div className="m-3 pb-3">
-              <DisplayTracker todayMeals={todayMeals} totalKcal={totalKcal} leftKcal={leftKcal} />
+              <DisplayTracker todayMeals={todayMeals} userTargetKcal={userTargetKcal} />
             </div>
             <div className="m-3 border-t-2 pt-3">
               <MacroBreakdown
                 protein={userProtein}
                 carbs={userCarbs}
                 fats={userFats}
-                totalProtein={totalProtein}
-                totalCarbs={totalCarbs}
-                totalFats={totalFats}
+                todayMeals={todayMeals}
+                // totalProtein={totalProtein}
+                // totalCarbs={totalCarbs}
+                // totalFats={totalFats}
               />
             </div>
 
