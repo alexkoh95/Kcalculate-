@@ -33,9 +33,9 @@ function App() {
   const handleChange = async (userData) => {
     setAuth(true)
     await setUser(userData)
-    console.log("userData: ", userData)
+    console.log("Appjs userData: ", userData)
     // console.log("setUser: ", setUser)
-    console.log("user state: ", user)
+    console.log("Appjs userState: ", user)
     // console.log("inside auth :", auth)
     // console.log("inside user :", user)
 

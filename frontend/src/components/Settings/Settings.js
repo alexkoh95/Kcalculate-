@@ -84,7 +84,9 @@ const Settings = ({ user }) => {
       const editUser = {
         username: user.username,
         password: password,
+
         targetCalories: calories,
+        // targetCalories: ((calories === "") ? user.targetCalories : calories),
         targetCarbohydrates: carbohydrates,
         targetProtein: protein,
         targetFats: fats,
@@ -101,6 +103,7 @@ const Settings = ({ user }) => {
 
       const data = await res.json()
       console.log("data", data)
+
     } else {
       console.log("passwords do not match")
     }
