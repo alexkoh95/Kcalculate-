@@ -8,7 +8,9 @@ import SideNavBar from "../SideNavBar";
 
 const moment = require("moment");
 
-const History = () => {
+const History = ({ userLogin }) => {
+  const userName = userLogin.username;
+
   //get date data
   return (
     <div>
@@ -18,12 +20,12 @@ const History = () => {
       <main className="mx-4 p-9 pl-64">
         <div className="grid grid-cols-3 pt-2 space-x-5">
           <div>
-            <SideBar />
+            <SideBar userName={userName} />
           </div>
 
           <div className="col-span-2 p-3">
             <Overview />
-            <WeekGraph />
+            <WeekGraph userName={userName} />
           </div>
         </div>
       </main>

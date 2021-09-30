@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useHistory } from 'react';
 import { Doughnut } from 'react-chartjs-2'
 
-const DisplayTracker = ({ totalKcal, leftKcal }) => {
+const DisplayTracker = ({ todayMeals, userTargetKcal }) => {
+
+  let totalKcal = todayMeals.map((item) => item.calories).reduce((prev, curr) => prev + curr, 0)
+  let leftKcal = userTargetKcal - totalKcal
 
     const data = {
         labels: ['Total Kcal', 'Kcal left'],

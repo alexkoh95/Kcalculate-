@@ -24,13 +24,13 @@ const Dashboard = ({userLogin}) => {
 
     fetch(`/nutrition/user/${userLogin._id}`)
       .then((res) => res.json())
-      .then((user) => setUser(user));
+      .then((data) => setUser(data));
 
     fetch("/nutrition/weight/all")
       .then((res) => res.json())
       .then((weight) => setWeight(weight));
   };
-  console.log(meal)
+  console.log(user)
   console.log(userLogin)
 
   useEffect(() => {
@@ -50,14 +50,13 @@ const Dashboard = ({userLogin}) => {
   const [allMeals, setAllMeals] = useState([]);
   const [todayMeals, setTodayMeals] = useState([]);
   const [totalKcal, setTotalKcal] = useState(0);
-  const leftKcal = userTargetKcal - totalKcal;
 
   const [totalProtein, setTotalProtein] = useState(0);
   const [totalCarbs, setTotalCarbs] = useState(0);
   const [totalFats, setTotalFats] = useState(0);
 
   useEffect(() => {
-    if (user && weight && meal, allMeals) {
+    if (user && weight && meal) {
       setUserName(user.username);
       setUserTargetWeight(user.targetWeight);
       setUserTargetKcal(user.targetCalories);
@@ -70,6 +69,15 @@ const Dashboard = ({userLogin}) => {
       setDateForChart(weight.map((item) => item.date));
 
       setAllMeals(meal)
+      
+    }
+  }, [user, weight, meal]);
+
+  useEffect(() => {
+    if (allMeals) {
+
+      
+        
       setTodayMeals(
         allMeals.filter(
           (element) =>
@@ -97,13 +105,17 @@ const Dashboard = ({userLogin}) => {
           .map((item) => item.fats)
           .reduce((prev, curr) => prev + curr, 0)
       );
+      
+      
     }
-  }, [user, weight, meal, allMeals]);
+  }, [allMeals])
 
-  console.log("finding meals")
-  console.log(allMeals)
-  console.log(todayMeals)
-  console.log(userName)
+  let leftKcal = userTargetKcal - totalKcal
+
+  // console.log("finding meals")
+  // console.log(allMeals)
+  // console.log(todayMeals)
+  // console.log(userName)
   
   return (
     <div className="">
@@ -150,22 +162,23 @@ const Dashboard = ({userLogin}) => {
               <p className="tracking-widest uppercase text-xs text-yellow-500 text-opacity-70">
                 Remaining calories:{" "}
               </p>
-              <h1 className="text-3xl font-medium">{leftKcal}kcal</h1>
+              <h1 className="text-3xl font-medium">{leftKcal || userTargetKcal - totalKcal}kcal</h1>
               <p className="tracking-wider uppercase text-sm text-indigo-500">
                 Goal: {userTargetKcal}kcal
               </p>
             </div>
             <div className="m-3 pb-3">
-              <DisplayTracker totalKcal={totalKcal} leftKcal={leftKcal} />
+              <DisplayTracker todayMeals={todayMeals} userTargetKcal={userTargetKcal} />
             </div>
             <div className="m-3 border-t-2 pt-3">
               <MacroBreakdown
                 protein={userProtein}
                 carbs={userCarbs}
                 fats={userFats}
-                totalProtein={totalProtein}
-                totalCarbs={totalCarbs}
-                totalFats={totalFats}
+                todayMeals={todayMeals}
+                // totalProtein={totalProtein}
+                // totalCarbs={totalCarbs}
+                // totalFats={totalFats}
               />
             </div>
 
