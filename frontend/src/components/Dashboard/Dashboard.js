@@ -7,8 +7,9 @@ import WeightTracker from "./WeightTracker";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const Dashboard = () => {
+const Dashboard = ({userLogin}) => {
   const [meal, setMeal] = useState(null);
+  // const [user, setUser] = useState(null);
   const [user, setUser] = useState(null);
   const [weight, setWeight] = useState(null);
   const moment = require("moment");
@@ -21,7 +22,7 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then((meal) => setMeal(meal));
 
-    fetch("/nutrition/user/Iman")
+    fetch(`/nutrition/user/${userLogin._id}`)
       .then((res) => res.json())
       .then((user) => setUser(user));
 
@@ -29,6 +30,8 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then((weight) => setWeight(weight));
   };
+  console.log(meal)
+  console.log(userLogin)
 
   useEffect(() => {
     fetchAllData();
@@ -44,6 +47,7 @@ const Dashboard = () => {
   const [weightForChart, setWeightForChart] = useState([]);
   const [dateForChart, setDateForChart] = useState([]);
 
+  const [allMeals, setAllMeals] = useState([]);
   const [todayMeals, setTodayMeals] = useState([]);
   const [totalKcal, setTotalKcal] = useState(0);
   const leftKcal = userTargetKcal - totalKcal;
@@ -53,20 +57,21 @@ const Dashboard = () => {
   const [totalFats, setTotalFats] = useState(0);
 
   useEffect(() => {
-    if (user && weight && meal) {
-      setUserName(user.user.username);
-      setUserTargetWeight(user.user.targetWeight);
-      setUserTargetKcal(user.user.targetCalories);
+    if (user && weight && meal, allMeals) {
+      setUserName(user.username);
+      setUserTargetWeight(user.targetWeight);
+      setUserTargetKcal(user.targetCalories);
 
-      setUserProtein(user.user.targetProtein);
-      setUserFats(user.user.targetFats);
-      setUserCarbs(user.user.targetCarbohydrates);
+      setUserProtein(user.targetProtein);
+      setUserFats(user.targetFats);
+      setUserCarbs(user.targetCarbohydrates);
 
       setWeightForChart(weight.map((item) => item.weight));
       setDateForChart(weight.map((item) => item.date));
 
+      setAllMeals(meal)
       setTodayMeals(
-        meal.filter(
+        allMeals.filter(
           (element) =>
             moment(element.date).format("dddd MMMM Do YYYY") === today
         )
@@ -93,8 +98,13 @@ const Dashboard = () => {
           .reduce((prev, curr) => prev + curr, 0)
       );
     }
-  }, [user, weight, meal]);
+  }, [user, weight, meal, allMeals]);
 
+  console.log("finding meals")
+  console.log(allMeals)
+  console.log(todayMeals)
+  console.log(userName)
+  
   return (
     <div className="">
       <div className="">
