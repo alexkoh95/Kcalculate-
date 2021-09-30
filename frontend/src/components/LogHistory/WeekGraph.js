@@ -3,14 +3,28 @@ import { Bar } from "react-chartjs-2";
 
 const moment = require("moment");
 
-const WeekGraph = () => {
+const WeekGraph = ({ userLogin }) => {
   const [nutritionData, setNutritionData] = useState([]);
+  const [userName, setUserName] = useState(null);
 
-  useEffect(() => {
-    fetch(`/nutrition/`)
+  const fetchData = () => {
+    fetch("/nutrition")
       .then((res) => res.json())
       .then((data) => setNutritionData(data));
+
+    //need to make this params eventually instead of hard-code "Iman"
+    fetch(`/nutrition/user/${userLogin._id}`)
+      .then((res) => res.json())
+      .then((userName) => setUserName(userName));
+  };
+  useEffect(() => {
+    fetchData();
   }, []);
+
+  //filter Data based on username
+  const filterByUserName = nutritionData?.filter(
+    (element) => element.user === userName?.user.username
+  );
 
   //Check Date
   const todayCheck = moment().format("dddd MMMM Do YYYY");
@@ -23,7 +37,7 @@ const WeekGraph = () => {
 
   //Filter data by date
   //today's Nutrition Data
-  const todayNutritionData = nutritionData.filter(
+  const todayNutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === todayCheck
   );
   const todayCalories = todayNutritionData
@@ -40,7 +54,7 @@ const WeekGraph = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L1 Day Nutrition Data
-  const l1NutritionData = nutritionData.filter(
+  const l1NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l1DayCheck
   );
   const l1Calories = l1NutritionData
@@ -57,7 +71,7 @@ const WeekGraph = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L2 Day Nutrition Data
-  const l2NutritionData = nutritionData.filter(
+  const l2NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l2DayCheck
   );
   const l2Calories = l2NutritionData
@@ -74,7 +88,7 @@ const WeekGraph = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L3 Day Nutrition Data
-  const l3NutritionData = nutritionData.filter(
+  const l3NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l3DayCheck
   );
   const l3Calories = l3NutritionData
@@ -91,7 +105,7 @@ const WeekGraph = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L4 Day Nutrition Data
-  const l4NutritionData = nutritionData.filter(
+  const l4NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l4DayCheck
   );
   const l4Calories = l4NutritionData
@@ -108,7 +122,7 @@ const WeekGraph = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L5 Day Nutrition Data
-  const l5NutritionData = nutritionData.filter(
+  const l5NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l5DayCheck
   );
   const l5Calories = l5NutritionData
@@ -125,7 +139,7 @@ const WeekGraph = () => {
     .reduce((prev, curr) => prev + curr, 0);
 
   //L6 Day Nutrition Data
-  const l6NutritionData = nutritionData.filter(
+  const l6NutritionData = filterByUserName?.filter(
     (element) => moment(element.date).format("dddd MMMM Do YYYY") === l6DayCheck
   );
   const l6Calories = l6NutritionData
@@ -164,7 +178,7 @@ const WeekGraph = () => {
           l1Calories,
           todayCalories,
         ],
-        backgroundColor: "rgba(153, 102, 255, 0.2)",
+        backgroundColor: "rgba(153, 102, 255, 0.8)",
       },
       {
         label: "Carbs(g)",
@@ -241,8 +255,6 @@ const WeekGraph = () => {
 
   return (
     <div>
-      <h1>Calories Graph</h1>
-      <Bar data={data} options={options} />
       <h1>Macronutrients Graph</h1>
       <Bar data={data} options={options} />
     </div>
@@ -254,3 +266,9 @@ export default WeekGraph;
 //Colour Scheme
 // 'rgba(153, 102, 255, 0.2)',
 //               'rgba(255, 159, 64, 0.2)',
+
+/* Seed nutrition data
+
+
+
+*/
