@@ -18,6 +18,7 @@ const LogDisplay = (props) => {
       .then((data) => setData(data));
     
   }, []);
+  
 
   const [todayMeals, setTodayMeals] = useState([])
   
@@ -35,6 +36,8 @@ const LogDisplay = (props) => {
     }, [data])
     
 
+ 
+  // const todayMeals = data.filter((element) => moment(element.date).format("dddd MMMM Do YYYY") === today)
 
   // getting all meals data
   const mealtype = todayMeals.map((meal) => meal.mealtype);
@@ -51,6 +54,7 @@ const LogDisplay = (props) => {
   //getting snack data
   const snack = todayMeals.filter((ele) => ele.mealtype === "Snack");
 
+  console.log(snack)
   
   return (
     <div className="relative space-y-10 pb-2 p-4 rounded-xl border-2 border-indigo-600 mt-5">
@@ -100,7 +104,7 @@ const LogDisplay = (props) => {
             <div className="pb-3">
               {mealtype !== breakfast &&
                 breakfast.map((itemNutrition) => (
-                  <Link to={`/log/delete/${itemNutrition._id}`}>
+                  <Link to={`/log/${itemNutrition._id}`}>
                     <FoodCard {...itemNutrition} />{" "}
                   </Link>
                 ))}
