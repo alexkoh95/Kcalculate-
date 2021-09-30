@@ -15,7 +15,7 @@ import EditLogModal from "./components/Log/EditLogModal";
 import Deletelog from "./components/Log/Deletelog";
 import DailyInformationPage from "./components/LogHistory/DailyInformationPage";
 import Main from "./components/SignupLogin/Main";
-import SignIn from "./components/SignupLogin/Signin";
+import Signin from "./components/SignupLogin/Signin";
 import SignupNext from "./components/SignupLogin/SignupNext";
 import SettingsPage from "./components/Settings/SettingsPage";
 
@@ -31,9 +31,11 @@ function App() {
   const [user, setUser] = useState(null);
 
   const handleChange = async (userData) => {
-    // console.log("App userdata: ", userData)
     setAuth(true)
     await setUser(userData)
+    console.log("userData: ", userData)
+    // console.log("setUser: ", setUser)
+    console.log("user state: ", user)
     // console.log("inside auth :", auth)
     // console.log("inside user :", user)
 
@@ -42,9 +44,9 @@ function App() {
   // console.log("outside user :", user)
 
   // NEED TO PROPS AND CALL THIS ALONG NAV BAR
-  const handleLogout = () => {
+  const handleLogout = async (event) => {
     setAuth(false);
-    setUser(null);
+    await setUser(null);
   };
 
   return (
@@ -59,37 +61,31 @@ function App() {
             <Route path="/" exact component={Main} />
             {/*} <Route path="/signin" props={handleChange} exact component={SignIn} /> */}
             <Route path="/signin" exact>
-              <SignIn handleChange={handleChange} />
+              <Signin handleChange={handleChange} />
             </Route>
 
             <Route path="/signup" exact component={Signup} />
             <Route path="/signupnext" exact component={SignupNext} />
 
 
-            {/* 7 private routes, auth{auth} */}
-            {/* components use capital C */}
-            {/* uncomment PrivateRoute function right at the bottom */}
-            <Route
+            {/* 7 private routes, auth{auth}
+            components use capital C
+            settings add/remove user={user}
+            uncomment PrivateRoute function right at the bottom */}
+            <PrivateRoute auth={auth} user={user} path="/dashboard" exact Component={Dashboard} />
+            {/* <PrivateRoute auth={auth} user={user} path="/dashboard" exact>
+              <Dashboard handleLogout={handleLogout} />
+          </PrivateRoute> */}
+            {/* <Route path="/dashboard" exact Component={Dashboard} /> */}
 
-              path="/dashboard"
-              exact
-              component={Dashboard}
-            />
-            {/* <Route
-             
-              path="/dashboard"
-              exact
-              Component={Dashboard}
-            /> */}
-
-            <Route path="/log" component={Log} exact />
+            <PrivateRoute auth={auth} user={user} path="/log" Component={Log} exact />
             {/*}  <Route path="/log" exact component={Log} /> */}
 
-            <Route path="/log/:id" exact component={EditLogModal} />
-            <Route path="/log/delete/:id" exact component={Deletelog} />
-            <Route path="/loghistory" exact component={History} />
-            <Route path="/loghistory/DailyInformationPage/:date" exact component={DailyInformationPage} />
-            <Route user={user} path="/settings" exact component={SettingsPage} />
+            <PrivateRoute auth={auth} user={user} path="/log/:id" exact Component={EditLogModal} />
+            <PrivateRoute auth={auth} user={user} path="/log/delete/:id" exact Component={Deletelog} />
+            <PrivateRoute auth={auth} user={user} path="/loghistory" exact Component={History} />
+            <PrivateRoute auth={auth} user={user} path="/loghistory/DailyInformationPage/:date" exact Component={DailyInformationPage} />
+            <PrivateRoute auth={auth} user={user} path="/settings" exact Component={SettingsPage} />
           </Switch>
         </main>
       </div>
