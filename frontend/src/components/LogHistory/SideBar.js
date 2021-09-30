@@ -30,9 +30,11 @@ const SideBar = () => {
     fixTheFetchProblem();
   }, []);
 
+  console.log(userName?.user.userName);
+
   //filter Data based on username
   const filterByUserName = data?.filter(
-    (element) => element.user === userName.user.username
+    (element) => element.user === userName?.user.username
   );
 
   //Display Date
