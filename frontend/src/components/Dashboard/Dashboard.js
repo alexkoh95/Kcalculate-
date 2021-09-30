@@ -50,7 +50,7 @@ const Dashboard = ({userLogin}) => {
   const [allMeals, setAllMeals] = useState([]);
   const [todayMeals, setTodayMeals] = useState([]);
   const [totalKcal, setTotalKcal] = useState(0);
-  const leftKcal = userTargetKcal - totalKcal;
+  let leftKcal = userTargetKcal - totalKcal;
 
   const [totalProtein, setTotalProtein] = useState(0);
   const [totalCarbs, setTotalCarbs] = useState(0);
