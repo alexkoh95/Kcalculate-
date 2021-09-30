@@ -24,13 +24,13 @@ const Dashboard = ({userLogin}) => {
 
     fetch(`/nutrition/user/${userLogin._id}`)
       .then((res) => res.json())
-      .then((user) => setUser(user));
+      .then((data) => setUser(data));
 
     fetch("/nutrition/weight/all")
       .then((res) => res.json())
       .then((weight) => setWeight(weight));
   };
-  console.log(meal)
+  console.log(user)
   console.log(userLogin)
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Dashboard = ({userLogin}) => {
   const [totalFats, setTotalFats] = useState(0);
 
   useEffect(() => {
-    if (user && weight && meal, allMeals) {
+    if (user && weight && meal) {
       setUserName(user.username);
       setUserTargetWeight(user.targetWeight);
       setUserTargetKcal(user.targetCalories);
@@ -70,6 +70,12 @@ const Dashboard = ({userLogin}) => {
       setDateForChart(weight.map((item) => item.date));
 
       setAllMeals(meal)
+      
+    }
+  }, [user, weight, meal]);
+
+  useEffect(() => {
+    if (allMeals) {
       setTodayMeals(
         allMeals.filter(
           (element) =>
@@ -98,7 +104,7 @@ const Dashboard = ({userLogin}) => {
           .reduce((prev, curr) => prev + curr, 0)
       );
     }
-  }, [user, weight, meal, allMeals]);
+  }, [allMeals])
 
   console.log("finding meals")
   console.log(allMeals)
@@ -156,7 +162,7 @@ const Dashboard = ({userLogin}) => {
               </p>
             </div>
             <div className="m-3 pb-3">
-              <DisplayTracker totalKcal={totalKcal} leftKcal={leftKcal} />
+              <DisplayTracker todayMeals={todayMeals} totalKcal={totalKcal} leftKcal={leftKcal} />
             </div>
             <div className="m-3 border-t-2 pt-3">
               <MacroBreakdown
