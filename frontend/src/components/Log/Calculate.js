@@ -16,23 +16,6 @@ const Calculate = (props) => {
   const history = useHistory();
   const [nutritionCalculated, setNutritionCalculated] = useState();
 
-  // Getting USER
-  const [userName, setUserName] = useState(null);
-
-  const fetchUserData = () => {
-    //need to make this params eventually instead of hard-code "Iman"
-    fetch(`/nutrition/user/${props.userLogin}`)
-      .then((res) => res.json())
-      .then((userName) => setUserName(userName));
-  };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-
-  // console.log(userName);
-  // console.log(userName.user.username);
-
   useEffect(() => {
     setNutritionCalculated([...props.nutritionDataToCalculate]);
   }, [props.nutritionDataToCalculate]);
@@ -44,7 +27,10 @@ const Calculate = (props) => {
     await setMeal((prevState) => {
       return e.target.value;
     });
-    await setNutritionCalculated((prevState) => {
+  };
+
+  const submitMealType = (event) => {
+    setNutritionCalculated((prevState) => {
       const newArray = [...nutritionCalculated];
       let addedMealType = [Object.assign(newArray[0], { mealType: meal })];
       return addedMealType;
@@ -59,10 +45,6 @@ const Calculate = (props) => {
   };
 
   const submitDate = (event) => {
-    // setDate((prevState) => {
-    //   console.log(date);
-    //   return event.target.value;
-    // });
     setNutritionCalculated((prevState) => {
       const newArray = [...nutritionCalculated];
       let addedDate = [Object.assign(newArray[0], { date: date })];
@@ -87,7 +69,7 @@ const Calculate = (props) => {
     const weight = nutritionCalculated[0].ServingSizeg;
     const date = nutritionCalculated[0].date;
     const mealtype = nutritionCalculated[0].mealType;
-    const user = userName.username;
+    const user = props.userName;
 
     const submitToDataBase = {
       name,
@@ -168,7 +150,15 @@ const Calculate = (props) => {
                 <option value="Dinner">Dinner</option>
               </select>
             </div>
-
+            <div>
+              {" "}
+              <button
+                className=" bg-black text-white uppercase tracking-wider px-5 py-1 mt-2 text-xs shadow-md"
+                onClick={submitMealType}
+              >
+                Set MealType
+              </button>
+            </div>
             <div>
               <input
                 onChange={handleDateChange}

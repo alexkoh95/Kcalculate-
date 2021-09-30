@@ -5,13 +5,13 @@ import Result from "./Result";
 import LogDisplay from "./LogDisplay";
 import SideNavBar from "../SideNavBar";
 
-const Log = () => {
+const Log = ({ userLogin }) => {
   // =====================================================
   //                  USE STATES & VARIABLES
   // =====================================================
   const [searchTerm, setSearchTerm] = useState("");
   const [nutritionDataToCalculate, setNutritionDataToCalculate] = useState("");
-
+  const userName = userLogin.username;
   const addToCalculate = (item) => {
     setNutritionDataToCalculate([...nutritionDataToCalculate, item]);
   };
@@ -37,6 +37,7 @@ const Log = () => {
             <Calculate
               nutritionDataToCalculate={nutritionDataToCalculate}
               setNutritionDataToCalculate={setNutritionDataToCalculate}
+              userName={userName}
             />
           </div>
           <div>

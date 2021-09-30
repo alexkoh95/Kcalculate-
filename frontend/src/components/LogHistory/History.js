@@ -24,7 +24,7 @@ const History = ({ userLogin }) => {
           </div>
 
           <div className="col-span-2 p-3">
-            <Overview />
+            <Overview userName={userName} />
             <WeekGraph userName={userName} />
           </div>
         </div>
