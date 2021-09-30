@@ -1,24 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const moment = require("moment");
-const Overview = () => {
+const Overview = ({ userName }) => {
   const today = moment().format("dddd MMMM Do YYYY");
-  const fetchAllData = () => {
-    fetch("/nutrition").then((res) => res.json());
-
-    fetch("/nutrition/user/Iman").then((res) => res.json());
-
-    fetch("/nutrition/weight/all").then((res) => res.json());
-  };
-
-  const [userName, setUser] = useState("");
-
-  useEffect(() => {
-    fetchAllData();
-  }, []);
-
-  const lastSevenDays = moment().subtract(7, "days");
-
+  console.log(userName);
   return (
     <div>
       <div

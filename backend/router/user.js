@@ -123,7 +123,7 @@ router.post("/create", async (req, res) => {
 
 // Update user profile
 router.put("/update", async (req, res) => {
-  console.log("between put")
+  console.log(req.body)
 
   await UserModel.updateOne(
     {
