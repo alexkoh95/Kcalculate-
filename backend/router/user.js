@@ -91,11 +91,22 @@ router.get("/find", async (req, res) => {
 })
 
 // Find user profile 2
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const user = await UserModel.find({ username: req.params.id })
+//     console.log("userprofile2 :", user)
+//     res.json({ user: user[0] });
+//   } catch (error) {
+//     res.json({ status: "not ok", msg: "user not found" });
+//   }
+// })
+
+// Find user profile 3
 router.get("/:id", async (req, res) => {
   try {
-    const user = await UserModel.find({ username: req.params.id })
+    const user = await UserModel.findById(req.params.id)
     console.log("userprofile2 :", user)
-    res.json({ user: user[0] });
+    res.json(user);
   } catch (error) {
     res.json({ status: "not ok", msg: "user not found" });
   }

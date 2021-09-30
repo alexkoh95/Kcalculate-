@@ -7,8 +7,9 @@ import WeightTracker from "./WeightTracker";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const Dashboard = () => {
+const Dashboard = ({userLogin}) => {
   const [meal, setMeal] = useState(null);
+  // const [user, setUser] = useState(null);
   const [user, setUser] = useState(null);
   const [weight, setWeight] = useState(null);
   const moment = require("moment");
@@ -21,7 +22,7 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then((meal) => setMeal(meal));
 
-    fetch("/nutrition/user/Iman")
+    fetch(`/nutrition/user/${userLogin._id}`)
       .then((res) => res.json())
       .then((user) => setUser(user));
 
@@ -29,6 +30,9 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then((weight) => setWeight(weight));
   };
+
+  console.log(userLogin)
+  console.log(userLogin._id)
 
   useEffect(() => {
     fetchAllData();
@@ -54,13 +58,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user && weight && meal) {
-      setUserName(user.user.username);
-      setUserTargetWeight(user.user.targetWeight);
-      setUserTargetKcal(user.user.targetCalories);
+      setUserName(user.username);
+      setUserTargetWeight(user.targetWeight);
+      setUserTargetKcal(user.targetCalories);
 
-      setUserProtein(user.user.targetProtein);
-      setUserFats(user.user.targetFats);
-      setUserCarbs(user.user.targetCarbohydrates);
+      setUserProtein(user.targetProtein);
+      setUserFats(user.targetFats);
+      setUserCarbs(user.targetCarbohydrates);
 
       setWeightForChart(weight.map((item) => item.weight));
       setDateForChart(weight.map((item) => item.date));
@@ -94,7 +98,9 @@ const Dashboard = () => {
       );
     }
   }, [user, weight, meal]);
-
+  
+  console.log(userName)
+  
   return (
     <div className="">
       <div className="">

@@ -72,7 +72,8 @@ function App() {
             components use capital C
             settings add/remove user={user}
             uncomment PrivateRoute function right at the bottom */}
-            <PrivateRoute auth={auth} user={user} path="/dashboard" exact Component={Dashboard} />
+            <PrivateRoute auth={auth} userLogin={user} path="/dashboard/" exact Component={Dashboard} />
+            {/* <PrivateRoute auth={auth} user={user} path="/dashboard/:id"><Dashboard user={user}/> </PrivateRoute> */}
             {/* <PrivateRoute auth={auth} user={user} path="/dashboard" exact>
               <Dashboard handleLogout={handleLogout} />
           </PrivateRoute> */}
