@@ -31,15 +31,14 @@ function App() {
   const [user, setUser] = useState(null);
 
   const handleChange = async (userData) => {
-    setAuth(true)
-    await setUser(userData)
-    console.log("Appjs userData: ", userData)
+    setAuth(true);
+    await setUser(userData);
+    console.log("userData: ", userData);
     // console.log("setUser: ", setUser)
-    console.log("Appjs userState: ", user)
+    console.log("user state: ", user);
     // console.log("inside auth :", auth)
     // console.log("inside user :", user)
-
-  }
+  };
   // console.log("outside auth :", auth)
   // console.log("outside user :", user)
 
@@ -67,26 +66,67 @@ function App() {
             <Route path="/signup" exact component={Signup} />
             <Route path="/signupnext" exact component={SignupNext} />
 
-
             {/* 7 private routes, auth{auth}
             components use capital C
             settings add/remove user={user}
             uncomment PrivateRoute function right at the bottom */}
-            <PrivateRoute auth={auth} userLogin={user} path="/dashboard/" exact Component={Dashboard} />
+            <PrivateRoute
+              auth={auth}
+              userLogin={user}
+              path="/dashboard/"
+              exact
+              Component={Dashboard}
+            />
             {/* <PrivateRoute auth={auth} user={user} path="/dashboard/:id"><Dashboard user={user}/> </PrivateRoute> */}
             {/* <PrivateRoute auth={auth} user={user} path="/dashboard" exact>
               <Dashboard handleLogout={handleLogout} />
           </PrivateRoute> */}
             {/* <Route path="/dashboard" exact Component={Dashboard} /> */}
 
-            <PrivateRoute auth={auth} user={user} path="/log" Component={Log} exact />
+            <PrivateRoute
+              auth={auth}
+              userLogin={user}
+              path="/log"
+              Component={Log}
+              exact
+            />
             {/*}  <Route path="/log" exact component={Log} /> */}
 
-            <PrivateRoute auth={auth} user={user} path="/log/:id" exact Component={EditLogModal} />
-            <PrivateRoute auth={auth} user={user} path="/log/delete/:id" exact Component={Deletelog} />
-            <PrivateRoute auth={auth} user={user} path="/loghistory" exact Component={History} />
-            <PrivateRoute auth={auth} user={user} path="/loghistory/DailyInformationPage/:date" exact Component={DailyInformationPage} />
-            <PrivateRoute auth={auth} user={user} path="/settings" exact Component={SettingsPage} />
+            <PrivateRoute
+              auth={auth}
+              userLogin={user}
+              path="/log/:id"
+              exact
+              Component={EditLogModal}
+            />
+            <PrivateRoute
+              auth={auth}
+              userLogin={user}
+              path="/log/delete/:id"
+              exact
+              Component={Deletelog}
+            />
+            <PrivateRoute
+              auth={auth}
+              userLogin={user}
+              path="/loghistory"
+              exact
+              Component={History}
+            />
+            <PrivateRoute
+              auth={auth}
+              userLogin={user}
+              path="/loghistory/DailyInformationPage/:date"
+              exact
+              Component={DailyInformationPage}
+            />
+            <PrivateRoute
+              auth={auth}
+              user={user}
+              path="/settings"
+              exact
+              Component={SettingsPage}
+            />
           </Switch>
         </main>
       </div>
