@@ -164,7 +164,7 @@ const WeekGraph = () => {
           l1Calories,
           todayCalories,
         ],
-        backgroundColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(153, 102, 255, 0.2)",
       },
       {
         label: "Carbs(g)",
@@ -178,7 +178,7 @@ const WeekGraph = () => {
           todayCarbs,
         ],
 
-        backgroundColor: "rgb(54, 162, 235)",
+        backgroundColor: "rgba(255, 159, 64, 0.25)",
       },
       {
         label: "Protein(g)",
@@ -192,12 +192,12 @@ const WeekGraph = () => {
           todayProtein,
         ],
 
-        backgroundColor: "rgb(75, 192, 192)",
+        backgroundColor: "rgba(255, 159, 64, 0.5)",
       },
       {
         label: "Fats(g)",
         data: [l6Fats, l5Fats, l4Fats, l3Fats, l2Fats, l1Fats, todayFats],
-        backgroundColor: "rgb(4, 244, 100)",
+        backgroundColor: "rgba(255, 159, 64, 0.75)",
       },
     ],
   };
