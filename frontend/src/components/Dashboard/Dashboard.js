@@ -50,7 +50,6 @@ const Dashboard = ({userLogin}) => {
   const [allMeals, setAllMeals] = useState([]);
   const [todayMeals, setTodayMeals] = useState([]);
   const [totalKcal, setTotalKcal] = useState(0);
-  let leftKcal = userTargetKcal - totalKcal;
 
   const [totalProtein, setTotalProtein] = useState(0);
   const [totalCarbs, setTotalCarbs] = useState(0);
@@ -105,6 +104,8 @@ const Dashboard = ({userLogin}) => {
       );
     }
   }, [allMeals])
+
+  let leftKcal = userTargetKcal - totalKcal;
 
   console.log("finding meals")
   console.log(allMeals)
