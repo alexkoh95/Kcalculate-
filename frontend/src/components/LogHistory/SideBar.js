@@ -7,33 +7,26 @@ import DailyInformationPage from "./DailyInformationPage";
 const dayjs = require("dayjs");
 const moment = require("moment");
 
-const SideBar = ({ userLogin }) => {
+const SideBar = ({ userName }) => {
   // =====================================================
   //                  USE STATES & VARIABLES
   // =====================================================
   const [data, setData] = useState([]);
   const [nutritionData, setNutritionData] = useState([]);
-  const [userName, setUserName] = useState(null);
 
   const fixTheFetchProblem = () => {
     fetch("/nutrition")
       .then((res) => res.json())
       .then((data) => setData(data));
-
-    //need to make this params eventually instead of hard-code "Iman"
-    fetch(`/nutrition/user/${userLogin._id}`)
-      .then((res) => res.json())
-      .then((userName) => setUserName(userName));
   };
-
   useEffect(() => {
     fixTheFetchProblem();
   }, []);
 
+  console.log(userName);
+
   //filter Data based on username
-  const filterByUserName = data?.filter(
-    (element) => element.user === userName?.username
-  );
+  const filterByUserName = data?.filter((element) => element.user === userName);
 
   //Display Date
   const todayDisplay = moment().format("dddd MMMM Do YYYY");

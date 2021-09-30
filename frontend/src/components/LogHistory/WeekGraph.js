@@ -3,28 +3,23 @@ import { Bar } from "react-chartjs-2";
 
 const moment = require("moment");
 
-const WeekGraph = ({ userLogin }) => {
+const WeekGraph = ({ userName }) => {
   const [nutritionData, setNutritionData] = useState([]);
-  const [userName, setUserName] = useState(null);
+
+  const [data, setData] = useState([]);
 
   const fetchData = () => {
     fetch("/nutrition")
       .then((res) => res.json())
-      .then((data) => setNutritionData(data));
-
-    //need to make this params eventually instead of hard-code "Iman"
-    fetch(`/nutrition/user/${userLogin._id}`)
-      .then((res) => res.json())
-      .then((userName) => setUserName(userName));
+      .then((data) => setData(data));
   };
+
   useEffect(() => {
     fetchData();
   }, []);
 
   //filter Data based on username
-  const filterByUserName = nutritionData?.filter(
-    (element) => element.user === userName?.user.username
-  );
+  const filterByUserName = data?.filter((element) => element.user === userName);
 
   //Check Date
   const todayCheck = moment().format("dddd MMMM Do YYYY");
@@ -164,7 +159,7 @@ const WeekGraph = ({ userLogin }) => {
   const l5Day = moment().subtract(5, "day").format("dddd");
   const l6Day = moment().subtract(6, "day").format("dddd");
 
-  const data = {
+  const graphData = {
     labels: [l6Day, l5Day, l4Day, l3Day, l2Day, l1Day, today],
     datasets: [
       {
@@ -249,14 +244,14 @@ const WeekGraph = ({ userLogin }) => {
           </a>
         </div>
       </div>
-      <Bar data={data} options={options} />
+      <Bar data={graphData} options={options} />
     </>
   );
 
   return (
     <div>
       <h1>Macronutrients Graph</h1>
-      <Bar data={data} options={options} />
+      <Bar data={graphData} options={options} />
     </div>
   );
 };
