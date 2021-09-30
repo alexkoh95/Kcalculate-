@@ -30,9 +30,8 @@ const Dashboard = ({userLogin}) => {
       .then((res) => res.json())
       .then((weight) => setWeight(weight));
   };
-
+  console.log(meal)
   console.log(userLogin)
-  console.log(userLogin._id)
 
   useEffect(() => {
     fetchAllData();
@@ -48,6 +47,7 @@ const Dashboard = ({userLogin}) => {
   const [weightForChart, setWeightForChart] = useState([]);
   const [dateForChart, setDateForChart] = useState([]);
 
+  const [allMeals, setAllMeals] = useState([]);
   const [todayMeals, setTodayMeals] = useState([]);
   const [totalKcal, setTotalKcal] = useState(0);
   const leftKcal = userTargetKcal - totalKcal;
@@ -57,7 +57,7 @@ const Dashboard = ({userLogin}) => {
   const [totalFats, setTotalFats] = useState(0);
 
   useEffect(() => {
-    if (user && weight && meal) {
+    if (user && weight && meal, allMeals) {
       setUserName(user.username);
       setUserTargetWeight(user.targetWeight);
       setUserTargetKcal(user.targetCalories);
@@ -69,8 +69,9 @@ const Dashboard = ({userLogin}) => {
       setWeightForChart(weight.map((item) => item.weight));
       setDateForChart(weight.map((item) => item.date));
 
+      setAllMeals(meal)
       setTodayMeals(
-        meal.filter(
+        allMeals.filter(
           (element) =>
             moment(element.date).format("dddd MMMM Do YYYY") === today
         )
@@ -97,8 +98,11 @@ const Dashboard = ({userLogin}) => {
           .reduce((prev, curr) => prev + curr, 0)
       );
     }
-  }, [user, weight, meal]);
-  
+  }, [user, weight, meal, allMeals]);
+
+  console.log("finding meals")
+  console.log(allMeals)
+  console.log(todayMeals)
   console.log(userName)
   
   return (
