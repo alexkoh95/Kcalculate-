@@ -7,7 +7,7 @@ import DailyInformationPage from "./DailyInformationPage";
 const dayjs = require("dayjs");
 const moment = require("moment");
 
-const SideBar = () => {
+const SideBar = ({ userLogin }) => {
   // =====================================================
   //                  USE STATES & VARIABLES
   // =====================================================
@@ -21,7 +21,7 @@ const SideBar = () => {
       .then((data) => setData(data));
 
     //need to make this params eventually instead of hard-code "Iman"
-    fetch("/nutrition/user/Iman")
+    fetch(`/nutrition/user/${userLogin._id}`)
       .then((res) => res.json())
       .then((userName) => setUserName(userName));
   };
@@ -30,11 +30,9 @@ const SideBar = () => {
     fixTheFetchProblem();
   }, []);
 
-  console.log(userName?.user.userName);
-
   //filter Data based on username
   const filterByUserName = data?.filter(
-    (element) => element.user === userName?.user.username
+    (element) => element.user === userName?.username
   );
 
   //Display Date

@@ -21,7 +21,7 @@ const Calculate = (props) => {
 
   const fetchUserData = () => {
     //need to make this params eventually instead of hard-code "Iman"
-    fetch("/nutrition/user/Iman")
+    fetch(`/nutrition/user/${props.userLogin}`)
       .then((res) => res.json())
       .then((userName) => setUserName(userName));
   };
@@ -87,7 +87,7 @@ const Calculate = (props) => {
     const weight = nutritionCalculated[0].ServingSizeg;
     const date = nutritionCalculated[0].date;
     const mealtype = nutritionCalculated[0].mealType;
-    const user = userName.user.username;
+    const user = userName.username;
 
     const submitToDataBase = {
       name,
