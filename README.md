@@ -45,17 +45,8 @@ The main functions of the app is working. Users can do the following:
 ### Log History
 ![Log History](https://imgur.com/sJbXG2o.jpg)
 
-## Installation and Setup Instructions
-
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
-
-Installation:
-
-`npm install`  
 
 ## Reflection
-
-THIS IS ONLY AN EXAMPLE, NOT COMPLETE
 
   - What was the context for this project? (ie: was this a side project? was this for Turing? was this for an experiment?)
   - What did you set out to build?
@@ -64,13 +55,15 @@ THIS IS ONLY AN EXAMPLE, NOT COMPLETE
   - What tools did you use to implement this project?
       - This might seem obvious because you are IN this codebase, but to all other humans now is the time to talk about why you chose webpack instead of create react app, or D3, or vanilla JS instead of a framework etc. Brag about your choices and justify them here.  
 
-#### Example:  
+This was a week long group project built during the third module at General Assembly (GA) Singapore (SEI-31). Project goals include:
+ - (1) Building a frontend with React
+ - (2) Connecting frontend and backend with APIs
+ - (3) Storing data in an online database such as MongoDB Atlas
+ - (4) How to collaborate in a team by using GitHub (fetch, commit, push, pull cycle) 
 
-THIS IS ONLY AN EXAMPLE, NOT COMPLETE
+We reinforced our understanding of the content taught by GA by using a MERN stack to achieve our app's functions. 
 
-This was a 3 week long project built during my third module at Turing School of Software and Design. Project goals included using technologies learned up until this point and familiarizing myself with documentation for new features.  
-
-Originally I wanted to build an application that allowed users to pull data from the Twitter API based on what they were interested in, such as 'most tagged users'. I started this process by using the `create-react-app` boilerplate, then adding `react-router-4.0` and `redux`.  
+The main features I contributed to in this group projects are (1) Pulling from CalorieNinja's API and storing information in the database, (2) Displaying insights in the Log History page. s
 
 One of the main challenges I ran into was Authentication. This lead me to spend a few days on a research spike into OAuth, Auth0, and two-factor authentication using Firebase or other third parties. Due to project time constraints, I had to table authentication and focus more on data visualization from parts of the API that weren't restricted to authenticated users.
 
