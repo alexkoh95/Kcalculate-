@@ -48,12 +48,6 @@ The main functions of the app is working. Users can do the following:
 
 ## Reflection
 
-  - What was the context for this project? (ie: was this a side project? was this for Turing? was this for an experiment?)
-  - What did you set out to build?
-  - Why was this project challenging and therefore a really good learning experience?
-  - What were some unexpected obstacles?
-  - What tools did you use to implement this project?
-      - This might seem obvious because you are IN this codebase, but to all other humans now is the time to talk about why you chose webpack instead of create react app, or D3, or vanilla JS instead of a framework etc. Brag about your choices and justify them here.  
 
 This was a week long group project built during the third module at General Assembly (GA) Singapore (SEI-31). Project goals include:
  - (1) Building a frontend with React
@@ -63,8 +57,11 @@ This was a week long group project built during the third module at General Asse
 
 We reinforced our understanding of the content taught by GA by using a MERN stack to achieve our app's functions. 
 
-The main features I contributed to in this group projects are (1) Pulling from CalorieNinja's API and storing information in the database, (2) Displaying insights in the Log History page. s
+Alex:
+The main features I contributed to in this group project are (1) Pulling from CalorieNinja's API and storing information in the database, (2) Displaying insights in the Log History page. 
 
-One of the main challenges I ran into was Authentication. This lead me to spend a few days on a research spike into OAuth, Auth0, and two-factor authentication using Firebase or other third parties. Due to project time constraints, I had to table authentication and focus more on data visualization from parts of the API that weren't restricted to authenticated users.
+Iman: 
+The main features I contribute to in this group project are (1) Overall design, (2) Dashboard
 
-At the end of the day, the technologies implemented in this project are React, React-Router 4.0, Redux, LoDash, D3, and a significant amount of VanillaJS, JSX, and CSS. I chose to use the `create-react-app` boilerplate to minimize initial setup and invest more time in diving into weird technological rabbit holes. In the next iteration I plan on handrolling a `webpack.config.js` file to more fully understand the build process.
+Wei Hong: 
+The main features I contributed to were (1) User sign-up and sign-in (2) User authentication
